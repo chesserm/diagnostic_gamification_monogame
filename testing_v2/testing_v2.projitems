@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>6efba8a9-a407-4029-bdd0-651d22a87386</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>testing_v2</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\back_button.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\customize_button.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\gameTextFont.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\monkey.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\play_button.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\shop_button.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\stats_button.xnb" />
+  </ItemGroup>
+</Project>
