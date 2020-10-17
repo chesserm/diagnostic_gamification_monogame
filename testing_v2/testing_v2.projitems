@@ -14,7 +14,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Row.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\CustomizePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\MainMenu.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\ShopPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\StatsPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)States.cs" />
   </ItemGroup>
   <ItemGroup>

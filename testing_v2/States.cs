@@ -1,9 +1,8 @@
 ﻿
 
-namespace state_helpers
+namespace game_state_enums
 {
-
-    enum CorePage
+    public enum CorePage
     {
         Menu,
         Stats,
@@ -14,7 +13,7 @@ namespace state_helpers
 
 
     // Enum to know which screen of the game loop they are on 
-    enum PlayScreen
+    public enum PlayPage
     {
         Initial,
         Main,
@@ -27,7 +26,7 @@ namespace state_helpers
 
 
     // Enum to determine which symptom is being investigated
-    enum Symptom
+    public enum Symptom
     {
         General,
         Head,

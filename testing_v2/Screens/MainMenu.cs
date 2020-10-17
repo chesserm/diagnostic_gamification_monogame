@@ -6,19 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using testing_v2.Controls;
+using game_state_enums;
 
 namespace testing_v2.Screens
 {
-    // Enum for us to know which screen the user is on
-    enum CorePage
-    {
-        Menu,
-        Stats,
-        Shop,
-        Play,
-        Customize
-    }
-
 
     class MainMenu
     {
@@ -26,9 +17,12 @@ namespace testing_v2.Screens
         // Screen object that abstracts 99% of the work from this object
         Screen _screen = new Screen();
 
-        // Enum that lets us detect what screen the user has selected
-        CorePage selectedMainMenuPage = CorePage.Menu;
+
+
         #endregion
+
+        // Enum that lets us detect what screen the user has selected
+        public CorePage SelectedCorePage { get; set; }
 
         #region HelperFunctions
         // Define grid layout for this screen
@@ -87,22 +81,22 @@ namespace testing_v2.Screens
         #region ButtonEventHandlers
         private void StatsButton_Click(object sender, EventArgs e)
         {
-            selectedMainMenuPage = CorePage.Stats;
+            SelectedCorePage = CorePage.Stats;
         }
 
         private void CustomizeButton_Click(object sender, EventArgs e)
         {
-            selectedMainMenuPage = CorePage.Customize;
+            SelectedCorePage = CorePage.Customize;
         }
 
         private void ShopButton_Click(object sender, EventArgs e)
         {
-            selectedMainMenuPage = CorePage.Shop;
+            SelectedCorePage = CorePage.Shop;
         }
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
-            selectedMainMenuPage = CorePage.Play;
+            SelectedCorePage = CorePage.Play;
         }
         #endregion
 
@@ -112,12 +106,15 @@ namespace testing_v2.Screens
         // Constructor
         public MainMenu(Texture2D mmButtonTexture, SpriteFont mmButtonFont)
         {
+            SelectedCorePage = CorePage.Menu;
+
             // Divide the grid of the screen into rows and columns
             DesignScreenLayout();
 
             // Create and place the objects needed for this page
             CreateAndPlaceElements(mmButtonTexture, mmButtonFont);
         }
+
 
         // Draw for Game
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

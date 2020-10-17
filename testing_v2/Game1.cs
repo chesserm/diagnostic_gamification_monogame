@@ -6,7 +6,7 @@ using Org.Apache.Http.Cookies;
 using System;
 using System.Collections.Specialized;
 using System.Linq;
-using state_helpers;
+using game_state_enums;
 using testing_v2.Screens;
 
 namespace testing_v2
@@ -17,61 +17,206 @@ namespace testing_v2
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        // The screen resolution we are designing for (scaling will adjust for variation)
         int screenHeight = 1366;
         int screenWidth = 768;
 
-        // Monkey
-        Texture2D monkey;
-        Texture2D play_button;
-        Texture2D shop_button;
-        Texture2D customize_button;
-        Texture2D stats_button;
-        Texture2D back_button;
+        // Old textures (one created for each button) that are no longer needed
+        #region SpecificTexturesNotNeeded
+        //Texture2D play_button;
+        //Texture2D shop_button;
+        //Texture2D customize_button;
+        //Texture2D stats_button;
+        //Texture2D back_button;
 
-        Texture2D background_box;
+        //Texture2D background_box;
 
-        Texture2D chf_button;
-        Texture2D copd_button;
-        Texture2D pneumonia_button;
+        //Texture2D chf_button;
+        //Texture2D copd_button;
+        //Texture2D pneumonia_button;
 
-        Texture2D diagnose_button;
-        Texture2D investigate_button;
+        //Texture2D diagnose_button;
+        //Texture2D investigate_button;
 
-        Texture2D general_exam_button;
-        Texture2D examine_head_button;
-        Texture2D examine_neck_button;
-        Texture2D examine_abdomen_button;
-        Texture2D examine_extremities_button;
-        Texture2D examine_lungs_button;
-        Texture2D examine_oxygen_button;
-        Texture2D examine_skin_button;
-        Texture2D order_blood_button;
-        Texture2D order_imaging_button;
+        //Texture2D general_exam_button;
+        //Texture2D examine_head_button;
+        //Texture2D examine_neck_button;
+        //Texture2D examine_abdomen_button;
+        //Texture2D examine_extremities_button;
+        //Texture2D examine_lungs_button;
+        //Texture2D examine_oxygen_button;
+        //Texture2D examine_skin_button;
+        //Texture2D order_blood_button;
+        //Texture2D order_imaging_button;
 
+        //static int menuButtonWidth = 200;
+        //static int menuButtonHeight = 100;
+        //static int backButtonWidth = 100;
+        //static int backButtonHeight = 50;
+        #endregion
+        
+
+        // Enums to track game state
+        #region GameStateEnums
+
+        CorePage currentCorePage = CorePage.Menu;
+        PlayPage currentPlayPage = PlayPage.Initial;
+        Symptom currentSymptom = Symptom.Nothing;
+        #endregion
+
+        // Content used (buttons, sprites, fonts, etc)
+        #region ContentVariables
         SpriteFont gameTextFont;
-
         Texture2D button;
+        Texture2D monkey;
+        #endregion
 
-        static int menuButtonWidth = 200;
-        static int menuButtonHeight = 100;
-        static int backButtonWidth = 100;
-        static int backButtonHeight = 50;
-
+        // Screens/Pages for our game
+        #region GamePages
         MainMenu mainMenuPage;
+        ShopPage shopPage;
+        CustomizePage customizePage;
+        StatsPage statsPage;
+
+        #endregion
 
         // Variable that detects touch
         TouchCollection tc;
 
-        // Variable that tracks whether or not the initial information has been read
-        //Screen currentScreen = Screen.Menu;
+        #region DeterminingCurrentState
 
+        // Determine which page's draw function to call
+        public void DeterminePageToDraw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            switch(mainMenuPage.SelectedCorePage)
+            {
+                case CorePage.Menu:
+                    {
+                        mainMenuPage.Draw(gameTime, spriteBatch);
+                        break;
+                    }
+                case CorePage.Shop:
+                    {
+                        // Update state in the shop page if it was toggled from returning to main page
+                        if (shopPage.SelectedCorePage == CorePage.Menu)
+                        {
+                            shopPage.SelectedCorePage = CorePage.Shop;
+                            mainMenuPage.SelectedCorePage = CorePage.Menu;
+                        }
+                        else
+                        {
+                            // Draw Shop Page
+                            shopPage.Draw(gameTime, spriteBatch);
+                        }
 
-        // Variable that tracks which part of the play loop the user is on
-        PlayScreen diagnosticStep = PlayScreen.Initial;
+                        
+                        
+                        break;
+                    }
+                case CorePage.Customize:
+                    {
+                        // Update state in the customize page if it was toggled from returning to main page
+                        if (customizePage.SelectedCorePage == CorePage.Menu)
+                        {
+                            customizePage.SelectedCorePage = CorePage.Customize;
+                            mainMenuPage.SelectedCorePage = CorePage.Menu;
+                        }
+                        else
+                        {
+                            // Draw Customize Page
+                            customizePage.Draw(gameTime, spriteBatch);
+                        }
 
-       
-        // Variable that tracks which symptom the user is investigating
-        Symptom currentSymptom = Symptom.Nothing;
+                        
+                        break;
+                    }
+                case CorePage.Stats:
+                    {
+                        // Update state in the stats page if it was toggled from returning to main page
+                        if (statsPage.SelectedCorePage == CorePage.Menu)
+                        {
+                            statsPage.SelectedCorePage = CorePage.Stats;
+                            mainMenuPage.SelectedCorePage = CorePage.Menu;
+                        }
+                        else
+                        {
+                            // Draw Stats Page
+                            statsPage.Draw(gameTime, spriteBatch);
+                        }
+
+                        
+                        break;
+                    }
+            }
+        }
+
+        // Determine which page to update, and update it
+        public void DeterminePageToUpdate(GameTime gameTime)
+        {
+            switch (mainMenuPage.SelectedCorePage)
+            {
+                case CorePage.Menu:
+                    {
+                        mainMenuPage.Update(gameTime);
+                        break;
+                    }
+                case CorePage.Shop:
+                    {
+                        // Update state in the shop page if it was toggled from returning to main page
+                        if (shopPage.SelectedCorePage == CorePage.Menu)
+                        {
+                            shopPage.SelectedCorePage = CorePage.Shop;
+                            mainMenuPage.SelectedCorePage = CorePage.Menu;
+                        }
+                        else
+                        {
+                            // Update Shop Page
+                            shopPage.Update(gameTime);
+                        }
+
+                        
+
+                        break;
+                    }
+                case CorePage.Customize:
+                    {
+                        // Update state in the customize page if it was toggled from returning to main page
+                        if (customizePage.SelectedCorePage == CorePage.Menu)
+                        {
+                            customizePage.SelectedCorePage = CorePage.Customize;
+                            mainMenuPage.SelectedCorePage = CorePage.Menu;
+                        }
+                        else
+                        {
+                            // Update Customize Page
+                            customizePage.Update(gameTime);
+                        }
+
+                        
+                        break;
+                    }
+                case CorePage.Stats:
+                    {
+                        // Update state in the stats page if it was toggled from returning to main page
+                        if (statsPage.SelectedCorePage == CorePage.Menu)
+                        {
+                            statsPage.SelectedCorePage = CorePage.Stats;
+                            mainMenuPage.SelectedCorePage = CorePage.Menu;
+                        }
+                        else
+                        {
+                            // Update Stats Page
+                            statsPage.Update(gameTime);
+                        }
+
+                        
+                        break;
+                    }
+            }
+        }
+
+        #endregion
+
 
         // This is the constructor for the game class and is where we can set some parameters
         public Game1()
@@ -85,7 +230,6 @@ namespace testing_v2
         // This function is called once when the application opens to initialize certain values (e.g. database connections)
         protected override void Initialize()
         {
-            
 
             base.Initialize();
         }
@@ -98,32 +242,35 @@ namespace testing_v2
 
             // TODO: use this.Content to load your game content here
             monkey = Content.Load<Texture2D>("monkey");
-            background_box = Content.Load<Texture2D>("background_box");
 
-            play_button = Content.Load<Texture2D>("play_button");
-            shop_button = Content.Load<Texture2D>("shop_button");
-            customize_button = Content.Load<Texture2D>("customize_button");
-            back_button = Content.Load<Texture2D>("back_button");
-            stats_button = Content.Load<Texture2D>("stats_button");
+            #region NoLongerNeeded
+            //background_box = Content.Load<Texture2D>("background_box");
 
-            diagnose_button = Content.Load<Texture2D>("diagnose_button");
-            investigate_button = Content.Load<Texture2D>("investigate_button");
+            //play_button = Content.Load<Texture2D>("play_button");
+            //shop_button = Content.Load<Texture2D>("shop_button");
+            //customize_button = Content.Load<Texture2D>("customize_button");
+            //back_button = Content.Load<Texture2D>("back_button");
+            //stats_button = Content.Load<Texture2D>("stats_button");
 
-            chf_button = Content.Load<Texture2D>("CHF");
-            copd_button = Content.Load<Texture2D>("COPD");
-            pneumonia_button = Content.Load<Texture2D>("pneumonia");
+            //diagnose_button = Content.Load<Texture2D>("diagnose_button");
+            //investigate_button = Content.Load<Texture2D>("investigate_button");
 
-            general_exam_button = Content.Load<Texture2D>("general_exam_button");
-            examine_abdomen_button = Content.Load<Texture2D>("examine_abdomen");
-            examine_extremities_button = Content.Load<Texture2D>("extreme_extremities");
-            examine_head_button = Content.Load<Texture2D>("examine_head");
-            examine_lungs_button = Content.Load<Texture2D>("examine_lungs");
-            examine_neck_button = Content.Load<Texture2D>("examine_neck");
-            examine_oxygen_button = Content.Load<Texture2D>("examine_oxygen");
-            examine_skin_button = Content.Load<Texture2D>("examine_skin");
+            //chf_button = Content.Load<Texture2D>("CHF");
+            //copd_button = Content.Load<Texture2D>("COPD");
+            //pneumonia_button = Content.Load<Texture2D>("pneumonia");
 
-            order_blood_button = Content.Load<Texture2D>("order_blood_work");
-            order_imaging_button = Content.Load<Texture2D>("ordering_imaging");
+            //general_exam_button = Content.Load<Texture2D>("general_exam_button");
+            //examine_abdomen_button = Content.Load<Texture2D>("examine_abdomen");
+            //examine_extremities_button = Content.Load<Texture2D>("extreme_extremities");
+            //examine_head_button = Content.Load<Texture2D>("examine_head");
+            //examine_lungs_button = Content.Load<Texture2D>("examine_lungs");
+            //examine_neck_button = Content.Load<Texture2D>("examine_neck");
+            //examine_oxygen_button = Content.Load<Texture2D>("examine_oxygen");
+            //examine_skin_button = Content.Load<Texture2D>("examine_skin");
+
+            //order_blood_button = Content.Load<Texture2D>("order_blood_work");
+            //order_imaging_button = Content.Load<Texture2D>("ordering_imaging");
+            #endregion
 
             button = Content.Load<Texture2D>("button");
 
@@ -131,6 +278,9 @@ namespace testing_v2
 
             // TODO: Add your initialization logic here
             mainMenuPage = new MainMenu(button, gameTextFont);
+            shopPage = new ShopPage(button, gameTextFont);
+            customizePage = new CustomizePage(button, gameTextFont);
+            statsPage = new StatsPage(button, gameTextFont);
         }
 
 
@@ -145,7 +295,9 @@ namespace testing_v2
             // TODO: Add your update logic here
             tc = TouchPanel.GetState();
 
-            mainMenuPage.Update(gameTime);
+            // Automatically determine and update correct page
+            DeterminePageToUpdate(gameTime);
+            //mainMenuPage.Update(gameTime);
 
             // Check which button is being pressed
             
@@ -366,9 +518,11 @@ namespace testing_v2
             //}
             #endregion
 
+            //Automatically determine which page to draw
+            DeterminePageToDraw(gameTime, _spriteBatch);
 
-            mainMenuPage.Draw(gameTime, _spriteBatch);
-            
+            //mainMenuPage.Draw(gameTime, _spriteBatch);
+
 
 
 
