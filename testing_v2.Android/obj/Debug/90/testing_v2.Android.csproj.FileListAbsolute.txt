@@ -9,6 +9,7 @@ C:\Users\Matthew\Downloads\messing_around_testing_stuff\testing_v2.Android\bin\A
 C:\Users\Matthew\Downloads\messing_around_testing_stuff\testing_v2.Android\obj\Debug\90\MonoAndroid,Version=v9.0.AssemblyAttributes.cs
 C:\Users\Matthew\Downloads\messing_around_testing_stuff\testing_v2.Android\obj\Debug\90\build.props
 C:\Users\Matthew\Downloads\messing_around_testing_stuff\testing_v2.Android\obj\Debug\90\adb.props
+C:\Users\Matthew\Downloads\messing_around_testing_stuff\testing_v2.Android\obj\Debug\90\testing_v2.Android.csprojAssemblyReference.cache
 C:\Users\Matthew\Downloads\messing_around_testing_stuff\testing_v2.Android\obj\Debug\90\stamp\_BuildLibraryImportsCache.stamp
 C:\Users\Matthew\Downloads\messing_around_testing_stuff\testing_v2.Android\obj\Debug\90\res.flag
 C:\Users\Matthew\Downloads\messing_around_testing_stuff\testing_v2.Android\obj\Debug\90\R.txt
@@ -109,4 +110,3 @@ C:\Users\Matthew\Downloads\messing_around_testing_stuff\testing_v2.Android\obj\D
 C:\Users\Matthew\Downloads\messing_around_testing_stuff\testing_v2.Android\obj\Debug\90\stamp\_GenerateJavaStubs.stamp
 C:\Users\Matthew\Downloads\messing_around_testing_stuff\testing_v2.Android\obj\Debug\90\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\Matthew\Downloads\messing_around_testing_stuff\testing_v2.Android\obj\Debug\90\stamp\_ResolveLibraryProjectImports.stamp
-C:\Users\Matthew\Downloads\messing_around_testing_stuff\testing_v2.Android\obj\Debug\90\testing_v2.Android.csprojAssemblyReference.cache

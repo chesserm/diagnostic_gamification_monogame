@@ -2,11 +2,12 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
+using Org.Apache.Http.Cookies;
 using System;
 using System.Collections.Specialized;
 using System.Linq;
-
-
+using state_helpers;
+using testing_v2.Screens;
 
 namespace testing_v2
 {
@@ -16,6 +17,9 @@ namespace testing_v2
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        int screenHeight = 1366;
+        int screenWidth = 768;
+
         // Monkey
         Texture2D monkey;
         Texture2D play_button;
@@ -24,32 +28,50 @@ namespace testing_v2
         Texture2D stats_button;
         Texture2D back_button;
 
+        Texture2D background_box;
+
+        Texture2D chf_button;
+        Texture2D copd_button;
+        Texture2D pneumonia_button;
+
+        Texture2D diagnose_button;
+        Texture2D investigate_button;
+
+        Texture2D general_exam_button;
+        Texture2D examine_head_button;
+        Texture2D examine_neck_button;
+        Texture2D examine_abdomen_button;
+        Texture2D examine_extremities_button;
+        Texture2D examine_lungs_button;
+        Texture2D examine_oxygen_button;
+        Texture2D examine_skin_button;
+        Texture2D order_blood_button;
+        Texture2D order_imaging_button;
 
         SpriteFont gameTextFont;
+
+        Texture2D button;
 
         static int menuButtonWidth = 200;
         static int menuButtonHeight = 100;
         static int backButtonWidth = 100;
         static int backButtonHeight = 50;
 
+        MainMenu mainMenuPage;
 
         // Variable that detects touch
         TouchCollection tc;
 
-
-        // Enum for us to know which screen the user is on
-        enum Screen
-        {
-            Menu,
-            Stats,
-            Shop,
-            Play,
-            Customize
-        }
         // Variable that tracks whether or not the initial information has been read
-        Screen currentScreen = Screen.Menu;
+        //Screen currentScreen = Screen.Menu;
 
 
+        // Variable that tracks which part of the play loop the user is on
+        PlayScreen diagnosticStep = PlayScreen.Initial;
+
+       
+        // Variable that tracks which symptom the user is investigating
+        Symptom currentSymptom = Symptom.Nothing;
 
         // This is the constructor for the game class and is where we can set some parameters
         public Game1()
@@ -63,7 +85,7 @@ namespace testing_v2
         // This function is called once when the application opens to initialize certain values (e.g. database connections)
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            
 
             base.Initialize();
         }
@@ -76,14 +98,39 @@ namespace testing_v2
 
             // TODO: use this.Content to load your game content here
             monkey = Content.Load<Texture2D>("monkey");
-            
+            background_box = Content.Load<Texture2D>("background_box");
+
             play_button = Content.Load<Texture2D>("play_button");
             shop_button = Content.Load<Texture2D>("shop_button");
             customize_button = Content.Load<Texture2D>("customize_button");
             back_button = Content.Load<Texture2D>("back_button");
             stats_button = Content.Load<Texture2D>("stats_button");
 
+            diagnose_button = Content.Load<Texture2D>("diagnose_button");
+            investigate_button = Content.Load<Texture2D>("investigate_button");
+
+            chf_button = Content.Load<Texture2D>("CHF");
+            copd_button = Content.Load<Texture2D>("COPD");
+            pneumonia_button = Content.Load<Texture2D>("pneumonia");
+
+            general_exam_button = Content.Load<Texture2D>("general_exam_button");
+            examine_abdomen_button = Content.Load<Texture2D>("examine_abdomen");
+            examine_extremities_button = Content.Load<Texture2D>("extreme_extremities");
+            examine_head_button = Content.Load<Texture2D>("examine_head");
+            examine_lungs_button = Content.Load<Texture2D>("examine_lungs");
+            examine_neck_button = Content.Load<Texture2D>("examine_neck");
+            examine_oxygen_button = Content.Load<Texture2D>("examine_oxygen");
+            examine_skin_button = Content.Load<Texture2D>("examine_skin");
+
+            order_blood_button = Content.Load<Texture2D>("order_blood_work");
+            order_imaging_button = Content.Load<Texture2D>("ordering_imaging");
+
+            button = Content.Load<Texture2D>("button");
+
             gameTextFont = Content.Load<SpriteFont>("gameTextFont");
+
+            // TODO: Add your initialization logic here
+            mainMenuPage = new MainMenu(button, gameTextFont);
         }
 
 
@@ -98,90 +145,10 @@ namespace testing_v2
             // TODO: Add your update logic here
             tc = TouchPanel.GetState();
 
+            mainMenuPage.Update(gameTime);
+
             // Check which button is being pressed
-            switch(currentScreen)
-            {
-                case Screen.Play:
-                    {
-                        if (tc.Count > 0)
-                        {
-                            if (tc[0].Position.X < menuButtonWidth && tc[0].Position.Y < menuButtonHeight)
-                            {
-                                currentScreen = Screen.Menu;
-                            }
-                        }
-                        break;
-                    }
-                case Screen.Menu:
-                    {
-
-                        // Check if the user is touching anywhere on the screen
-                        if (tc.Count > 0)
-                        {
-                            // The buttons on the top row of the 2x2 grid
-                            bool is_shop_button = tc[0].Position.X > 200 && tc[0].Position.X < (200 + menuButtonWidth) && tc[0].Position.Y > 500 && tc[0].Position.Y < (500 + menuButtonHeight);
-                            bool is_customize_button = tc[0].Position.X > 600 && tc[0].Position.X < (600 + menuButtonWidth) && tc[0].Position.Y > 500 && tc[0].Position.Y < (500 + menuButtonHeight);
-
-                            // The buttons on the bottom row of the 2x2 grid
-                            bool is_stats_button = tc[0].Position.X > 200 && tc[0].Position.X < (200 + menuButtonWidth) && tc[0].Position.Y > 800 && tc[0].Position.Y < (800 + menuButtonHeight);
-                            bool is_play_button = tc[0].Position.X > 600 && tc[0].Position.X < (600 + menuButtonWidth) && tc[0].Position.Y > 800 && tc[0].Position.Y < (800 + menuButtonHeight);
-                            
-                            
-                            if (is_shop_button)
-                            {
-                                currentScreen = Screen.Shop;
-                            }
-                            else if (is_customize_button)
-                            {
-                                currentScreen = Screen.Customize;
-                            }
-                            else if (is_stats_button)
-                            {
-                                currentScreen = Screen.Stats;
-                            }
-                            else if (is_play_button)
-                            {
-                                currentScreen = Screen.Play;
-                            }
-                        } //if
-                        break;
-                    }
-                case Screen.Shop:
-                    {
-                        if (tc.Count > 0)
-                        {
-                            if (tc[0].Position.X < menuButtonWidth && tc[0].Position.Y < menuButtonHeight )
-                            {
-                                currentScreen = Screen.Menu;
-                            }
-                        }
-                        break;
-                    }
-                case Screen.Customize:
-                    {
-                        if (tc.Count > 0)
-                        {
-                            if (tc[0].Position.X < menuButtonWidth && tc[0].Position.Y < menuButtonHeight)
-                            {
-                                currentScreen = Screen.Menu;
-                            }
-                        }
-                        break;
-                    }
-                case Screen.Stats:
-                    {
-                        if (tc.Count > 0)
-                        {
-                            if (tc[0].Position.X < menuButtonWidth && tc[0].Position.Y < menuButtonHeight)
-                            {
-                                currentScreen = Screen.Menu;
-                            }
-                        }
-                        break;
-                    }
-                default:
-                    break;
-            }
+            
 
             base.Update(gameTime);
         }
@@ -195,52 +162,219 @@ namespace testing_v2
             // TODO: Add your drawing code here inside of the Begin() and End() function calls
             _spriteBatch.Begin();
             //_spriteBatch.Draw(monkey, new Vector2(0, 0), Color.White);
-
+            #region oldcode
             // Main menu
             // Check which button is being pressed
-            switch (currentScreen)
-            {
-                case Screen.Menu:
-                    {
-                        
-                        _spriteBatch.Draw(shop_button, new Vector2(200, 500), Color.White);
-                        _spriteBatch.Draw(customize_button, new Vector2(600, 500), Color.White);
-                        _spriteBatch.Draw(stats_button, new Vector2(200, 800), Color.White);
-                        _spriteBatch.Draw(play_button, new Vector2(600, 800), Color.White);
-                        
-                        break;
-                    }
-                case Screen.Shop:
-                    {
-                        _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
-                        break;
-                    }
-                case Screen.Customize:
-                    {
-                        _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
-                        break;
-                    }
-                case Screen.Stats:
-                    {
-                        _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
-                        break;
-                    }
-                case Screen.Play:
-                    {
-                        _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
-                        break;
-                    }
-                default:
-                    break;
-            }
+            //switch (currentScreen)
+            //{
+            //    case Screen.Menu:
+            //        {
+
+            //            _spriteBatch.Draw(shop_button, new Vector2(200, 500), Color.White);
+            //            _spriteBatch.Draw(customize_button, new Vector2(600, 500), Color.White);
+            //            _spriteBatch.Draw(stats_button, new Vector2(200, 800), Color.White);
+            //            _spriteBatch.Draw(play_button, new Vector2(600, 800), Color.White);
+
+            //            break;
+            //        }
+            //    case Screen.Shop:
+            //        {
+            //            _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
+            //            _spriteBatch.DrawString(gameTextFont, "Shop Page", new Vector2(400, 500), Color.Black);
+            //            break;
+            //        }
+            //    case Screen.Customize:
+            //        {
+            //            _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
+            //            _spriteBatch.DrawString(gameTextFont, "Customize Page", new Vector2(400, 500), Color.Black);
+            //            break;
+            //        }
+            //    case Screen.Stats:
+            //        {
+            //            _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
+            //            _spriteBatch.DrawString(gameTextFont, "Stats Page", new Vector2(400, 500), Color.Black);
+            //            break;
+            //        }
+            //    case Screen.Play:
+            //        {
+            //            // Figure out which step of the diagnostic process the user is in 
+            //            switch (diagnosticStep)
+            //            {
+            //                case PlayScreen.Initial:
+            //                    {
+            //                        _spriteBatch.Draw(background_box, new Vector2(100, 100), Color.White);
+            //                        _spriteBatch.DrawString(gameTextFont, "Initial Presentation Information", new Vector2(275, 150), Color.Black);
+
+            //                        _spriteBatch.DrawString(gameTextFont, "Age: 74", new Vector2(150, 300), Color.Black);
+            //                        _spriteBatch.DrawString(gameTextFont, "Gender: Male", new Vector2(150, 350), Color.Black);
+
+            //                        _spriteBatch.DrawString(gameTextFont, "Description of Symptoms:", new Vector2(150, 450), Color.Black);
+            //                        _spriteBatch.DrawString(gameTextFont, "Chest Heaviness", new Vector2(200, 500), Color.Black);
+
+            //                        _spriteBatch.DrawString(gameTextFont, "Severity of Symptoms: Severe", new Vector2(150, 600), Color.Black);
+
+            //                        _spriteBatch.DrawString(gameTextFont, "Onset of Symptoms: 3 days", new Vector2(150, 650), Color.Black);
+
+            //                        _spriteBatch.DrawString(gameTextFont, "Duration of Symptoms: Constant", new Vector2(150, 700), Color.Black);
+
+            //                        _spriteBatch.DrawString(gameTextFont, "Provocating Factors:", new Vector2(150, 800), Color.Black);
+            //                        _spriteBatch.DrawString(gameTextFont, "Exertion", new Vector2(200, 850), Color.Black);
+
+            //                        _spriteBatch.DrawString(gameTextFont, "Relieving Factors:", new Vector2(150, 900), Color.Black);
+            //                        _spriteBatch.DrawString(gameTextFont, "None", new Vector2(200, 950), Color.Black);
 
 
+            //                        _spriteBatch.DrawString(gameTextFont, "Past Medical History: ", new Vector2(150, 1050), Color.Black);
+            //                        _spriteBatch.DrawString(gameTextFont, "Heart Failure", new Vector2(200, 1100), Color.Black);
+            //                        _spriteBatch.DrawString(gameTextFont, "Cornary Atery Disease", new Vector2(200, 1150), Color.Black);
+            //                        _spriteBatch.DrawString(gameTextFont, "COPD", new Vector2(200, 1200), Color.Black);
+            //                        _spriteBatch.DrawString(gameTextFont, "Current Tobacco Use", new Vector2(200, 1250), Color.Black);
+
+
+            //                        _spriteBatch.Draw(play_button, new Vector2(300, 1400), Color.White);
+
+
+
+            //                        break;
+            //                    }
+            //                case PlayScreen.Main:
+            //                    {
+            //                        //_spriteBatch.DrawString(gameTextFont, "Main Play Page", new Vector2(400, 500), Color.Black);
+
+            //                        _spriteBatch.Draw(monkey, new Vector2(250, 350), Color.White);
+
+            //                        _spriteBatch.Draw(diagnose_button, new Vector2(200, 1200), Color.White);
+            //                        _spriteBatch.Draw(investigate_button, new Vector2(600, 1200), Color.White);
+
+
+            //                        break;
+            //                    }
+            //                case PlayScreen.SymptomList:
+            //                    {
+            //                        // Check which symptom is being investigated
+            //                        switch (currentSymptom)
+            //                        {
+            //                            case Symptom.Nothing:
+            //                                {
+            //                                    _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
+
+            //                                    _spriteBatch.Draw(background_box, new Vector2(100, 100), Color.White);
+            //                                    _spriteBatch.DrawString(gameTextFont, "Select a Symptom to Investigate", new Vector2(275, 150), Color.Black);
+
+            //                                    _spriteBatch.Draw(general_exam_button, new Vector2(200, 400), Color.White);
+            //                                    _spriteBatch.Draw(examine_head_button, new Vector2(200, 550), Color.White);
+            //                                    _spriteBatch.Draw(examine_neck_button, new Vector2(200, 700), Color.White);
+            //                                    _spriteBatch.Draw(examine_lungs_button, new Vector2(200, 850), Color.White);
+            //                                    _spriteBatch.Draw(examine_extremities_button, new Vector2(200, 1000), Color.White);
+            //                                    _spriteBatch.Draw(examine_abdomen_button, new Vector2(200, 1150), Color.White);
+            //                                    _spriteBatch.Draw(order_blood_button, new Vector2(200, 1300), Color.White);
+            //                                    _spriteBatch.Draw(order_imaging_button, new Vector2(200, 1450), Color.White);
+            //                                    break;
+            //                                }
+            //                            case Symptom.General:
+            //                                {
+            //                                    _spriteBatch.Draw(background_box, new Vector2(100, 100), Color.White);
+            //                                    _spriteBatch.DrawString(gameTextFont, "Results of General Exam", new Vector2(275, 150), Color.Black);
+
+            //                                    _spriteBatch.DrawString(gameTextFont, "Vitals:", new Vector2(150, 350), Color.Black);
+            //                                    _spriteBatch.DrawString(gameTextFont, "Temperature: 38.4", new Vector2(200, 400), Color.Black);
+            //                                    _spriteBatch.DrawString(gameTextFont, "Heart Rate: 121", new Vector2(200, 450), Color.Black);
+            //                                    _spriteBatch.DrawString(gameTextFont, "Respiratory Rate: 121", new Vector2(200, 500), Color.Black);
+            //                                    _spriteBatch.DrawString(gameTextFont, "Blood Pressure: 104/53", new Vector2(200, 550), Color.Black);
+
+            //                                    _spriteBatch.DrawString(gameTextFont, "General Observations:", new Vector2(150, 700), Color.Black);
+            //                                    _spriteBatch.DrawString(gameTextFont, "Awake", new Vector2(200, 750), Color.Black);
+            //                                    _spriteBatch.DrawString(gameTextFont, "Alert", new Vector2(200, 800), Color.Black);
+            //                                    _spriteBatch.DrawString(gameTextFont, "Oriented x2", new Vector2(200, 850), Color.Black);
+
+            //                                    _spriteBatch.Draw(back_button, new Vector2(750, 125), Color.White);
+
+            //                                    break;
+            //                                }
+            //                            case Symptom.Head:
+            //                                {
+            //                                    break;
+            //                                }
+            //                            case Symptom.Neck:
+            //                                {
+            //                                    break;
+            //                                }
+            //                            case Symptom.Lungs:
+            //                                {
+            //                                    break;
+            //                                }
+            //                            case Symptom.Extremities:
+            //                                {
+            //                                    break;
+            //                                }
+            //                            case Symptom.Abdomen:
+            //                                {
+            //                                    break;
+            //                                }
+            //                            case Symptom.Oxygen:
+            //                                {
+            //                                    break;
+            //                                }
+            //                            case Symptom.Imaging:
+            //                                {
+            //                                    break;
+            //                                }
+            //                            default:
+            //                                {
+            //                                    break;
+            //                                }
+            //                        }
+
+
+
+            //                        break;
+            //                    }
+            //                case PlayScreen.SymptomInfo:
+            //                    {
+            //                        _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
+            //                        _spriteBatch.DrawString(gameTextFont, "Symtom Info Play Page", new Vector2(400, 500), Color.Black);
+            //                        break;
+            //                    }
+            //                case PlayScreen.Reasoning:
+            //                    {
+            //                        _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
+            //                        _spriteBatch.DrawString(gameTextFont, "Reasoning Play Page", new Vector2(400, 500), Color.Black);
+            //                        break;
+            //                    }
+            //                case PlayScreen.Diagnose:
+            //                    {
+            //                        _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
+            //                        _spriteBatch.DrawString(gameTextFont, "Diagnose Play Page", new Vector2(400, 500), Color.Black);
+            //                        break;
+            //                    }
+            //                case PlayScreen.Summary:
+            //                    {
+            //                        _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
+            //                        _spriteBatch.DrawString(gameTextFont, "Summary Play Page", new Vector2(400, 500), Color.Black);
+            //                        break;
+            //                    }
+            //                default:
+            //                    {
+            //                        break;
+            //                    }
+            //            }
+
+            //            break;
+            //        }
+            //    default:
+            //        break;
+            //}
+            #endregion
+
+
+            mainMenuPage.Draw(gameTime, _spriteBatch);
             
+
 
 
             //_spriteBatch.DrawString(gameTextFont, "Hello World!", new Vector2(100, 100), Color.Black);
-            
-            
+
+
             _spriteBatch.End();
 
             base.Draw(gameTime);

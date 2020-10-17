@@ -5,14 +5,48 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/back_button.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/background_box.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/button.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/CHF.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/COPD.png</File>
     <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/customize_button.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/diagnose_button.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/examine_abdomen.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/examine_head.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/examine_lungs.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/examine_neck.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/examine_oxygen.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/examine_skin.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/extreme_extremities.png</File>
     <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/gameTextFont.spritefont</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/general_exam_button.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/investigate_button.png</File>
     <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/monkey.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/order_blood_work.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/ordering_imaging.png</File>
     <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/play_button.png</File>
+    <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/pneumonia.png</File>
     <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/shop_button.png</File>
     <File>C:/Users/Matthew/Downloads/messing_around_testing_stuff/testing_v2/Content/stats_button.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

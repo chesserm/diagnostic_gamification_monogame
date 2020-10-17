@@ -9,17 +9,16 @@
     <Import_RootNamespace>testing_v2</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Component.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Button.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Row.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\MainMenu.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)States.cs" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
-    <None Include="$(MSBuildThisFileDirectory)Content\back_button.xnb" />
     <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
-    <None Include="$(MSBuildThisFileDirectory)Content\customize_button.xnb" />
-    <None Include="$(MSBuildThisFileDirectory)Content\gameTextFont.xnb" />
-    <None Include="$(MSBuildThisFileDirectory)Content\monkey.xnb" />
-    <None Include="$(MSBuildThisFileDirectory)Content\play_button.xnb" />
-    <None Include="$(MSBuildThisFileDirectory)Content\shop_button.xnb" />
-    <None Include="$(MSBuildThisFileDirectory)Content\stats_button.xnb" />
   </ItemGroup>
 </Project>
