@@ -28,14 +28,14 @@ namespace testing_v2.Screens
         // Define grid layout for this screen
         private void DesignScreenLayout()
         {
-            // 30 rows exist in the deafult grid, so get the default height
+            // 24 rows exist in the deafult grid, so get the default height
             int defaultHeight = Screen.defaultRowHeight;
 
             // Divide screen height (24 rows of size defaultHeight pixels) into four rows
             _screen.AddRow(2 * defaultHeight); // row 0
-            _screen.AddRow(8 * defaultHeight); // row 1
+            _screen.AddRow(8 * defaultHeight); // row 1 buttons go here
             _screen.AddRow(1 * defaultHeight); // row 2
-            _screen.AddRow(8 * defaultHeight); // row 3
+            _screen.AddRow(8 * defaultHeight); // row 3 buttons go here
             _screen.AddRow(2 * defaultHeight); // row 4
             _screen.AddFinalRow();             // row 5
 
