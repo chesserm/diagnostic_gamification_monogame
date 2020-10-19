@@ -9,7 +9,7 @@ namespace testing_v2.Managers
 {
     public class PlayerManager
     {
-        private static string _filename = "/playerInfo3.xml";
+        private static string _filename = "/playerInfo5.xml";
 
         public Player Player { get; private set; }
 
@@ -24,11 +24,10 @@ namespace testing_v2.Managers
 
 
         //will return a blockstats object if the current block is full
-        public BlockStats caseComplete(bool correct, char casetype)
+        public void caseComplete(bool correct, char casetype)
         {
-            BlockStats b = Player.caseComplete(correct, casetype);
+            Player.caseComplete(correct, casetype);
             PlayerManager.save(this);
-            return b;
         } 
 
         public static PlayerManager Load()
@@ -45,6 +44,7 @@ namespace testing_v2.Managers
 
                 return new PlayerManager(readplayer);
             }
+
         }
         public static void save(PlayerManager PlayerManager)
         {

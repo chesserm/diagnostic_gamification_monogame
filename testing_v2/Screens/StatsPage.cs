@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using testing_v2.Managers;
 
 namespace testing_v2.Screens
 {
@@ -12,7 +13,7 @@ namespace testing_v2.Screens
         #region MemberVariables
         // Screen object that abstracts 99% of the work from this object
         Screen _screen = new Screen();
-
+        PlayerManager _playerManager;
         #endregion
 
         // Enum that lets us detect what screen the user has selected
@@ -49,14 +50,17 @@ namespace testing_v2.Screens
         {
             // Create Button Objects
             Controls.Button backButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Back" };
-
+            Controls.Button addcorrectcopd = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "correctcopd" };
+            Controls.Button copdscore = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = _playerManager.Player.total_correct.ToString() };
 
             // Assign event handlers for the buttons (so they actually do something)
             backButton.Click += BackButton_Click;
-
+            addcorrectcopd.Click += addcorrectcopd_Click;
             // Place button objects (row and col indices gotten from DesignScreenLayout() function above)
 
             _screen.Place(backButton, 0, 0);
+            _screen.Place(addcorrectcopd, 0, 2);
+            _screen.Place(copdscore, 1, 2);
 
         }
 
@@ -65,10 +69,16 @@ namespace testing_v2.Screens
             SelectedCorePage = CorePage.Menu;
         }
 
+        private void addcorrectcopd_Click(object sender, EventArgs e)
+        {
+            _playerManager.caseComplete(true, 'c');
+        }
+
         // Constructor
-        public StatsPage(Texture2D mmButtonTexture, SpriteFont mmButtonFont)
+        public StatsPage(Texture2D mmButtonTexture, SpriteFont mmButtonFont, ref PlayerManager playerManagerin)
         {
             SelectedCorePage = CorePage.Stats;
+            _playerManager = playerManagerin;
 
             // Divide the grid of the screen into rows and columns
             DesignScreenLayout();

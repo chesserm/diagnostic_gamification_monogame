@@ -8,6 +8,8 @@ using System.Collections.Specialized;
 using System.Linq;
 using game_state_enums;
 using testing_v2.Screens;
+using testing_v2.Managers;
+using Javax.Security.Auth;
 
 namespace testing_v2
 {
@@ -16,6 +18,7 @@ namespace testing_v2
         // Variables given to us (spritebatch is in charge of drawing ALL visuals)
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        public PlayerManager _playerManager;
 
         // The screen resolution we are designing for (scaling will adjust for variation)
         int screenHeight = 1366;
@@ -243,6 +246,8 @@ namespace testing_v2
             // TODO: use this.Content to load your game content here
             monkey = Content.Load<Texture2D>("monkey");
 
+            _playerManager = PlayerManager.Load();
+
             #region NoLongerNeeded
             //background_box = Content.Load<Texture2D>("background_box");
 
@@ -280,7 +285,7 @@ namespace testing_v2
             mainMenuPage = new MainMenu(button, gameTextFont);
             shopPage = new ShopPage(button, gameTextFont);
             customizePage = new CustomizePage(button, gameTextFont);
-            statsPage = new StatsPage(button, gameTextFont);
+            statsPage = new StatsPage(button, gameTextFont, ref _playerManager);
         }
 
 

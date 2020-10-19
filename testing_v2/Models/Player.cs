@@ -12,8 +12,9 @@ namespace testing_v2.Models
 		public string ExpLevel { get; set; }
 		public BlockStats currblock { get; set; }
 		public int total_correct { get; set; }
+		public List<BlockStats> Blocks { get; private set; }
 
-		public BlockStats caseComplete(bool correct, char casetype)
+		public void caseComplete(bool correct, char casetype)
 		{
 			if (correct) total_correct++;
 			currblock.caseComplete(correct, casetype);
@@ -23,17 +24,17 @@ namespace testing_v2.Models
             {
 				BlockStats temp = currblock;
 				currblock = new BlockStats(NextCase);
-				return currblock;
+				if (temp != null)
+					Blocks.Add(temp);
 			}
-			NumCoins += 100;
-			Experience += 50;
-			return null;
+
 
 		}
 		public Player()
 		{
 			currblock = new BlockStats(0);
 			ExpLevel = "undergrad";
+			Blocks = new List<BlockStats>();
 
 		}
 	}
