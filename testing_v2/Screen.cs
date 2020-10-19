@@ -152,8 +152,19 @@ namespace testing_v2
             int x = _rows[row].getWidthBeforeCol(col) * COLUMN_WIDTH;
             int y = _rows[row].StartY;
 
-            int width = _rows[row].getWidthColumn(col) * COLUMN_WIDTH;
             int height = _rows[row].Height;
+            int width;
+
+            int widthColumn = _rows[row].getWidthColumn(col);
+            if (widthColumn == -1)
+            {
+                width = screenWidth;
+            }
+            else
+            {
+                width = _rows[row].getWidthColumn(col) * COLUMN_WIDTH;
+            }
+            
 
             return new Rectangle(x, y, width, height);
         }
