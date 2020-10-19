@@ -39,5 +39,14 @@ namespace game_state_enums
         Nothing
     }
 
-
+    // Enum for customizable item types
+    public enum ItemType
+    {
+        Hat,
+        Labcoat,
+        Stethescope,
+        Mask,
+        Shoes,
+        Pants
+    }
 }
