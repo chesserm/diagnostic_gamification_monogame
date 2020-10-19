@@ -37,7 +37,10 @@ namespace game_state_enums
         Abdomen,
         Oxygen,
         Imaging,
-        Nothing
+        Bloodwork,
+        Skin,
+        Nothing,
+        MainMenu
     }
 
     public enum DiagnosisState
