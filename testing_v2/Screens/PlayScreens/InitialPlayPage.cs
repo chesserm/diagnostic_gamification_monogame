@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using testing_v2.Controls;
+using game_state_enums;
 
 namespace testing_v2.Screens.PlayScreens
 {
@@ -12,9 +13,13 @@ namespace testing_v2.Screens.PlayScreens
     {
         #region MemberVariables
         Screen _screen = new Screen();
+
         #endregion
 
         #region Properties
+        // Flag for determining when the user is finished with this page (PlayPage checks this)
+        public bool IsUserFinishedWithPage { get; set; }
+
         public int Age { get; set; }
         public string Gender { get; set; }
 
@@ -169,7 +174,7 @@ namespace testing_v2.Screens.PlayScreens
             Textbox relievingFactors = new Textbox(font, RelievingFactors);
 
             // Button to advance to core gameplay loop
-            Button continueButton = new Button(texture, font) { Text = "Continue"};
+            Controls.Button continueButton = new Controls.Button(texture, font) { Text = "Continue"};
             
             #endregion
 
@@ -209,7 +214,8 @@ namespace testing_v2.Screens.PlayScreens
 
         private void ContinueButton_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            // Set boolean to true so PlayPage knows to switch state to the next page in the loop
+            IsUserFinishedWithPage = true;
         }
 
         #endregion
@@ -219,6 +225,9 @@ namespace testing_v2.Screens.PlayScreens
         // Constructor
         public InitialPlayPage(Texture2D texture, SpriteFont font)
         {
+            // Initialize flag that the PlayPage checks for
+            IsUserFinishedWithPage = false;
+
             // Divide the grid of the screen into rows and columns
             DesignScreenLayout();
 

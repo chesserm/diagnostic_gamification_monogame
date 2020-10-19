@@ -2,7 +2,7 @@
 
 namespace game_state_enums
 {
-    public enum CorePage
+    public enum CoreState
     {
         Menu,
         Stats,
@@ -13,7 +13,7 @@ namespace game_state_enums
 
 
     // Enum to know which screen of the game loop they are on 
-    public enum PlayPage
+    public enum PlayState
     {
         Initial,
         Main,
@@ -21,12 +21,13 @@ namespace game_state_enums
         SymptomList,
         SymptomInfo,
         Reasoning,
-        Summary
+        Summary,
+        Back
     }
 
 
     // Enum to determine which symptom is being investigated
-    public enum Symptom
+    public enum SymptomState
     {
         General,
         Head,
@@ -37,6 +38,15 @@ namespace game_state_enums
         Oxygen,
         Imaging,
         Nothing
+    }
+
+    public enum DiagnosisState
+    {
+        Undiagnosed,
+        COPD,
+        Pneumonia,
+        CHF,
+        Back
     }
 
 

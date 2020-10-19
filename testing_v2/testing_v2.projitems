@@ -18,7 +18,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\CustomizePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\MainMenu.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\DiagnosePlayPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\InitialPlayPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\MainPlayPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\ShopPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\StatsPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)States.cs" />
