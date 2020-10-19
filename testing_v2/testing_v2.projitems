@@ -11,6 +11,8 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Component.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Button.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Sprite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Textbox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Row.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screen.cs" />
