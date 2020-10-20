@@ -8,6 +8,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using game_state_enums;
 using testing_v2.Screens;
+using System.Collections.Generic;
 
 namespace testing_v2
 {
@@ -68,7 +69,13 @@ namespace testing_v2
         #region ContentVariables
         SpriteFont gameTextFont;
         Texture2D button;
-        Texture2D monkey;
+        Texture2D monkey1;
+        Texture2D blackST1;
+        Texture2D silverST1;
+        Texture2D goldST1;
+        Texture2D mask1;
+        Texture2D hat1;
+        Texture2D sprite;
         #endregion
 
         // Screens/Pages for our game
@@ -240,8 +247,37 @@ namespace testing_v2
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+
+            Dictionary<string, ShopItem> storeitems = new Dictionary<string, ShopItem>();
             // TODO: use this.Content to load your game content here
-            monkey = Content.Load<Texture2D>("monkey");
+            monkey1 = Content.Load<Texture2D>("monkey");
+            blackST1 = Content.Load<Texture2D>("monkey");
+            silverST1 = Content.Load<Texture2D>("monkey");
+            goldST1 = Content.Load<Texture2D>("monkey");
+            mask1 = Content.Load<Texture2D>("monkey");
+            hat1 = Content.Load<Texture2D>("monkey");
+
+            sprite = Content.Load<Texture2D>("monkey");
+
+            ShopItem monkey = new ShopItem(monkey1, ItemType.Labcoat, 5, 100);
+            ShopItem blackST = new ShopItem(blackST1, ItemType.Stethescope, 0, 100);
+            ShopItem silverST = new ShopItem(silverST1, ItemType.Stethescope, 0, 200);
+            ShopItem goldST = new ShopItem(goldST1, ItemType.Stethescope, 0, 300);
+            ShopItem mask = new ShopItem(mask1, ItemType.Mask, 0, 200);
+            ShopItem hat = new ShopItem(hat1, ItemType.Hat, 0, 150);
+
+            storeitems["monkey"] = monkey;
+            storeitems["blackST"] = blackST;
+            storeitems["silverST"] = silverST;
+            storeitems["goldST"] = goldST;
+            storeitems["mask"] = mask;
+            storeitems["hat"] = hat;
+
+            //sprite
+            //Dictionary<string, ShopItem> owneditems = new Dictionary<string, ShopItem>();
+
+
+
 
             #region NoLongerNeeded
             //background_box = Content.Load<Texture2D>("background_box");
@@ -278,8 +314,9 @@ namespace testing_v2
 
             // TODO: Add your initialization logic here
             mainMenuPage = new MainMenu(button, gameTextFont);
-            shopPage = new ShopPage(button, gameTextFont);
-            customizePage = new CustomizePage(button, gameTextFont);
+            shopPage = new ShopPage(button, gameTextFont, storeitems);
+            //TODO change customize page third arguement to player purchased items list
+            customizePage = new CustomizePage(button, gameTextFont, storeitems, sprite);
             statsPage = new StatsPage(button, gameTextFont);
         }
 

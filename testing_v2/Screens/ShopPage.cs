@@ -43,7 +43,7 @@ namespace testing_v2.Screens
             _screen.AddColumn(0, 4); 
 
             // Add columns to row #2 (index 1)
-            _screen.AddColumn(1, 4);
+            _screen.AddColumn(1, 4); 
             _screen.AddColumn(1, 4); // Text can go here
             _screen.AddColumn(1, 4);
 
@@ -63,32 +63,112 @@ namespace testing_v2.Screens
             _screen.AddColumn(4, 4);
 
             // Add columns to row #6 (index 5)
-            //_screen.AddColumn(5, 12);
+            _screen.AddColumn(5, 12);
 
         }
 
-        private void CreateAndPlaceElements(Texture2D mmButtonTexture, SpriteFont mmButtonFont)
+        private void CreateAndPlaceElements(Texture2D mmButtonTexture, SpriteFont mmButtonFont, Dictionary<string, ShopItem> storeitems)
         {
             // Create Button Objects
-            Controls.Button backButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Backkkkk" };
+            Controls.Button backButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Back" };
+            Controls.Button shopButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Shop" };
+            Controls.Button InstrButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Click on price to buy an item!" };
 
-            Controls.Button back22Button = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Back22" };
+
+            Controls.Button blackSTprice = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "$" + storeitems["blackST"].Price.ToString() };
+            Controls.Button silverSTprice = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "LOCKED!!" };
+            //TODO how to unlock - show that to user
+            Controls.Button goldSTprice = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "LOCKED!!" };
+            Controls.Button maskprice = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "$" + storeitems["mask"].Price.ToString() };
+            Controls.Button hatprice = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "$" + storeitems["hat"].Price.ToString() };
+            Controls.Button monkeyprice = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "$" + storeitems["monkey"].Price.ToString() };
             //
-            Texture2D monkey;
-            monkey = Content.Load<Texture2D>("monkey");
-            Controls.Button monkey1 = new Controls.Button(monkey, mmButtonFont);
 
+            Controls.Button monkey = new Controls.Button(storeitems["monkey"].ComponentTexture, mmButtonFont);
+            Controls.Button blackST = new Controls.Button(storeitems["blackST"].ComponentTexture, mmButtonFont);
+            Controls.Button silverST = new Controls.Button(storeitems["silverST"].ComponentTexture, mmButtonFont);
+            Controls.Button goldST = new Controls.Button(storeitems["goldST"].ComponentTexture, mmButtonFont);
+            Controls.Button mask = new Controls.Button(storeitems["mask"].ComponentTexture, mmButtonFont);
+            Controls.Button hat = new Controls.Button(storeitems["hat"].ComponentTexture, mmButtonFont);
             // Assign event handlers for the buttons (so they actually do something)
             backButton.Click += BackButton_Click;
 
-            // Place button objects (row and col indices gotten from DesignScreenLayout() function above)
-            
-            _screen.Place(backButton, 0, 0);
+            blackSTprice.Click += BlackSTprice_Click;
+            silverSTprice.Click += SilverSTprice_Click;
+            goldSTprice.Click += GoldSTprice_Click;
+            maskprice.Click += Maskprice_Click;
+            hatprice.Click += Hatprice_Click;
+            monkeyprice.Click += Monkeyprice_Click;
 
-            _screen.Place(back22Button, 0, 1);
-            _screen.Place(monkey1, 3, 3);
+            
+            
+
+            // Place button objects (row and col indices gotten from DesignScreenLayout() function above)
+
+            _screen.Place(backButton, 0, 0);
+            _screen.Place(shopButton, 0, 1);
+            _screen.Place(blackST, 1, 0);
+            _screen.Place(silverST, 1, 1);
+            _screen.Place(goldST, 1, 2);
+
+            _screen.Place(blackSTprice, 2, 0);
+            _screen.Place(silverSTprice, 2, 1);
+            _screen.Place(goldSTprice, 2, 2);
+
+            _screen.Place(mask, 3, 0);
+            _screen.Place(hat, 3, 1);
+            _screen.Place(monkey, 3, 2);
+
+            _screen.Place(maskprice, 4, 0);
+            _screen.Place(hatprice, 4, 1);
+            _screen.Place(monkeyprice, 4, 2);
+
+            _screen.Place(InstrButton, 5, 0);
+
+
 
         }
+
+        private void Monkeyprice_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Hatprice_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Maskprice_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void GoldSTprice_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void SilverSTprice_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void BlackSTprice_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+
+        //CLICK HANDLING STEPS
+        //IF the item id isnt aleady in list / grayed
+        //append item id into player item list
+        //player class update coins based on item.price
+        //change item button color to gray
+        //Alert player that they purchased item
+
+
+
 
         private void BackButton_Click(object sender, EventArgs e)
         {
@@ -96,7 +176,7 @@ namespace testing_v2.Screens
         }
 
         // Constructor
-        public ShopPage(Texture2D mmButtonTexture, SpriteFont mmButtonFont)
+        public ShopPage(Texture2D mmButtonTexture, SpriteFont mmButtonFont, Dictionary<string, ShopItem> storeitems)
         {
             SelectedCorePage = CorePage.Shop;
 
@@ -104,7 +184,7 @@ namespace testing_v2.Screens
             DesignScreenLayout();
 
             // Create and place the objects needed for this page
-            CreateAndPlaceElements(mmButtonTexture, mmButtonFont);
+            CreateAndPlaceElements(mmButtonTexture, mmButtonFont, storeitems);
 
         }
 

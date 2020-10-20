@@ -25,38 +25,61 @@ namespace testing_v2.Screens
             int defaultHeight = Screen.defaultRowHeight;
 
             // Divide screen height (24 rows of size defaultHeight pixels) into four rows
-            _screen.AddRow(8 * defaultHeight); // row 0
-            _screen.AddRow(8 * defaultHeight); // row 1
-            _screen.AddFinalRow(); // row 2
+            _screen.AddRow(2 * defaultHeight); // row 0
+            _screen.AddRow(16 * defaultHeight); // row 1 sprite
+            _screen.AddRow(4 * defaultHeight); // row 2 items
+            _screen.AddFinalRow(); // row 3 instructions
 
 
             // Divide screen width within rows into columns (there are 12 column units to divide)
 
             // Add columns to row #1 (index 0)
-
             _screen.AddColumn(0, 4); // back button goes here
-            _screen.AddColumn(0, 4);
-            _screen.AddColumn(0, 4);
+            _screen.AddColumn(0, 8); //title
+            
+            // Add columns to row #2 (index 1) sprite
+            _screen.AddColumn(1, 12);
 
-            // Add columns to row #2 (index 1)
-            _screen.AddColumn(1, 4);
-            _screen.AddColumn(1, 4); // Text can go here
-            _screen.AddColumn(1, 4);
+            // Add columns to row #3 (index 2) items
+            _screen.AddColumn(2, 4); //mask
+            _screen.AddColumn(2, 4); //hat
+            _screen.AddColumn(2, 4); //stethoscope
+
+            // Add columns to row #4 (index 3) instructions
+            _screen.AddColumn(3, 12);
+
+
 
         }
 
-        private void CreateAndPlaceElements(Texture2D mmButtonTexture, SpriteFont mmButtonFont)
+        private void CreateAndPlaceElements(Texture2D mmButtonTexture, SpriteFont mmButtonFont, Dictionary<string, ShopItem> storeitems, Texture2D sprite)
         {
             // Create Button Objects
             Controls.Button backButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Back" };
+            Controls.Button titleButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Customize" };
+            Controls.Button instaButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Click on item to change your avatar" };
 
+            Controls.Button sprite1 = new Controls.Button(sprite, mmButtonFont);
 
+            //Controls.Button monkey = new Controls.Button(storeitems["monkey"].ComponentTexture, mmButtonFont);
+            Controls.Button blackST = new Controls.Button(storeitems["blackST"].ComponentTexture, mmButtonFont);
+            //Controls.Button silverST = new Controls.Button(storeitems["silverST"].ComponentTexture, mmButtonFont);
+            //Controls.Button goldST = new Controls.Button(storeitems["goldST"].ComponentTexture, mmButtonFont);
+            Controls.Button mask = new Controls.Button(storeitems["mask"].ComponentTexture, mmButtonFont);
+            Controls.Button hat = new Controls.Button(storeitems["hat"].ComponentTexture, mmButtonFont);
             // Assign event handlers for the buttons (so they actually do something)
             backButton.Click += BackButton_Click;
 
             // Place button objects (row and col indices gotten from DesignScreenLayout() function above)
 
             _screen.Place(backButton, 0, 0);
+            _screen.Place(titleButton, 0, 1);
+            _screen.Place(sprite1, 1, 0);
+            _screen.Place(blackST, 2, 0);
+            _screen.Place(mask, 2, 1);
+            _screen.Place(hat, 2, 2);
+
+            _screen.Place(instaButton, 3, 0);
 
         }
 
@@ -66,7 +89,7 @@ namespace testing_v2.Screens
         }
 
         // Constructor
-        public CustomizePage(Texture2D mmButtonTexture, SpriteFont mmButtonFont)
+        public CustomizePage(Texture2D mmButtonTexture, SpriteFont mmButtonFont, Dictionary<string, ShopItem> playeritems, Texture2D sprite)
         {
             SelectedCorePage = CorePage.Customize;
 
@@ -74,7 +97,7 @@ namespace testing_v2.Screens
             DesignScreenLayout();
 
             // Create and place the objects needed for this page
-            CreateAndPlaceElements(mmButtonTexture, mmButtonFont);
+            CreateAndPlaceElements(mmButtonTexture, mmButtonFont, playeritems, sprite);
 
         }
 
