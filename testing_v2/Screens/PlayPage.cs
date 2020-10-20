@@ -22,11 +22,20 @@ namespace testing_v2.Screens
         DiagnosePlayPage diagnosePlayPage;
         SymptomListPage symptomListPlayPage;
         SymptomInfoPlayPage symptomInfoPlayPage;
+        ReasoningPlayPage reasoningPlayPage;
+        SummaryPlayPage summaryPlayPage;
 
         // Assets that need to be passed to various functions
         Texture2D _patientTexture;
         Texture2D _buttonTexture;
         SpriteFont _font;
+
+        // Maps for reasoning
+        Dictionary<SymptomState, String> userReasoning;
+        Dictionary<SymptomState, String> correctReasoning;
+
+        // User's Diagnosis
+        DiagnosisState _playerDiagnosis;
 
         #endregion
 
@@ -151,6 +160,7 @@ namespace testing_v2.Screens
             // Set state variables
             CurrentPlayState = PlayState.Initial;
             IsUserDoneWithPlay = false;
+            _playerDiagnosis = DiagnosisState.Undiagnosed;
 
             // Set asset variables
             _patientTexture = patientTexture;
@@ -162,6 +172,8 @@ namespace testing_v2.Screens
             mainPlayPage = new MainPlayPage(patientTexture, buttonTexture, font);
             diagnosePlayPage = new DiagnosePlayPage(buttonTexture, font);
             symptomListPlayPage = new SymptomListPage(buttonTexture, font);
+            reasoningPlayPage = new ReasoningPlayPage();
+            summaryPlayPage = new SummaryPlayPage();
 
             // Get data before passing it into info page (and set data in initialPlayPage)
             getData();
@@ -244,7 +256,8 @@ namespace testing_v2.Screens
                                 }
                             default:
                                 {
-                                    // There is no other way for this state to be set differently
+                                    // User hasn't done anything on main play page yet, so update
+                                    mainPlayPage.Update(gameTime);
                                     break;
                                 }
                         }
@@ -263,8 +276,10 @@ namespace testing_v2.Screens
                         {
                             case SymptomState.Nothing:
                                 {
-                                    // Default state, do nothing
+                                    // Default state, just update
                                     // This case MUST be explicitly written since its behavior differs from MainMenu and default
+                                    symptomListPlayPage.Update(gameTime);
+
                                     break;
                                 }
                             case SymptomState.MainMenu:
@@ -295,44 +310,112 @@ namespace testing_v2.Screens
                     }
                 case PlayState.SymptomInfo:
                     {
+                        // Check if user is done reviewing information on the symptom they selected
+                        if (symptomInfoPlayPage.IsUserFinishedReviewing)
+                        {
+                            // User is finished reviewing
+
+                            // Check for edge case (only present during alpha) for imaging
+                            if (symptomInfoPlayPage.SymptomInfoStatus == SymptomState.Imaging)
+                            {
+                                // Set play page back to Main Play page (skip reasoning)
+                                CurrentPlayState = PlayState.Main;
+                            }
+                            else
+                            {
+                                // Normal case displays reasoning page after symptom info
+
+                                // TODO: NEED TO CHECK WHICH VALUES THE USER HAS ALREADY SEEN AND NOT SEND THEM TO REASONING
+                                CurrentPlayState = PlayState.Reasoning;
+                            }
+                        }
+                        else
+                        {
+                            // User is not finished reviewing symptom info, so update page
+                            symptomInfoPlayPage.Update(gameTime);
+                        }
+
+                        // Reset symptomInfoPlayPage state tracker
+                        // If the user is still on the page, this has no effect
+                        // If the user is finished with the page, this resets it for the next visit
+                        symptomInfoPlayPage.IsUserFinishedReviewing = false;
+
                         break;
                     }
                 case PlayState.Reasoning:
                     {
+                        // Check if the user is finished reviewing summary page
+                        if (reasoningPlayPage.IsUserFinishedWithPage)
+                        {
+                            // User is finished with reasoning page (selected a reasoning), return to main page of play
+                            CurrentPlayState = PlayState.Main;
+                        }
+                        else
+                        {
+                            // User is not yet finished, update page
+                            reasoningPlayPage.Update(gameTime);
+                        }
+
+                        // Reset Review page's state variable
+                        // If user isn't finished with page, this has no effect
+                        // If user is finished with page, this resets it.
+                        reasoningPlayPage.IsUserFinishedWithPage = false;
                         break;
                     }
                 case PlayState.Diagnose:
                     {
                         switch(diagnosePlayPage.PatientDiagnosis)
                         {
-                            case DiagnosisState.CHF:
+                            case DiagnosisState.Undiagnosed:
                                 {
-                                    break;
-                                }
-                            case DiagnosisState.COPD:
-                                {
-                                    break;
-                                }
-                            case DiagnosisState.Pneumonia:
-                                {
+                                    // Undiagnosed (player hasn't selected anything)
+                                    diagnosePlayPage.Update(gameTime);
                                     break;
                                 }
                             case DiagnosisState.Back:
                                 {
+                                    // Player mistakenly chose diagnose and wants to return to main play page
+                                    CurrentPlayState = PlayState.Main;
                                     break;
                                 }
                             default:
                                 {
+                                    // In all other cases, Player has made a diagnosis
+
+                                    // Update diagnosis variable
+                                    _playerDiagnosis = diagnosePlayPage.PatientDiagnosis;
+
+                                    // Change state to go to summary
+                                    CurrentPlayState = PlayState.Summary;
                                     break;
                                 }
                         }
 
                         // Reset DiagnosisState variable for next time page is visited
+                        // If user hasn't selected a diagnosis yet, this has no effect
+                        // If user has selected a diagnosis/gone back, this resets it for next visit
                         diagnosePlayPage.PatientDiagnosis = DiagnosisState.Undiagnosed;
                         break;
                     }
                 case PlayState.Summary:
                     {
+                        // Check if the user is finished reviewing summary page
+                        if (summaryPlayPage.IsUserFinishedWithPage)
+                        {
+                            // User is finished with summary page, return to main menu of app
+                            IsUserDoneWithPlay = true;
+                            CurrentPlayState = PlayState.Main;
+                        }
+                        else
+                        {
+                            // User is not yet finished, update page
+                            summaryPlayPage.Update(gameTime);
+                        }
+
+                        // Reset summary page's state variable
+                        // If user isn't finished with page, this has no effect
+                        // If user is finished with page, this resets it.
+                        summaryPlayPage.IsUserFinishedWithPage = false;
                         break;
                     }
             }

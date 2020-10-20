@@ -23,6 +23,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\DiagnosePlayPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\InitialPlayPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\MainPlayPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\ReasoningPlayPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\SummaryPlayPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\SymptomInfoPlayPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\SymptomListPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\ShopPage.cs" />

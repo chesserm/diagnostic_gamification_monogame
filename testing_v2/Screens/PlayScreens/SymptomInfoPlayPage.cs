@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using game_state_enums;
 using System.Linq;
+using Microsoft.Xna.Framework;
 
 namespace testing_v2.Screens.PlayScreens
 {
@@ -702,8 +703,9 @@ namespace testing_v2.Screens.PlayScreens
         {
             // Reset screen object
             _screen = new Screen();
+            SymptomInfoStatus = selectedSymptom;
 
-            switch(selectedSymptom)
+            switch (selectedSymptom)
             {
                 case SymptomState.General:
                     {
@@ -779,6 +781,19 @@ namespace testing_v2.Screens.PlayScreens
             return;
         }
 
+
+        // Draw for Game
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            // The screen object takes care of drawing everything 
+            _screen.Draw(gameTime, spriteBatch);
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            // The screen object takes care of updating everything 
+            _screen.Update(gameTime);
+        }
 
 
         #endregion
