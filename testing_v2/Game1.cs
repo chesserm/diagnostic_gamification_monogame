@@ -54,15 +54,6 @@ namespace testing_v2
         //static int backButtonWidth = 100;
         //static int backButtonHeight = 50;
         #endregion
-        
-
-        // Enums to track game state
-        #region GameStateEnums
-
-        CoreState currentCorePage = CoreState.Menu;
-        PlayState currentPlayPage = PlayState.Initial;
-        SymptomState currentSymptom = SymptomState.Nothing;
-        #endregion
 
         // Content used (buttons, sprites, fonts, etc)
         #region ContentVariables
@@ -73,187 +64,205 @@ namespace testing_v2
 
         // Screens/Pages for our game
         #region GamePages
-        MainMenu mainMenuPage;
-        ShopPage shopPage;
-        CustomizePage customizePage;
-        StatsPage statsPage;
+        //MainMenu mainMenuPage;
+        //ShopPage shopPage;
+        //CustomizePage customizePage;
+        //StatsPage statsPage;
+        //PlayPage playPage;
 
         #endregion
+
+        GameDriver gameDriver;
 
         // Variable that detects touch
         TouchCollection tc;
 
-        #region DeterminingCurrentState
+        //#region DeterminingCurrentState
 
-        // Determine which page's draw function to call
-        public void DeterminePageToDraw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            switch(mainMenuPage.SelectedCorePage)
-            {
-                case CoreState.Menu:
-                    {
-                        mainMenuPage.Draw(gameTime, spriteBatch);
-                        break;
-                    }
-                case CoreState.Shop:
-                    {
-                        // Update state in the shop page if it was toggled from returning to main page
-                        if (shopPage.SelectedCorePage == CoreState.Menu)
-                        {
-                            shopPage.SelectedCorePage = CoreState.Shop;
-                            mainMenuPage.SelectedCorePage = CoreState.Menu;
-                        }
-                        else
-                        {
-                            // Draw Shop Page
-                            shopPage.Draw(gameTime, spriteBatch);
-                        }
-
-                        
-                        
-                        break;
-                    }
-                case CoreState.Customize:
-                    {
-                        // Update state in the customize page if it was toggled from returning to main page
-                        if (customizePage.SelectedCorePage == CoreState.Menu)
-                        {
-                            customizePage.SelectedCorePage = CoreState.Customize;
-                            mainMenuPage.SelectedCorePage = CoreState.Menu;
-                        }
-                        else
-                        {
-                            // Draw Customize Page
-                            customizePage.Draw(gameTime, spriteBatch);
-                        }
+        //// Determine which page's draw function to call
+        //public void DeterminePageToDraw(GameTime gameTime, SpriteBatch spriteBatch)
+        //{
+        //    switch(mainMenuPage.SelectedCorePage)
+        //    {
+        //        case CoreState.Menu:
+        //            {
+        //                mainMenuPage.Draw(gameTime, spriteBatch);
+        //                break;
+        //            }
+        //        case CoreState.Shop:
+        //            {
+        //                // Update state in the shop page if it was toggled from returning to main page
+        //                if (shopPage.SelectedCorePage == CoreState.Menu)
+        //                {
+        //                    shopPage.SelectedCorePage = CoreState.Shop;
+        //                    mainMenuPage.SelectedCorePage = CoreState.Menu;
+        //                }
+        //                else
+        //                {
+        //                    // Draw Shop Page
+        //                    shopPage.Draw(gameTime, spriteBatch);
+        //                }
 
                         
-                        break;
-                    }
-                case CoreState.Stats:
-                    {
-                        // Update state in the stats page if it was toggled from returning to main page
-                        if (statsPage.SelectedCorePage == CoreState.Menu)
-                        {
-                            statsPage.SelectedCorePage = CoreState.Stats;
-                            mainMenuPage.SelectedCorePage = CoreState.Menu;
-                        }
-                        else
-                        {
-                            // Draw Stats Page
-                            statsPage.Draw(gameTime, spriteBatch);
-                        }
+                        
+        //                break;
+        //            }
+        //        case CoreState.Customize:
+        //            {
+        //                // Update state in the customize page if it was toggled from returning to main page
+        //                if (customizePage.SelectedCorePage == CoreState.Menu)
+        //                {
+        //                    customizePage.SelectedCorePage = CoreState.Customize;
+        //                    mainMenuPage.SelectedCorePage = CoreState.Menu;
+        //                }
+        //                else
+        //                {
+        //                    // Draw Customize Page
+        //                    customizePage.Draw(gameTime, spriteBatch);
+        //                }
 
                         
-                        break;
-                    }
-                case CoreState.Play:
-                    {
-                        break;
-                    }
-            }
-        }
+        //                break;
+        //            }
+        //        case CoreState.Stats:
+        //            {
+        //                // Update state in the stats page if it was toggled from returning to main page
+        //                if (statsPage.SelectedCorePage == CoreState.Menu)
+        //                {
+        //                    statsPage.SelectedCorePage = CoreState.Stats;
+        //                    mainMenuPage.SelectedCorePage = CoreState.Menu;
+        //                }
+        //                else
+        //                {
+        //                    // Draw Stats Page
+        //                    statsPage.Draw(gameTime, spriteBatch);
+        //                }
 
-        // Determine which page to update, and update it
-        public void DeterminePageToUpdate(GameTime gameTime)
-        {
-            switch (mainMenuPage.SelectedCorePage)
-            {
-                case CoreState.Menu:
-                    {
-                        mainMenuPage.Update(gameTime);
-                        break;
-                    }
-                case CoreState.Shop:
-                    {
-                        // Update state in the shop page if it was toggled from returning to main page
-                        if (shopPage.SelectedCorePage == CoreState.Menu)
-                        {
-                            shopPage.SelectedCorePage = CoreState.Shop;
-                            mainMenuPage.SelectedCorePage = CoreState.Menu;
+                        
+        //                break;
+        //            }
+        //        case CoreState.Play:
+        //            {
+                        
+        //                break;
+        //            }
+        //    }
+        //}
 
-                            /*
-                             * Here you would check shopPage.ItemsPurchased and add each item to the player class's list of ids
-                             * of purchased items and you would also check the shopPage.TotalCoinsSpent and subtract this value from the player's
-                             * balance of coins.
-                             * 
-                             * Then you'd reset the shopPage.ItemsPurchased to an empty list and shopPage.TotalCoinsSpent to 0 for the next time
-                             * the player goes into the shop
-                             * 
-                             * These variables have to be created. I just made them up for conceptual notes.
-                             * 
-                             * An alternative, and possibly better way to do this, is to instead set a property in the shopPage (e.g. playercoins) to be
-                             * equal to the player's coins before entering the page. This lets you check to make sure they don't spend more than they are
-                             * allowed to in the shop and makes the update easier when you return (you just set the player's coins equal to the variable when
-                             * you return instead of adding). you would still need to reset this to 0 in the shop page after returning.
-                             * 
-                             */
+        //// Determine which page to update, and update it
+        //public void DeterminePageToUpdate(GameTime gameTime)
+        //{
+        //    switch (mainMenuPage.SelectedCorePage)
+        //    {
+        //        case CoreState.Menu:
+        //            {
+        //                mainMenuPage.Update(gameTime);
+        //                break;
+        //            }
+        //        case CoreState.Shop:
+        //            {
+        //                // Update state in the shop page if it was toggled from returning to main page
+        //                if (shopPage.SelectedCorePage == CoreState.Menu)
+        //                {
+        //                    shopPage.SelectedCorePage = CoreState.Shop;
+        //                    mainMenuPage.SelectedCorePage = CoreState.Menu;
 
-                        }
-                        else
-                        {
-                            // Update Shop Page
-                            shopPage.Update(gameTime);
-                        }
+        //                    /*
+        //                     * Here you would check shopPage.ItemsPurchased and add each item to the player class's list of ids
+        //                     * of purchased items and you would also check the shopPage.TotalCoinsSpent and subtract this value from the player's
+        //                     * balance of coins.
+        //                     * 
+        //                     * Then you'd reset the shopPage.ItemsPurchased to an empty list and shopPage.TotalCoinsSpent to 0 for the next time
+        //                     * the player goes into the shop
+        //                     * 
+        //                     * These variables have to be created. I just made them up for conceptual notes.
+        //                     * 
+        //                     * An alternative, and possibly better way to do this, is to instead set a property in the shopPage (e.g. playercoins) to be
+        //                     * equal to the player's coins before entering the page. This lets you check to make sure they don't spend more than they are
+        //                     * allowed to in the shop and makes the update easier when you return (you just set the player's coins equal to the variable when
+        //                     * you return instead of adding). you would still need to reset this to 0 in the shop page after returning.
+        //                     * 
+        //                     */
+
+        //                }
+        //                else
+        //                {
+        //                    // Update Shop Page
+        //                    shopPage.Update(gameTime);
+        //                }
 
                         
 
-                        break;
-                    }
-                case CoreState.Customize:
-                    {
-                        // Update state in the customize page if it was toggled from returning to main page
-                        if (customizePage.SelectedCorePage == CoreState.Menu)
-                        {
-                            customizePage.SelectedCorePage = CoreState.Customize;
-                            mainMenuPage.SelectedCorePage = CoreState.Menu;
-                        }
-                        else
-                        {
-                            // Update Customize Page
-                            customizePage.Update(gameTime);
-                        }
+        //                break;
+        //            }
+        //        case CoreState.Customize:
+        //            {
+        //                // Update state in the customize page if it was toggled from returning to main page
+        //                if (customizePage.SelectedCorePage == CoreState.Menu)
+        //                {
+        //                    customizePage.SelectedCorePage = CoreState.Customize;
+        //                    mainMenuPage.SelectedCorePage = CoreState.Menu;
+        //                }
+        //                else
+        //                {
+        //                    // Update Customize Page
+        //                    customizePage.Update(gameTime);
+        //                }
 
                         
-                        break;
-                    }
-                case CoreState.Stats:
-                    {
-                        // Update state in the stats page if it was toggled from returning to main page
-                        if (statsPage.SelectedCorePage == CoreState.Menu)
-                        {
-                            statsPage.SelectedCorePage = CoreState.Stats;
-                            mainMenuPage.SelectedCorePage = CoreState.Menu;
+        //                break;
+        //            }
+        //        case CoreState.Stats:
+        //            {
+        //                // Update state in the stats page if it was toggled from returning to main page
+        //                if (statsPage.SelectedCorePage == CoreState.Menu)
+        //                {
+        //                    statsPage.SelectedCorePage = CoreState.Stats;
+        //                    mainMenuPage.SelectedCorePage = CoreState.Menu;
 
-                            /*
-                             * Here you would check statsPage.NumCorrect properties (there would need to be one for each cause)
-                             * and set each variable in the corresponding player class to the new values
-                             * 
-                             * Then you'd just have to make sure the variables in the statsPage class get re-assigned to before 
-                             * re-entering the stats page
-                             * 
-                             * 
-                             * These variables have to be created. I just made them up for conceptual notes.
-                             * 
-                             */
-                        }
-                        else
-                        {
-                            // Update Stats Page
-                            statsPage.Update(gameTime);
-                        }
+        //                    /*
+        //                     * Here you would check statsPage.NumCorrect properties (there would need to be one for each cause)
+        //                     * and set each variable in the corresponding player class to the new values
+        //                     * 
+        //                     * Then you'd just have to make sure the variables in the statsPage class get re-assigned to before 
+        //                     * re-entering the stats page
+        //                     * 
+        //                     * 
+        //                     * These variables have to be created. I just made them up for conceptual notes.
+        //                     * 
+        //                     */
+        //                }
+        //                else
+        //                {
+        //                    // Update Stats Page
+        //                    statsPage.Update(gameTime);
+        //                }
 
                         
-                        break;
-                    }
-                case CoreState.Play:
-                    {
-                        break;
-                    }
-            }
-        }
+        //                break;
+        //            }
+        //        case CoreState.Play:
+        //            {
+        //                // Check to see if user is done with play loop
+        //                if (playPage.IsUserDoneWithPlay)
+        //                {
+        //                    // Update global state variable
+        //                    mainMenuPage.SelectedCorePage = CoreState.Menu;
+        //                }
+        //                else
+        //                {
+        //                    playPage.Update(gameTime);
+        //                }
 
-        #endregion
+        //                // Reset state variable for plaly
+        //                // If user
+        //                playPage.IsUserDoneWithPlay = false;
+        //                break;
+        //            }
+        //    }
+        //}
+
+        //#endregion
 
 
         // This is the constructor for the game class and is where we can set some parameters
@@ -315,10 +324,13 @@ namespace testing_v2
             gameTextFont = Content.Load<SpriteFont>("gameTextFont");
 
             // TODO: Add your initialization logic here
-            mainMenuPage = new MainMenu(button, gameTextFont);
-            shopPage = new ShopPage(button, gameTextFont);
-            customizePage = new CustomizePage(button, gameTextFont);
-            statsPage = new StatsPage(button, gameTextFont);
+            //mainMenuPage = new MainMenu(button, gameTextFont);
+            //shopPage = new ShopPage(button, gameTextFont);
+            //customizePage = new CustomizePage(button, gameTextFont);
+            //statsPage = new StatsPage(button, gameTextFont);
+
+            // Initialize game driver, which manages the whole game
+            gameDriver = new GameDriver(button, gameTextFont, monkey, monkey);
         }
 
 
@@ -334,7 +346,9 @@ namespace testing_v2
             tc = TouchPanel.GetState();
 
             // Automatically determine and update correct page
-            DeterminePageToUpdate(gameTime);
+
+            gameDriver.Update(gameTime);
+
             //mainMenuPage.Update(gameTime);
 
             // Check which button is being pressed
@@ -557,7 +571,9 @@ namespace testing_v2
             #endregion
 
             //Automatically determine which page to draw
-            DeterminePageToDraw(gameTime, _spriteBatch);
+
+            gameDriver.Draw(gameTime, _spriteBatch);
+            //DeterminePageToDraw(gameTime, _spriteBatch);
 
             //mainMenuPage.Draw(gameTime, _spriteBatch);
 

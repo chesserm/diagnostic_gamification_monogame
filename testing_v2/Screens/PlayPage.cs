@@ -182,12 +182,24 @@ namespace testing_v2.Screens
             symptomInfoPlayPage = new SymptomInfoPlayPage(patientData, SymptomState.Nothing, buttonTexture, font);
         }
 
-        // Function that can be called by Game's state manager to reset the play loop
+        // Function that can be called by Game's state manager to reset the play loop thoroughly
         public void ResetPlayLoop()
         {
-            // Set state variables
+            // Set state variables for the PlayPage object
             CurrentPlayState = PlayState.Initial;
             IsUserDoneWithPlay = false;
+
+            // Reset state variables for all pages
+            initialPlayPage.IsUserFinishedWithPage = false;
+            mainPlayPage.CurrentMainPlayState = PlayState.Main;
+            symptomListPlayPage.SelectedSymptom = SymptomState.Nothing;
+            symptomInfoPlayPage.IsUserFinishedReviewing = false;
+            symptomInfoPlayPage.SymptomInfoStatus = SymptomState.Nothing;
+            reasoningPlayPage.IsUserFinishedWithPage = false;
+            diagnosePlayPage.PatientDiagnosis = DiagnosisState.Undiagnosed;
+            summaryPlayPage.IsUserFinishedWithPage = false;
+
+
         }
 
 
@@ -201,11 +213,47 @@ namespace testing_v2.Screens
             {
                 case PlayState.Initial:
                     {
-                        
-                        
+                        initialPlayPage.Draw(gameTime, spriteBatch);
+                        break;
+                    }
+                case PlayState.Main:
+                    {
+                        mainPlayPage.Draw(gameTime, spriteBatch);
+                        break;
+                    }
+                case PlayState.SymptomList:
+                    {
+                        symptomListPlayPage.Draw(gameTime, spriteBatch);
+                        break;
+                    }
+                case PlayState.SymptomInfo:
+                    {
+                        symptomListPlayPage.Draw(gameTime, spriteBatch);
+                        break;
+                    }
+                case PlayState.Reasoning:
+                    {
+                        reasoningPlayPage.Draw(gameTime, spriteBatch);
+                        break;
+                    }
+                case PlayState.Diagnose:
+                    {
+                        diagnosePlayPage.Draw(gameTime, spriteBatch);
+                        break;
+                    }
+                case PlayState.Summary:
+                    {
+                        summaryPlayPage.Draw(gameTime, spriteBatch);
+                        break;
+                    }
+                default:
+                    {
+                        // No other cases
                         break;
                     }
             }
+
+            return;
         }
 
         public void Update(GameTime gameTime)
@@ -419,6 +467,7 @@ namespace testing_v2.Screens
                         break;
                     }
             }
+            return;
         }
         
         #endregion

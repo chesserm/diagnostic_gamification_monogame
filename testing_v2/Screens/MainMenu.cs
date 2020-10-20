@@ -17,7 +17,11 @@ namespace testing_v2.Screens
         // Screen object that abstracts 99% of the work from this object
         Screen _screen = new Screen();
 
-
+        // Other pages
+        ShopPage shopPage;
+        CustomizePage customizePage;
+        StatsPage statsPage;
+        PlayPage playPage;
 
         #endregion
 
@@ -125,7 +129,6 @@ namespace testing_v2.Screens
 
         public void Update(GameTime gameTime)
         {
-            // The screen object takes care of updating everything 
             _screen.Update(gameTime);
         }
 
