@@ -76,6 +76,9 @@ namespace testing_v2
         Texture2D mask1;
         Texture2D hat1;
         Texture2D sprite;
+
+        Texture2D layover_blackST;
+        Texture2D layover_mask1;
         #endregion
 
         // Screens/Pages for our game
@@ -251,20 +254,26 @@ namespace testing_v2
             Dictionary<string, ShopItem> storeitems = new Dictionary<string, ShopItem>();
             // TODO: use this.Content to load your game content here
             monkey1 = Content.Load<Texture2D>("monkey");
-            blackST1 = Content.Load<Texture2D>("monkey");
-            silverST1 = Content.Load<Texture2D>("monkey");
-            goldST1 = Content.Load<Texture2D>("monkey");
-            mask1 = Content.Load<Texture2D>("monkey");
-            hat1 = Content.Load<Texture2D>("monkey");
+            blackST1 = Content.Load<Texture2D>("shopBlackST");
+            silverST1 = Content.Load<Texture2D>("shopsilverST");
+            goldST1 = Content.Load<Texture2D>("shopgoldST");
+            mask1 = Content.Load<Texture2D>("mask");
+            hat1 = Content.Load<Texture2D>("hat");
 
-            sprite = Content.Load<Texture2D>("monkey");
+            sprite = Content.Load<Texture2D>("guy-noST");
+
+            layover_blackST = Content.Load<Texture2D>("layover_blackST");
+            layover_mask1 = Content.Load<Texture2D>("layover_mask");
 
             ShopItem monkey = new ShopItem(monkey1, ItemType.Labcoat, 5, 100);
             ShopItem blackST = new ShopItem(blackST1, ItemType.Stethescope, 0, 100);
-            ShopItem silverST = new ShopItem(silverST1, ItemType.Stethescope, 0, 200);
-            ShopItem goldST = new ShopItem(goldST1, ItemType.Stethescope, 0, 300);
-            ShopItem mask = new ShopItem(mask1, ItemType.Mask, 0, 200);
-            ShopItem hat = new ShopItem(hat1, ItemType.Hat, 0, 150);
+            ShopItem silverST = new ShopItem(silverST1, ItemType.Stethescope, 1, 200);
+            ShopItem goldST = new ShopItem(goldST1, ItemType.Stethescope, 2, 300);
+            ShopItem mask = new ShopItem(mask1, ItemType.Mask, 3, 200);
+            ShopItem hat = new ShopItem(hat1, ItemType.Hat, 4, 150);
+
+            ShopItem layover_BST = new ShopItem(layover_blackST, ItemType.Stethescope, 100, 0);
+            ShopItem layover_mask = new ShopItem(layover_mask1, ItemType.Mask, 100, 0);
 
             storeitems["monkey"] = monkey;
             storeitems["blackST"] = blackST;
@@ -272,6 +281,9 @@ namespace testing_v2
             storeitems["goldST"] = goldST;
             storeitems["mask"] = mask;
             storeitems["hat"] = hat;
+
+            storeitems["layoverBST"] = layover_BST;
+            storeitems["layovermask"] = layover_mask;
 
             //sprite
             //Dictionary<string, ShopItem> owneditems = new Dictionary<string, ShopItem>();

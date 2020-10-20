@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace testing_v2.Screens
 {
-    class ShopPage : Game
+    class ShopPage
     {
         #region MemberVariables
         // Screen object that abstracts 99% of the work from this object

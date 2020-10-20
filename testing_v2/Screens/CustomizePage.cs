@@ -57,7 +57,7 @@ namespace testing_v2.Screens
             // Create Button Objects
             Controls.Button backButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Back" };
             Controls.Button titleButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Customize" };
-            Controls.Button instaButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Click on item to change your avatar" };
+            Controls.Button instaButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Click on an item to add to your avatar" };
 
             Controls.Button sprite1 = new Controls.Button(sprite, mmButtonFont);
 
@@ -67,21 +67,54 @@ namespace testing_v2.Screens
             //Controls.Button goldST = new Controls.Button(storeitems["goldST"].ComponentTexture, mmButtonFont);
             Controls.Button mask = new Controls.Button(storeitems["mask"].ComponentTexture, mmButtonFont);
             Controls.Button hat = new Controls.Button(storeitems["hat"].ComponentTexture, mmButtonFont);
+
+            Controls.Button layover_blackST = new Controls.Button(storeitems["layoverBST"].ComponentTexture, mmButtonFont);
+            Controls.Button layover_mask = new Controls.Button(storeitems["layovermask"].ComponentTexture, mmButtonFont);
+            Controls.Button layover_hat = new Controls.Button(storeitems["hat"].ComponentTexture, mmButtonFont);
             // Assign event handlers for the buttons (so they actually do something)
             backButton.Click += BackButton_Click;
 
+            blackST.Click += (sender, EventArgs) => { ButtonBlackST_Click(sender, EventArgs, layover_mask); };
+            
+            hat.Click += (sender, EventArgs) => { ButtonHat_Click(sender, EventArgs, layover_hat); };
+
+            mask.Click += (sender, EventArgs) => { ButtonMask_Click(sender, EventArgs, layover_blackST); };
+
+            
             // Place button objects (row and col indices gotten from DesignScreenLayout() function above)
 
             _screen.Place(backButton, 0, 0);
             _screen.Place(titleButton, 0, 1);
+
             _screen.Place(sprite1, 1, 0);
+
             _screen.Place(blackST, 2, 0);
             _screen.Place(mask, 2, 1);
             _screen.Place(hat, 2, 2);
 
             _screen.Place(instaButton, 3, 0);
 
+            //_screen.Place(layover_hat, 1, 0);
+            //_screen.Place(layover_blackST, 1, 0);
+            //_screen.Place(layover_mask, 1, 0);
+
         }
+
+        void ButtonMask_Click(object sender, EventArgs e, Controls.Button layover_mask)
+        {
+            _screen.Place(layover_mask, 1, 0);
+        }
+
+        void ButtonHat_Click(object sender, EventArgs e, Controls.Button layover_hat)
+        {
+            _screen.Place(layover_hat, 1, 0);
+        }
+
+        void ButtonBlackST_Click(object sender, EventArgs e, Controls.Button layover_blackST)
+        {
+            _screen.Place(layover_blackST, 1, 0);
+        }
+
 
         private void BackButton_Click(object sender, EventArgs e)
         {
