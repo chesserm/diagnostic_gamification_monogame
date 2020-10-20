@@ -18,6 +18,8 @@ namespace testing_v2.Screens.PlayScreens
         #region Properties
         public SymptomState SelectedSymptom { get; set; }
 
+        PatientData patientData { get; set; }
+
         #endregion
 
 

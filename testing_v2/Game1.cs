@@ -59,9 +59,9 @@ namespace testing_v2
         // Enums to track game state
         #region GameStateEnums
 
-        CorePage currentCorePage = CorePage.Menu;
-        PlayPage currentPlayPage = PlayPage.Initial;
-        Symptom currentSymptom = Symptom.Nothing;
+        CoreState currentCorePage = CoreState.Menu;
+        PlayState currentPlayPage = PlayState.Initial;
+        SymptomState currentSymptom = SymptomState.Nothing;
         #endregion
 
         // Content used (buttons, sprites, fonts, etc)
@@ -90,18 +90,18 @@ namespace testing_v2
         {
             switch(mainMenuPage.SelectedCorePage)
             {
-                case CorePage.Menu:
+                case CoreState.Menu:
                     {
                         mainMenuPage.Draw(gameTime, spriteBatch);
                         break;
                     }
-                case CorePage.Shop:
+                case CoreState.Shop:
                     {
                         // Update state in the shop page if it was toggled from returning to main page
-                        if (shopPage.SelectedCorePage == CorePage.Menu)
+                        if (shopPage.SelectedCorePage == CoreState.Menu)
                         {
-                            shopPage.SelectedCorePage = CorePage.Shop;
-                            mainMenuPage.SelectedCorePage = CorePage.Menu;
+                            shopPage.SelectedCorePage = CoreState.Shop;
+                            mainMenuPage.SelectedCorePage = CoreState.Menu;
                         }
                         else
                         {
@@ -113,13 +113,13 @@ namespace testing_v2
                         
                         break;
                     }
-                case CorePage.Customize:
+                case CoreState.Customize:
                     {
                         // Update state in the customize page if it was toggled from returning to main page
-                        if (customizePage.SelectedCorePage == CorePage.Menu)
+                        if (customizePage.SelectedCorePage == CoreState.Menu)
                         {
-                            customizePage.SelectedCorePage = CorePage.Customize;
-                            mainMenuPage.SelectedCorePage = CorePage.Menu;
+                            customizePage.SelectedCorePage = CoreState.Customize;
+                            mainMenuPage.SelectedCorePage = CoreState.Menu;
                         }
                         else
                         {
@@ -130,13 +130,13 @@ namespace testing_v2
                         
                         break;
                     }
-                case CorePage.Stats:
+                case CoreState.Stats:
                     {
                         // Update state in the stats page if it was toggled from returning to main page
-                        if (statsPage.SelectedCorePage == CorePage.Menu)
+                        if (statsPage.SelectedCorePage == CoreState.Menu)
                         {
-                            statsPage.SelectedCorePage = CorePage.Stats;
-                            mainMenuPage.SelectedCorePage = CorePage.Menu;
+                            statsPage.SelectedCorePage = CoreState.Stats;
+                            mainMenuPage.SelectedCorePage = CoreState.Menu;
                         }
                         else
                         {
@@ -147,6 +147,10 @@ namespace testing_v2
                         
                         break;
                     }
+                case CoreState.Play:
+                    {
+                        break;
+                    }
             }
         }
 
@@ -155,18 +159,36 @@ namespace testing_v2
         {
             switch (mainMenuPage.SelectedCorePage)
             {
-                case CorePage.Menu:
+                case CoreState.Menu:
                     {
                         mainMenuPage.Update(gameTime);
                         break;
                     }
-                case CorePage.Shop:
+                case CoreState.Shop:
                     {
                         // Update state in the shop page if it was toggled from returning to main page
-                        if (shopPage.SelectedCorePage == CorePage.Menu)
+                        if (shopPage.SelectedCorePage == CoreState.Menu)
                         {
-                            shopPage.SelectedCorePage = CorePage.Shop;
-                            mainMenuPage.SelectedCorePage = CorePage.Menu;
+                            shopPage.SelectedCorePage = CoreState.Shop;
+                            mainMenuPage.SelectedCorePage = CoreState.Menu;
+
+                            /*
+                             * Here you would check shopPage.ItemsPurchased and add each item to the player class's list of ids
+                             * of purchased items and you would also check the shopPage.TotalCoinsSpent and subtract this value from the player's
+                             * balance of coins.
+                             * 
+                             * Then you'd reset the shopPage.ItemsPurchased to an empty list and shopPage.TotalCoinsSpent to 0 for the next time
+                             * the player goes into the shop
+                             * 
+                             * These variables have to be created. I just made them up for conceptual notes.
+                             * 
+                             * An alternative, and possibly better way to do this, is to instead set a property in the shopPage (e.g. playercoins) to be
+                             * equal to the player's coins before entering the page. This lets you check to make sure they don't spend more than they are
+                             * allowed to in the shop and makes the update easier when you return (you just set the player's coins equal to the variable when
+                             * you return instead of adding). you would still need to reset this to 0 in the shop page after returning.
+                             * 
+                             */
+
                         }
                         else
                         {
@@ -178,13 +200,13 @@ namespace testing_v2
 
                         break;
                     }
-                case CorePage.Customize:
+                case CoreState.Customize:
                     {
                         // Update state in the customize page if it was toggled from returning to main page
-                        if (customizePage.SelectedCorePage == CorePage.Menu)
+                        if (customizePage.SelectedCorePage == CoreState.Menu)
                         {
-                            customizePage.SelectedCorePage = CorePage.Customize;
-                            mainMenuPage.SelectedCorePage = CorePage.Menu;
+                            customizePage.SelectedCorePage = CoreState.Customize;
+                            mainMenuPage.SelectedCorePage = CoreState.Menu;
                         }
                         else
                         {
@@ -195,13 +217,25 @@ namespace testing_v2
                         
                         break;
                     }
-                case CorePage.Stats:
+                case CoreState.Stats:
                     {
                         // Update state in the stats page if it was toggled from returning to main page
-                        if (statsPage.SelectedCorePage == CorePage.Menu)
+                        if (statsPage.SelectedCorePage == CoreState.Menu)
                         {
-                            statsPage.SelectedCorePage = CorePage.Stats;
-                            mainMenuPage.SelectedCorePage = CorePage.Menu;
+                            statsPage.SelectedCorePage = CoreState.Stats;
+                            mainMenuPage.SelectedCorePage = CoreState.Menu;
+
+                            /*
+                             * Here you would check statsPage.NumCorrect properties (there would need to be one for each cause)
+                             * and set each variable in the corresponding player class to the new values
+                             * 
+                             * Then you'd just have to make sure the variables in the statsPage class get re-assigned to before 
+                             * re-entering the stats page
+                             * 
+                             * 
+                             * These variables have to be created. I just made them up for conceptual notes.
+                             * 
+                             */
                         }
                         else
                         {
@@ -210,6 +244,10 @@ namespace testing_v2
                         }
 
                         
+                        break;
+                    }
+                case CoreState.Play:
+                    {
                         break;
                     }
             }

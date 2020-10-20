@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Sprite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Textbox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PatientData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Row.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\CustomizePage.cs" />
@@ -22,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\DiagnosePlayPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\InitialPlayPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\MainPlayPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\SymptomInfoPlayPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\SymptomListPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\ShopPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\StatsPage.cs" />

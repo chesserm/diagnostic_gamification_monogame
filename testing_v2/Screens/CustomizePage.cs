@@ -16,7 +16,7 @@ namespace testing_v2.Screens
         #endregion
 
         // Enum that lets us detect what screen the user has selected
-        public CorePage SelectedCorePage { get; set; }
+        public CoreState SelectedCorePage { get; set; }
 
         // Define grid layout for this screen
         private void DesignScreenLayout()
@@ -62,13 +62,13 @@ namespace testing_v2.Screens
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            SelectedCorePage = CorePage.Menu;
+            SelectedCorePage = CoreState.Menu;
         }
 
         // Constructor
         public CustomizePage(Texture2D mmButtonTexture, SpriteFont mmButtonFont)
         {
-            SelectedCorePage = CorePage.Customize;
+            SelectedCorePage = CoreState.Customize;
 
             // Divide the grid of the screen into rows and columns
             DesignScreenLayout();

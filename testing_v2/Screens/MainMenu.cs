@@ -22,7 +22,7 @@ namespace testing_v2.Screens
         #endregion
 
         // Enum that lets us detect what screen the user has selected
-        public CorePage SelectedCorePage { get; set; }
+        public CoreState SelectedCorePage { get; set; }
 
         #region HelperFunctions
         // Define grid layout for this screen
@@ -81,22 +81,22 @@ namespace testing_v2.Screens
         #region ButtonEventHandlers
         private void StatsButton_Click(object sender, EventArgs e)
         {
-            SelectedCorePage = CorePage.Stats;
+            SelectedCorePage = CoreState.Stats;
         }
 
         private void CustomizeButton_Click(object sender, EventArgs e)
         {
-            SelectedCorePage = CorePage.Customize;
+            SelectedCorePage = CoreState.Customize;
         }
 
         private void ShopButton_Click(object sender, EventArgs e)
         {
-            SelectedCorePage = CorePage.Shop;
+            SelectedCorePage = CoreState.Shop;
         }
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
-            SelectedCorePage = CorePage.Play;
+            SelectedCorePage = CoreState.Play;
         }
         #endregion
 
@@ -106,7 +106,7 @@ namespace testing_v2.Screens
         // Constructor
         public MainMenu(Texture2D mmButtonTexture, SpriteFont mmButtonFont)
         {
-            SelectedCorePage = CorePage.Menu;
+            SelectedCorePage = CoreState.Menu;
 
             // Divide the grid of the screen into rows and columns
             DesignScreenLayout();
