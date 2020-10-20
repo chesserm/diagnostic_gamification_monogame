@@ -283,9 +283,9 @@ namespace testing_v2
 
             // TODO: Add your initialization logic here
             mainMenuPage = new MainMenu(button, gameTextFont);
-            shopPage = new ShopPage(button, gameTextFont);
+            shopPage = new ShopPage(button, gameTextFont, _playerManager);
             customizePage = new CustomizePage(button, gameTextFont);
-            statsPage = new StatsPage(button, gameTextFont, ref _playerManager);
+            statsPage = new StatsPage(button, gameTextFont, _playerManager);
         }
 
 

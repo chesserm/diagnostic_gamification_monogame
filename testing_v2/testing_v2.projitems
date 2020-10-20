@@ -12,7 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Component.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Button.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Managers\BlockStatsManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Managers\PlayerManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\BlockStats.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\item.cs" />

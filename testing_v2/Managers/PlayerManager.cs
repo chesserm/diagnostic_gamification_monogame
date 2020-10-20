@@ -9,7 +9,7 @@ namespace testing_v2.Managers
 {
     public class PlayerManager
     {
-        private static string _filename = "/playerInfo5.xml";
+        private static string _filename = "/playerInfo6.xml";
 
         public Player Player { get; private set; }
 
@@ -28,7 +28,14 @@ namespace testing_v2.Managers
         {
             Player.caseComplete(correct, casetype);
             PlayerManager.save(this);
-        } 
+        }
+
+        public void buyItem(int itemID, int cost)
+        {
+            Player.itemsOwned.Add(itemID);
+            Player.NumCoins -= cost;
+            PlayerManager.save(this);
+        }
 
         public static PlayerManager Load()
         {

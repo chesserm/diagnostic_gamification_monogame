@@ -4,6 +4,7 @@ using System.Text;
 using game_state_enums;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using testing_v2.Managers;
 
 namespace testing_v2.Screens
 {
@@ -12,7 +13,9 @@ namespace testing_v2.Screens
         #region MemberVariables
         // Screen object that abstracts 99% of the work from this object
         Screen _screen = new Screen();
-        
+
+        PlayerManager _playerManager;
+
         #endregion
 
         // Enum that lets us detect what screen the user has selected
@@ -49,14 +52,17 @@ namespace testing_v2.Screens
         {
             // Create Button Objects
             Controls.Button backButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Back" };
+            Controls.Button itemPurchase = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "100" };
 
 
             // Assign event handlers for the buttons (so they actually do something)
             backButton.Click += BackButton_Click;
-
+            itemPurchase.Click += buyItem;
+           
             // Place button objects (row and col indices gotten from DesignScreenLayout() function above)
-            
+
             _screen.Place(backButton, 0, 0);
+            _screen.Place(itemPurchase, 0, 2);
 
         }
 
@@ -65,10 +71,16 @@ namespace testing_v2.Screens
             SelectedCorePage = CorePage.Menu;
         }
 
+        private void buyItem(object sender, EventArgs e)
+        {
+            _playerManager.buyItem(1, 100);
+        }
+
         // Constructor
-        public ShopPage(Texture2D mmButtonTexture, SpriteFont mmButtonFont)
+        public ShopPage(Texture2D mmButtonTexture, SpriteFont mmButtonFont, PlayerManager playerManagerin)
         {
             SelectedCorePage = CorePage.Shop;
+            _playerManager = playerManagerin;
 
             // Divide the grid of the screen into rows and columns
             DesignScreenLayout();
