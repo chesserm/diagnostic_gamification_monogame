@@ -120,9 +120,11 @@ namespace testing_v2
                         // Update state in the shop page if it was toggled from returning to main page
                         if (shopPage.SelectedCorePage == CoreState.Menu)
                         {
-
                             // Change state variable to return to main menu
                             mainMenuPage.SelectedCorePage = CoreState.Menu;
+
+                            // Reset shop's state tracker
+                            shopPage.SelectedCorePage = CoreState.Shop;
 
                             /*
                              * Here you would check shopPage.ItemsPurchased and add each item to the player class's list of ids
@@ -148,13 +150,6 @@ namespace testing_v2
                             shopPage.Update(gameTime);
                         }
 
-                        // Reset shopPage's state tracker
-                        // If the user is still in the shop, this has no effect
-                        // If the user is returning to main menu, it properly resets it for the next time the user goes there
-                        shopPage.SelectedCorePage = CoreState.Shop;
-
-
-
                         break;
                     }
                 case CoreState.Customize:
@@ -162,6 +157,9 @@ namespace testing_v2
                         // Update state in the customize page if it was toggled from returning to main page
                         if (customizePage.SelectedCorePage == CoreState.Menu)
                         {
+                            // Reset Customize page's state tracker
+                            customizePage.SelectedCorePage = CoreState.Customize;
+
                             // Update global state tracker
                             mainMenuPage.SelectedCorePage = CoreState.Menu;
                         }
@@ -170,12 +168,6 @@ namespace testing_v2
                             // Update Customize Page
                             customizePage.Update(gameTime);
                         }
-
-                        // Reset Customize page's state tracker
-                        // If the user is still in the page, this has no effect
-                        // If the user is returning to main menu, it properly resets it for the next time the user goes there
-                        customizePage.SelectedCorePage = CoreState.Customize;
-
                         break;
                     }
                 case CoreState.Stats:
@@ -183,6 +175,9 @@ namespace testing_v2
                         // Update state in the stats page if it was toggled from returning to main page
                         if (statsPage.SelectedCorePage == CoreState.Menu)
                         {
+                            // Update stats page's state tracker
+                            statsPage.SelectedCorePage = CoreState.Stats;
+
                             // Update global state tracker
                             mainMenuPage.SelectedCorePage = CoreState.Menu;
 
@@ -204,12 +199,6 @@ namespace testing_v2
                             statsPage.Update(gameTime);
                         }
 
-                        // Reset Customize page's state tracker
-                        // If the user is still in the page, this has no effect
-                        // If the user is returning to main menu, it properly resets it for the next time the user goes there
-                        statsPage.SelectedCorePage = CoreState.Stats;
-
-
                         break;
                     }
                 case CoreState.Play:
@@ -217,6 +206,9 @@ namespace testing_v2
                         // Check to see if user is done with play loop
                         if (playPage.IsUserDoneWithPlay)
                         {
+                            // Reset game loop and state
+                            playPage.ResetPlayLoop();
+
                             // Update global state variable
                             mainMenuPage.SelectedCorePage = CoreState.Menu;
                         }
@@ -224,12 +216,6 @@ namespace testing_v2
                         {
                             playPage.Update(gameTime);
                         }
-
-                        // Reset state variable for play
-                        // If user is still in play, this has no effect
-                        // If the user has returned to main menu, this resets the play loop for the next game
-                        playPage.IsUserDoneWithPlay = false;
-                        playPage.ResetPlayLoop();
                         break;
                     }
             }

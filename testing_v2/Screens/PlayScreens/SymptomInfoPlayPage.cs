@@ -672,6 +672,7 @@ namespace testing_v2.Screens.PlayScreens
 
         private void OkayButton_Click(object sender, EventArgs e)
         {
+            
             IsUserFinishedReviewing = true;
         }
 

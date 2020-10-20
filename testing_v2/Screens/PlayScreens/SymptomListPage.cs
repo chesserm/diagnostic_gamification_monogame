@@ -145,6 +145,8 @@ namespace testing_v2.Screens.PlayScreens
             #endregion
         }
 
+        #region EventHandlers
+
         private void ExamImaging_Click(object sender, EventArgs e)
         {
             SelectedSymptom = SymptomState.Imaging;
@@ -200,6 +202,7 @@ namespace testing_v2.Screens.PlayScreens
             SelectedSymptom = SymptomState.MainMenu;
         }
 
+        #endregion
 
         #endregion
 

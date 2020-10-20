@@ -50,30 +50,30 @@ namespace testing_v2.Screens.PlayScreens
             // Divide screen height (24 rows of size defaultHeight pixels) into four rows
             #region Rows
 
-            _screen.AddRow(1); // 0 title
-            _screen.AddRow(1); // 1 space after title
+            _screen.AddRow(1 * defaultHeight); // 0 title
+            _screen.AddRow(1 * defaultHeight); // 1 space after title
 
-            _screen.AddRow(1); // 2 Age
-            _screen.AddRow(1); // 3 Gender
-            _screen.AddRow(1); // 4 space after age + gender
+            _screen.AddRow(1 * defaultHeight); // 2 Age
+            _screen.AddRow(1 * defaultHeight); // 3 Gender
+            _screen.AddRow(1 * defaultHeight); // 4 space after age + gender
 
-            _screen.AddRow(1); // 5 past medical history title
-            _screen.AddRow(1); // 6 past medical history 1
-            _screen.AddRow(1); // 7 past medical history 2
-            _screen.AddRow(1); // 8 past medical history 3
-            _screen.AddRow(1); // 9 past medical history Tobacco
-            _screen.AddRow(1); // 10 Space after past medical history
+            _screen.AddRow(1 * defaultHeight); // 5 past medical history title
+            _screen.AddRow(1 * defaultHeight); // 6 past medical history 1
+            _screen.AddRow(1 * defaultHeight); // 7 past medical history 2
+            _screen.AddRow(1 * defaultHeight); // 8 past medical history 3
+            _screen.AddRow(1 * defaultHeight); // 9 past medical history Tobacco
+            _screen.AddRow(1 * defaultHeight); // 10 Space after past medical history
 
-            _screen.AddRow(1); // 11 Symptom title
-            _screen.AddRow(1); // 12 Symptom Description
-            _screen.AddRow(1); // 13 Symptom Severity
-            _screen.AddRow(1); // 14 Provocating Factors
-            _screen.AddRow(1); // 15 Relieving Factors
-            _screen.AddRow(1); // 16 Symptom Onset
-            _screen.AddRow(1); // 17 Symptom Duration
-            _screen.AddRow(1); // 18 Space after factors
+            _screen.AddRow(1 * defaultHeight); // 11 Symptom title
+            _screen.AddRow(1 * defaultHeight); // 12 Symptom Description
+            _screen.AddRow(1 * defaultHeight); // 13 Symptom Severity
+            _screen.AddRow(1 * defaultHeight); // 14 Provocating Factors
+            _screen.AddRow(1 * defaultHeight); // 15 Relieving Factors
+            _screen.AddRow(1 * defaultHeight); // 16 Symptom Onset
+            _screen.AddRow(1 * defaultHeight); // 17 Symptom Duration
+            _screen.AddRow(1 * defaultHeight); // 18 Space after factors
 
-            _screen.AddRow(1); // 19 Button
+            _screen.AddRow(1 * defaultHeight); // 19 Button
             _screen.AddFinalRow(); // 20 Space after button at bottom
 
             #endregion
@@ -141,9 +141,9 @@ namespace testing_v2.Screens.PlayScreens
             #endregion
 
             // Center button
-            _screen.AddColumn(20, 4);
-            _screen.AddColumn(20, 4); // Button goes here
-            _screen.AddColumn(20, 4);
+            _screen.AddColumn(19, 4);
+            _screen.AddColumn(19, 4); // Button goes here
+            _screen.AddColumn(19, 4);
 
             #endregion
         }
@@ -185,7 +185,7 @@ namespace testing_v2.Screens.PlayScreens
             // Placing all components on screen
             #region PlacingElements
 
-            _screen.Place(title, 0, 1);
+            _screen.Place(title, 0, 0);
             
             _screen.Place(age, 2, 0);
             _screen.Place(gender, 3, 0);
