@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using game_state_enums;
 using testing_v2.Screens.PlayScreens;
+using Org.Apache.Http.Cookies;
 
 namespace testing_v2.Screens
 {
@@ -12,20 +13,32 @@ namespace testing_v2.Screens
     {
         #region MemberVariables
 
+        // Instance of PatientData (object used to parse database records)
         PatientData patientData;
         
+        // Page objects
         InitialPlayPage initialPlayPage;
         MainPlayPage mainPlayPage;
         DiagnosePlayPage diagnosePlayPage;
         SymptomListPage symptomListPlayPage;
         SymptomInfoPlayPage symptomInfoPlayPage;
 
+        // Assets that need to be passed to various functions
+        Texture2D _patientTexture;
+        Texture2D _buttonTexture;
+        SpriteFont _font;
+
         #endregion
 
 
         #region Properties
 
+        // Enum to track what the current state is within the game play loop
         public PlayState CurrentPlayState { get; set; }
+
+        // Boolean for state manager to determine if user is done with PlayPage
+        // Set to true after one diagnosis and if the user wants to return to main menu from play
+        public bool IsUserDoneWithPlay { get; set; }
         #endregion
 
         #region HelperFunctions
@@ -135,7 +148,14 @@ namespace testing_v2.Screens
         // Constructor
         public PlayPage(Texture2D patientTexture, Texture2D buttonTexture, SpriteFont font)
         {
+            // Set state variables
             CurrentPlayState = PlayState.Initial;
+            IsUserDoneWithPlay = false;
+
+            // Set asset variables
+            _patientTexture = patientTexture;
+            _buttonTexture = buttonTexture;
+            _font = font;
 
             // Initialize child page objects
             initialPlayPage = new InitialPlayPage(buttonTexture, font);
@@ -143,15 +163,23 @@ namespace testing_v2.Screens
             diagnosePlayPage = new DiagnosePlayPage(buttonTexture, font);
             symptomListPlayPage = new SymptomListPage(buttonTexture, font);
 
-            // Get data before passing it into info page
+            // Get data before passing it into info page (and set data in initialPlayPage)
             getData();
 
 
             symptomInfoPlayPage = new SymptomInfoPlayPage(patientData, SymptomState.Nothing, buttonTexture, font);
-
-
         }
 
+        // Function that can be called by Game's state manager to reset the play loop
+        public void ResetPlayLoop()
+        {
+            // Set state variables
+            CurrentPlayState = PlayState.Initial;
+            IsUserDoneWithPlay = false;
+        }
+
+
+        #region DrawAndUpdate
 
         // Draw for Game
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -186,6 +214,8 @@ namespace testing_v2.Screens
                         }
 
                         // Reset flag for next time this page is visited
+                        // If the user is still on the page, this has no effect
+                        // If the user is finished with the page, this resets it for next time
                         initialPlayPage.IsUserFinishedWithPage = false;
 
                         break;
@@ -197,30 +227,70 @@ namespace testing_v2.Screens
                             case PlayState.Diagnose:
                                 {
                                     // Player is ready to diagnose the patient's ARF
+                                    CurrentPlayState = PlayState.Diagnose;
                                     break;
                                 }
                             case PlayState.SymptomList:
                                 {
                                     // Player wants to investigate a symptom
+                                    CurrentPlayState = PlayState.SymptomList;
                                     break;
                                 }
                             case PlayState.Back:
                                 {
-                                    // Player wants to return to main menu
+                                    // Player wants to return to main menu of the whole app
+                                    IsUserDoneWithPlay = true;
                                     break;
                                 }
                             default:
                                 {
+                                    // There is no other way for this state to be set differently
                                     break;
                                 }
                         }
 
                         // Reset the MainPlayPage's state tracking variable
+                        // If the user is still on mainPlayPage, this has no effect
+                        // If the user is finished with mainPlayPage (for now), this resets this for next time
                         mainPlayPage.CurrentMainPlayState = PlayState.Main;
                         break;
                     }
                 case PlayState.SymptomList:
                     {
+                        // Determine which symptom the user wants to investigate
+                        // The default value is SymptomState.Nothing
+                        switch(symptomListPlayPage.SelectedSymptom)
+                        {
+                            case SymptomState.Nothing:
+                                {
+                                    // Default state, do nothing
+                                    // This case MUST be explicitly written since its behavior differs from MainMenu and default
+                                    break;
+                                }
+                            case SymptomState.MainMenu:
+                                {
+                                    // The user wants to return to main page of play loop
+                                    CurrentPlayState = PlayState.Main;
+                                    break;
+                                }
+                            default:
+                                {
+                                    // For all other cases, the user wants to investigate a symptom
+
+                                    // Re-create the symptom info page to display correct info
+                                    symptomInfoPlayPage.ChangeSymptomInfo(symptomListPlayPage.SelectedSymptom, _buttonTexture, _font);
+
+                                    // Update state to point to info page
+                                    CurrentPlayState = PlayState.SymptomInfo;
+                                    break;
+                                }
+                        }
+
+                        // Reset SelectedSymptom variable in symptomListPlayPage
+                        // If user hasn't yet selected a page, this has no effect
+                        // If user has selected a symptom/returned to main menu, this resets page for next visit
+                        symptomListPlayPage.SelectedSymptom = SymptomState.Nothing;
+
                         break;
                     }
                 case PlayState.SymptomInfo:
@@ -267,6 +337,8 @@ namespace testing_v2.Screens
                     }
             }
         }
+        
+        #endregion
 
         #endregion
     }
