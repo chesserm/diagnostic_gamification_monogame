@@ -37,7 +37,7 @@ namespace testing_v2
         public List<String> OxygenData { get; set; }
 
         // 16 values in bloodwork
-        public List<float> BloodworkData { get; set; }
+        public List<double> BloodworkData { get; set; }
 
         // XRayImage
         public Texture2D XRayImage;
