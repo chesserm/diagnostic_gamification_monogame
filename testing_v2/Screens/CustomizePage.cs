@@ -18,6 +18,12 @@ namespace testing_v2.Screens
         // Enum that lets us detect what screen the user has selected
         public CorePage SelectedCorePage { get; set; }
 
+        public Dictionary<string, ShopItem> storeitems { get; set; }
+
+        public SpriteFont mmButtonFont { get; set; }
+
+        public Texture2D sprite { get; set; }
+
         // Define grid layout for this screen
         private void DesignScreenLayout()
         {
@@ -52,7 +58,7 @@ namespace testing_v2.Screens
 
         }
 
-        private void CreateAndPlaceElements(Texture2D mmButtonTexture, SpriteFont mmButtonFont, Dictionary<string, ShopItem> storeitems, Texture2D sprite)
+        private void CreateAndPlaceElements(Texture2D mmButtonTexture)
         {
             // Create Button Objects
             Controls.Button backButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Back" };
@@ -68,17 +74,17 @@ namespace testing_v2.Screens
             Controls.Button mask = new Controls.Button(storeitems["mask"].ComponentTexture, mmButtonFont);
             Controls.Button hat = new Controls.Button(storeitems["hat"].ComponentTexture, mmButtonFont);
 
-            Controls.Button layover_blackST = new Controls.Button(storeitems["layoverBST"].ComponentTexture, mmButtonFont);
-            Controls.Button layover_mask = new Controls.Button(storeitems["layovermask"].ComponentTexture, mmButtonFont);
-            Controls.Button layover_hat = new Controls.Button(storeitems["hat"].ComponentTexture, mmButtonFont);
+            
+            
+            
             // Assign event handlers for the buttons (so they actually do something)
             backButton.Click += BackButton_Click;
 
-            blackST.Click += (sender, EventArgs) => { ButtonBlackST_Click(sender, EventArgs, layover_mask); };
-            
-            hat.Click += (sender, EventArgs) => { ButtonHat_Click(sender, EventArgs, layover_hat); };
+            blackST.Click += BlackST_Click;
 
-            mask.Click += (sender, EventArgs) => { ButtonMask_Click(sender, EventArgs, layover_blackST); };
+            hat.Click += Hat_Click;
+
+            mask.Click += Mask_Click;
 
             
             // Place button objects (row and col indices gotten from DesignScreenLayout() function above)
@@ -94,26 +100,29 @@ namespace testing_v2.Screens
 
             _screen.Place(instaButton, 3, 0);
 
-            //_screen.Place(layover_hat, 1, 0);
-            //_screen.Place(layover_blackST, 1, 0);
-            //_screen.Place(layover_mask, 1, 0);
+            
 
         }
 
-        void ButtonMask_Click(object sender, EventArgs e, Controls.Button layover_mask)
+        private void Mask_Click(object sender, EventArgs e)
         {
+            Controls.Button layover_mask = new Controls.Button(storeitems["layovermask"].ComponentTexture, mmButtonFont);
             _screen.Place(layover_mask, 1, 0);
         }
 
-        void ButtonHat_Click(object sender, EventArgs e, Controls.Button layover_hat)
+        private void Hat_Click(object sender, EventArgs e)
         {
+            Controls.Button layover_hat = new Controls.Button(storeitems["hat"].ComponentTexture, mmButtonFont);
             _screen.Place(layover_hat, 1, 0);
         }
 
-        void ButtonBlackST_Click(object sender, EventArgs e, Controls.Button layover_blackST)
+        private void BlackST_Click(object sender, EventArgs e)
         {
+            Controls.Button layover_blackST = new Controls.Button(storeitems["layoverBST"].ComponentTexture, mmButtonFont);
             _screen.Place(layover_blackST, 1, 0);
         }
+
+        
 
 
         private void BackButton_Click(object sender, EventArgs e)
@@ -122,15 +131,18 @@ namespace testing_v2.Screens
         }
 
         // Constructor
-        public CustomizePage(Texture2D mmButtonTexture, SpriteFont mmButtonFont, Dictionary<string, ShopItem> playeritems, Texture2D sprite)
+        public CustomizePage(Texture2D mmButtonTexture, SpriteFont mmButtonFon, Dictionary<string, ShopItem> storeitem, Texture2D spritee)
         {
             SelectedCorePage = CorePage.Customize;
 
+            storeitems = storeitem;
+            sprite = spritee;
+            mmButtonFont = mmButtonFon;
             // Divide the grid of the screen into rows and columns
             DesignScreenLayout();
 
             // Create and place the objects needed for this page
-            CreateAndPlaceElements(mmButtonTexture, mmButtonFont, playeritems, sprite);
+            CreateAndPlaceElements(mmButtonTexture);
 
         }
 

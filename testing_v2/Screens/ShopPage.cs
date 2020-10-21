@@ -16,6 +16,11 @@ namespace testing_v2.Screens
         
         #endregion
 
+
+
+        public Dictionary<string, ShopItem> storeitems { get; set; }
+        public SpriteFont mmButtonFont { get; set; }
+
         // Enum that lets us detect what screen the user has selected
         public CorePage SelectedCorePage { get; set; }
 
@@ -67,7 +72,7 @@ namespace testing_v2.Screens
 
         }
 
-        private void CreateAndPlaceElements(Texture2D mmButtonTexture, SpriteFont mmButtonFont, Dictionary<string, ShopItem> storeitems)
+        private void CreateAndPlaceElements(Texture2D mmButtonTexture)
         {
             // Create Button Objects
             Controls.Button backButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Back" };
@@ -176,15 +181,16 @@ namespace testing_v2.Screens
         }
 
         // Constructor
-        public ShopPage(Texture2D mmButtonTexture, SpriteFont mmButtonFont, Dictionary<string, ShopItem> storeitems)
+        public ShopPage(Texture2D mmButtonTexture, SpriteFont mmButtonFontt, Dictionary<string, ShopItem> storeitemss)
         {
             SelectedCorePage = CorePage.Shop;
-
+            storeitems = storeitemss;
+            mmButtonFont = mmButtonFontt;
             // Divide the grid of the screen into rows and columns
             DesignScreenLayout();
 
             // Create and place the objects needed for this page
-            CreateAndPlaceElements(mmButtonTexture, mmButtonFont, storeitems);
+            CreateAndPlaceElements(mmButtonTexture);
 
         }
 
