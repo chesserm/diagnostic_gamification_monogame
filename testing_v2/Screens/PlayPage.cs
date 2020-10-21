@@ -31,9 +31,13 @@ namespace testing_v2.Screens
         Texture2D _buttonTexture;
         SpriteFont _font;
 
-        // Maps for reasoning
+        // Variable for tracking the recently selected symptom
+        SymptomState lastSelectedSymptom = SymptomState.Nothing;
+
+        // Maps for tracking reasoning
         Dictionary<SymptomState, String> userReasoning;
         Dictionary<SymptomState, String> correctReasoning;
+        Dictionary<ReasoningState, String> reasoningChoices;
 
         // User's Diagnosis
         DiagnosisState _playerDiagnosis;
@@ -150,6 +154,124 @@ namespace testing_v2.Screens
             return;
         }
 
+        // Function for updating the reasoning page for the user to select from
+        public void UpdateReasoningPage(SymptomState selectedSymptom)
+        {
+            // Reset the reasoningChoices dictionary
+            reasoningChoices = new Dictionary<ReasoningState, String>();
+
+            // Populate reasoningChoices with corresponding reasoning choices
+            switch (selectedSymptom)
+            {
+                case SymptomState.General:
+                    {
+                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        break;
+                    }
+                case SymptomState.Head:
+                    {
+                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        break;
+                    }
+                case SymptomState.Neck:
+                    {
+                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        break;
+                    }
+                case SymptomState.Lungs:
+                    {
+                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        break;
+                    }
+                case SymptomState.Extremities:
+                    {
+                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        break;
+                    }
+                case SymptomState.Skin:
+                    {
+                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        break;
+                    }
+                case SymptomState.Abdomen:
+                    {
+                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        break;
+                    }
+                case SymptomState.Oxygen:
+                    {
+                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        break;
+                    }
+                case SymptomState.Bloodwork:
+                    {
+                        reasoningChoices[ReasoningState.Correct] = "BloodworkCorrect Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        break;
+                    }
+                case SymptomState.Imaging:
+                    {
+                        reasoningChoices[ReasoningState.Correct] = "Imaging Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Imaging Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Imaging Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Imaging Incorrect Reasoning 3";
+                        break;
+                    }
+            }
+
+            // Force the page to redraw with the new reasoning values
+            reasoningPlayPage.ReasoningChoices = reasoningChoices;
+            reasoningPlayPage.UpdateReasoningPage();
+
+
+            return;
+        }
+
+        // Update the dictionary containing user selected reasoning
+        public void UpdateUserReasoning(SymptomState selectedSymptom, ReasoningState userChoice)
+        {
+            // Update the dictionaries tracking the reasoning for user and correct choices
+            userReasoning[selectedSymptom] = reasoningChoices[userChoice];
+            correctReasoning[selectedSymptom] = reasoningChoices[ReasoningState.Correct];
+
+            return;
+        }
+
+        // Ensure the summary page has the reasoning data it needs
+        public void SendSummaryPageReasoning()
+        {
+            summaryPlayPage.UserReasoning = userReasoning;
+            summaryPlayPage.CorrectReasoning = correctReasoning;
+            summaryPlayPage.UpdateSummaryPage();
+
+        }
+
         #endregion
 
 
@@ -173,8 +295,8 @@ namespace testing_v2.Screens
             mainPlayPage = new MainPlayPage(patientTexture, buttonTexture, font);
             diagnosePlayPage = new DiagnosePlayPage(buttonTexture, font);
             symptomListPlayPage = new SymptomListPage(buttonTexture, font);
-            reasoningPlayPage = new ReasoningPlayPage();
-            summaryPlayPage = new SummaryPlayPage();
+            reasoningPlayPage = new ReasoningPlayPage(buttonTexture, font);
+            summaryPlayPage = new SummaryPlayPage(buttonTexture, font);
 
             // Get data before passing it into info page (and set data in initialPlayPage)
             getData();
@@ -352,6 +474,9 @@ namespace testing_v2.Screens
                                     // Re-create the symptom info page to display correct info
                                     symptomInfoPlayPage.ChangeSymptomInfo(symptomListPlayPage.SelectedSymptom, _buttonTexture, _font);
 
+                                    // Update the PlayPage variable tracking last selected symptom (needed for reasoning page)
+                                    lastSelectedSymptom = symptomListPlayPage.SelectedSymptom;
+
                                     // Update state to point to info page (switches screens)
                                     CurrentPlayState = PlayState.SymptomInfo;
 
@@ -383,6 +508,7 @@ namespace testing_v2.Screens
                                 // Normal case displays reasoning page after symptom info
 
                                 // TODO: NEED TO CHECK WHICH VALUES THE USER HAS ALREADY SEEN AND NOT SEND THEM TO REASONING
+                                UpdateReasoningPage(lastSelectedSymptom);
                                 CurrentPlayState = PlayState.Reasoning;
                             }
 
@@ -405,6 +531,9 @@ namespace testing_v2.Screens
                         {
                             // Reset reasoning page's state tracker
                             reasoningPlayPage.IsUserFinishedWithPage = false;
+
+                            // Update the dictionaries that track user reasoning choices
+                            UpdateUserReasoning(lastSelectedSymptom, reasoningPlayPage.SelectedReasoning);
 
                             // User is finished with reasoning page (selected a reasoning), return to main page of play
                             CurrentPlayState = PlayState.Main;
@@ -443,6 +572,9 @@ namespace testing_v2.Screens
                                     // Update diagnosis variable
                                     _playerDiagnosis = diagnosePlayPage.PatientDiagnosis;
 
+                                    // Make sure summary page is up to date with reasoning values
+                                    SendSummaryPageReasoning();
+
                                     // Change state to go to summary
                                     CurrentPlayState = PlayState.Summary;
 
@@ -461,6 +593,8 @@ namespace testing_v2.Screens
                         {
                             // Reset summary page's state tracker
                             summaryPlayPage.IsUserFinishedWithPage = false;
+
+                            // DO NOT call resetPlayLoop() here. There will be an infinite loop 
 
                             // User is finished with summary page, return to main menu of app
                             IsUserDoneWithPlay = true;

@@ -53,4 +53,13 @@ namespace game_state_enums
     }
 
 
+    public enum ReasoningState
+    {
+        Correct,
+        Incorrect1,
+        Incorrect2,
+        Incorrect3,
+        Undecided
+    }
+
 }
