@@ -9,7 +9,7 @@ namespace testing_v2.Managers
 {
     public class PlayerManager
     {
-        private static string _filename = "/playerInfo6.xml";
+        private static string _filename = "/playerInfo7.xml";
 
         public Player Player { get; private set; }
 
