@@ -58,14 +58,14 @@ namespace testing_v2.Screens
         {
             // Create Button Objects
             Controls.Button backButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Back" };
-            Controls.Button addcorrectcopd = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "correctcopd" };
-            Controls.Button addcorrectpneumonia = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "correctpneumonia" };
-            Controls.Button addcorrectchf = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "correctcopd" };
-            Controls.Button addincorrectcopd = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "incorrectcopd" };
-            Controls.Button addincorrectpneumonia = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "incorrectpneumonia" };
-            Controls.Button addincorrectchf = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "incorrectcopd" };
+            Controls.Button addcorrectcopd = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Correct COPD" };
+            Controls.Button addcorrectpneumonia = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Correct Pnuemonia" };
+            Controls.Button addcorrectchf = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Correct CHF" };
+            Controls.Button addincorrectcopd = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Incorrect COPD" };
+            Controls.Button addincorrectpneumonia = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Incorrect Pnuemonia" };
+            Controls.Button addincorrectchf = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Incorrect CHF" };
 
-            Controls.Textbox displayCoins = new Controls.Textbox(mmButtonFont, $"my accuracy is: {_playerManager.Player.NumCoins}");
+            Controls.Textbox displayCoins = new Controls.Textbox(mmButtonFont, $"User coin balance: {_playerManager.Player.NumCoins}");
 
             _screen.Place(displayCoins, 0, 2);
 

@@ -177,8 +177,8 @@ namespace testing_v2.Screens.PlayScreens
             Controls.Textbox correctDiagnosisTitle = new Controls.Textbox(font, "Correct Dignosis");
             Controls.Textbox userDiagnosisTitle = new Controls.Textbox(font, "User Diagnosis");
 
-            Controls.Textbox correctTitle = new Controls.Textbox(font, "Correct");
-            Controls.Textbox incorrectTitle = new Controls.Textbox(font, "Incorrect");
+            Controls.Textbox correctTitle = new Controls.Textbox(font, "Correct Reasoning");
+            Controls.Textbox incorrectTitle = new Controls.Textbox(font, "User Reasoning");
 
             Controls.Textbox userDiagnosisText = new Controls.Textbox(font, getDiagnosisString(PlayerDiagnosis));
             Controls.Textbox correctDiagnosisText = new Controls.Textbox(font, getDiagnosisString(CorrectDiagnosis));
@@ -227,10 +227,12 @@ namespace testing_v2.Screens.PlayScreens
             _screen.Place(reasoningTitle, 4, 1);
             _screen.Place(correctTitle, 5, 1);
             _screen.Place(incorrectTitle, 5, 3);
+
             _screen.Place(correctDiagnosisTitle, 1, 1);
             _screen.Place(userDiagnosisTitle, 1, 3);
-            _screen.Place(userDiagnosisText, 2, 1);
-            _screen.Place(correctDiagnosisText, 2, 3);
+
+            _screen.Place(userDiagnosisText, 2, 3);
+            _screen.Place(correctDiagnosisText, 2, 1);
             
 
             // Button
