@@ -1,0 +1,16 @@
+Steps to run our project
+
+1. Download Visual Studio Community 2019 with the following packages 
+   selected from the installer:
+    - .NET Desktop Development
+    - Mobile Development with .NET 
+    - .Net Core Cross-platform development 
+2. Open Visual Studio with Admin Priviledges and go to Android Device Manager
+3. Create an Android emulator in the Android Device Manger with the settings
+   shown in emulator_settings.png (in the same folder as this file)
+4. Clone the repository
+5. Open the solution file from the repository in Visual Studio with Admin Priviledges and make sure the project is on 
+   the alpha_release branch (as indicated in the bottom right of Visual Studio)
+6. Click on the play button at the top of Visual Studio labeled "Pixel 2 Pie 9.0 - ..."
+   to run the code in the android emulator 
+
