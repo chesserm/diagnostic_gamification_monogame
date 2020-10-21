@@ -63,9 +63,9 @@ namespace testing_v2
 
             // Initialize all pages using assets provided
             mainMenuPage = new MainMenu(ButtonTexture, Font);
-            shopPage = new ShopPage(ButtonTexture, Font, imagesDictionary);
+            shopPage = new ShopPage(ButtonTexture, Font, imagesDictionary, playerManager);
             customizePage = new CustomizePage(ButtonTexture, Font, imagesDictionary, sprite);
-            statsPage = new StatsPage(ButtonTexture, Font);
+            statsPage = new StatsPage(ButtonTexture, Font, playerManager);
             playPage = new PlayPage(PatientTexture, ButtonTexture, Font);
 
 

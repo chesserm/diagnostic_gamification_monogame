@@ -117,12 +117,8 @@ namespace testing_v2.Screens
         // Constructor
         public StatsPage(Texture2D mmButtonTexture, SpriteFont mmButtonFont, PlayerManager playerManagerin)
         {
-<<<<<<< HEAD
             SelectedCorePage = CoreState.Stats;
-=======
-            SelectedCorePage = CorePage.Stats;
             _playerManager = playerManagerin;
->>>>>>> playerclassxml
 
             // Divide the grid of the screen into rows and columns
             DesignScreenLayout();
