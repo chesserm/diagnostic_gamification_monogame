@@ -18,9 +18,9 @@ namespace testing_v2.Screens
         // Enum that lets us detect what screen the user has selected
         public CorePage SelectedCorePage { get; set; }
 
-        public Dictionary<string, ShopItem> storeitems { get; set; }
+        public Dictionary<string, ShopItem> Images { get; set; }
 
-        public SpriteFont mmButtonFont { get; set; }
+        public SpriteFont MmButtonFont { get; set; }
 
         public Texture2D sprite { get; set; }
 
@@ -61,18 +61,18 @@ namespace testing_v2.Screens
         private void CreateAndPlaceElements(Texture2D mmButtonTexture)
         {
             // Create Button Objects
-            Controls.Button backButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Back" };
-            Controls.Button titleButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Customize" };
-            Controls.Button instaButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Click on an item to add to your avatar" };
+            Controls.Button backButton = new Controls.Button(mmButtonTexture, MmButtonFont) { Text = "Back" };
+            Controls.Button titleButton = new Controls.Button(mmButtonTexture, MmButtonFont) { Text = "Customize" };
+            Controls.Button instaButton = new Controls.Button(mmButtonTexture, MmButtonFont) { Text = "Click on an item to add to your avatar" };
 
-            Controls.Button sprite1 = new Controls.Button(sprite, mmButtonFont);
+            Controls.Button sprite1 = new Controls.Button(sprite, MmButtonFont);
 
-            //Controls.Button monkey = new Controls.Button(storeitems["monkey"].ComponentTexture, mmButtonFont);
-            Controls.Button blackST = new Controls.Button(storeitems["blackST"].ComponentTexture, mmButtonFont);
-            //Controls.Button silverST = new Controls.Button(storeitems["silverST"].ComponentTexture, mmButtonFont);
-            //Controls.Button goldST = new Controls.Button(storeitems["goldST"].ComponentTexture, mmButtonFont);
-            Controls.Button mask = new Controls.Button(storeitems["mask"].ComponentTexture, mmButtonFont);
-            Controls.Button hat = new Controls.Button(storeitems["hat"].ComponentTexture, mmButtonFont);
+            //Controls.Button monkey = new Controls.Button(images["monkey"].ComponentTexture, MmButtonFont);
+            Controls.Button blackST = new Controls.Button(Images["blackST"].ComponentTexture, MmButtonFont);
+            //Controls.Button silverST = new Controls.Button(images["silverST"].ComponentTexture, mmButtonFont);
+            //Controls.Button goldST = new Controls.Button(images["goldST"].ComponentTexture, mmButtonFont);
+            Controls.Button mask = new Controls.Button(Images["mask"].ComponentTexture, MmButtonFont);
+            Controls.Button hat = new Controls.Button(Images["hat"].ComponentTexture, MmButtonFont);
 
             
             
@@ -106,19 +106,19 @@ namespace testing_v2.Screens
 
         private void Mask_Click(object sender, EventArgs e)
         {
-            Controls.Button layover_mask = new Controls.Button(storeitems["layovermask"].ComponentTexture, mmButtonFont);
+            Controls.Button layover_mask = new Controls.Button(Images["layovermask"].ComponentTexture, MmButtonFont);
             _screen.Place(layover_mask, 1, 0);
         }
 
         private void Hat_Click(object sender, EventArgs e)
         {
-            Controls.Button layover_hat = new Controls.Button(storeitems["hat"].ComponentTexture, mmButtonFont);
+            Controls.Button layover_hat = new Controls.Button(Images["hat"].ComponentTexture, MmButtonFont);
             _screen.Place(layover_hat, 1, 0);
         }
 
         private void BlackST_Click(object sender, EventArgs e)
         {
-            Controls.Button layover_blackST = new Controls.Button(storeitems["layoverBST"].ComponentTexture, mmButtonFont);
+            Controls.Button layover_blackST = new Controls.Button(Images["layoverBST"].ComponentTexture, MmButtonFont);
             _screen.Place(layover_blackST, 1, 0);
         }
 
@@ -131,13 +131,13 @@ namespace testing_v2.Screens
         }
 
         // Constructor
-        public CustomizePage(Texture2D mmButtonTexture, SpriteFont mmButtonFon, Dictionary<string, ShopItem> storeitem, Texture2D spritee)
+        public CustomizePage(Texture2D mmButtonTexture, SpriteFont mmButtonFont, Dictionary<string, ShopItem> images, Texture2D spritee)
         {
             SelectedCorePage = CorePage.Customize;
 
-            storeitems = storeitem;
+            Images = images;
             sprite = spritee;
-            mmButtonFont = mmButtonFon;
+            MmButtonFont = mmButtonFont;
             // Divide the grid of the screen into rows and columns
             DesignScreenLayout();
 

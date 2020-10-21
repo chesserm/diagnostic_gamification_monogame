@@ -68,6 +68,7 @@ namespace testing_v2
         // Content used (buttons, sprites, fonts, etc)
         #region ContentVariables
         SpriteFont gameTextFont;
+        
         Texture2D button;
         Texture2D monkey1;
         Texture2D blackST1;
@@ -251,7 +252,7 @@ namespace testing_v2
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
 
-            Dictionary<string, ShopItem> storeitems = new Dictionary<string, ShopItem>();
+            Dictionary<string, ShopItem> images = new Dictionary<string, ShopItem>();
             // TODO: use this.Content to load your game content here
             monkey1 = Content.Load<Texture2D>("monkey");
             blackST1 = Content.Load<Texture2D>("shopBlackST");
@@ -275,50 +276,19 @@ namespace testing_v2
             ShopItem layover_BST = new ShopItem(layover_blackST, ItemType.Stethescope, 100, 0);
             ShopItem layover_mask = new ShopItem(layover_mask1, ItemType.Mask, 100, 0);
 
-            storeitems["monkey"] = monkey;
-            storeitems["blackST"] = blackST;
-            storeitems["silverST"] = silverST;
-            storeitems["goldST"] = goldST;
-            storeitems["mask"] = mask;
-            storeitems["hat"] = hat;
+            images["monkey"] = monkey;
+            images["blackST"] = blackST;
+            images["silverST"] = silverST;
+            images["goldST"] = goldST;
+            images["mask"] = mask;
+            images["hat"] = hat;
 
-            storeitems["layoverBST"] = layover_BST;
-            storeitems["layovermask"] = layover_mask;
+            images["layoverBST"] = layover_BST;
+            images["layovermask"] = layover_mask;
 
             //sprite
             //Dictionary<string, ShopItem> owneditems = new Dictionary<string, ShopItem>();
 
-
-
-
-            #region NoLongerNeeded
-            //background_box = Content.Load<Texture2D>("background_box");
-
-            //play_button = Content.Load<Texture2D>("play_button");
-            //shop_button = Content.Load<Texture2D>("shop_button");
-            //customize_button = Content.Load<Texture2D>("customize_button");
-            //back_button = Content.Load<Texture2D>("back_button");
-            //stats_button = Content.Load<Texture2D>("stats_button");
-
-            //diagnose_button = Content.Load<Texture2D>("diagnose_button");
-            //investigate_button = Content.Load<Texture2D>("investigate_button");
-
-            //chf_button = Content.Load<Texture2D>("CHF");
-            //copd_button = Content.Load<Texture2D>("COPD");
-            //pneumonia_button = Content.Load<Texture2D>("pneumonia");
-
-            //general_exam_button = Content.Load<Texture2D>("general_exam_button");
-            //examine_abdomen_button = Content.Load<Texture2D>("examine_abdomen");
-            //examine_extremities_button = Content.Load<Texture2D>("extreme_extremities");
-            //examine_head_button = Content.Load<Texture2D>("examine_head");
-            //examine_lungs_button = Content.Load<Texture2D>("examine_lungs");
-            //examine_neck_button = Content.Load<Texture2D>("examine_neck");
-            //examine_oxygen_button = Content.Load<Texture2D>("examine_oxygen");
-            //examine_skin_button = Content.Load<Texture2D>("examine_skin");
-
-            //order_blood_button = Content.Load<Texture2D>("order_blood_work");
-            //order_imaging_button = Content.Load<Texture2D>("ordering_imaging");
-            #endregion
 
             button = Content.Load<Texture2D>("button");
 
@@ -326,9 +296,9 @@ namespace testing_v2
 
             // TODO: Add your initialization logic here
             mainMenuPage = new MainMenu(button, gameTextFont);
-            shopPage = new ShopPage(button, gameTextFont, storeitems);
+            shopPage = new ShopPage(button, gameTextFont, images);
             //TODO change customize page third arguement to player purchased items list
-            customizePage = new CustomizePage(button, gameTextFont, storeitems, sprite);
+            customizePage = new CustomizePage(button, gameTextFont, images, sprite);
             statsPage = new StatsPage(button, gameTextFont);
         }
 

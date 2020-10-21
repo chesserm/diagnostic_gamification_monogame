@@ -18,8 +18,8 @@ namespace testing_v2.Screens
 
 
 
-        public Dictionary<string, ShopItem> storeitems { get; set; }
-        public SpriteFont mmButtonFont { get; set; }
+        public Dictionary<string, ShopItem> Images { get; set; }
+        public SpriteFont MmButtonFont { get; set; }
 
         // Enum that lets us detect what screen the user has selected
         public CorePage SelectedCorePage { get; set; }
@@ -75,26 +75,26 @@ namespace testing_v2.Screens
         private void CreateAndPlaceElements(Texture2D mmButtonTexture)
         {
             // Create Button Objects
-            Controls.Button backButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Back" };
-            Controls.Button shopButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Shop" };
-            Controls.Button InstrButton = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "Click on price to buy an item!" };
+            Controls.Button backButton = new Controls.Button(mmButtonTexture, MmButtonFont) { Text = "Back" };
+            Controls.Button shopButton = new Controls.Button(mmButtonTexture, MmButtonFont) { Text = "Shop" };
+            Controls.Button InstrButton = new Controls.Button(mmButtonTexture, MmButtonFont) { Text = "Click on price to buy an item!" };
 
 
-            Controls.Button blackSTprice = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "$" + storeitems["blackST"].Price.ToString() };
-            Controls.Button silverSTprice = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "LOCKED!!" };
+            Controls.Button blackSTprice = new Controls.Button(mmButtonTexture, MmButtonFont) { Text = "$" + Images["blackST"].Price.ToString() };
+            Controls.Button silverSTprice = new Controls.Button(mmButtonTexture, MmButtonFont) { Text = "LOCKED!!" };
             //TODO how to unlock - show that to user
-            Controls.Button goldSTprice = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "LOCKED!!" };
-            Controls.Button maskprice = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "$" + storeitems["mask"].Price.ToString() };
-            Controls.Button hatprice = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "$" + storeitems["hat"].Price.ToString() };
-            Controls.Button monkeyprice = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "$" + storeitems["monkey"].Price.ToString() };
+            Controls.Button goldSTprice = new Controls.Button(mmButtonTexture, MmButtonFont) { Text = "LOCKED!!" };
+            Controls.Button maskprice = new Controls.Button(mmButtonTexture, MmButtonFont) { Text = "$" + Images["mask"].Price.ToString() };
+            Controls.Button hatprice = new Controls.Button(mmButtonTexture, MmButtonFont) { Text = "$" + Images["hat"].Price.ToString() };
+            Controls.Button monkeyprice = new Controls.Button(mmButtonTexture, MmButtonFont) { Text = "$" + Images["monkey"].Price.ToString() };
             //
 
-            Controls.Button monkey = new Controls.Button(storeitems["monkey"].ComponentTexture, mmButtonFont);
-            Controls.Button blackST = new Controls.Button(storeitems["blackST"].ComponentTexture, mmButtonFont);
-            Controls.Button silverST = new Controls.Button(storeitems["silverST"].ComponentTexture, mmButtonFont);
-            Controls.Button goldST = new Controls.Button(storeitems["goldST"].ComponentTexture, mmButtonFont);
-            Controls.Button mask = new Controls.Button(storeitems["mask"].ComponentTexture, mmButtonFont);
-            Controls.Button hat = new Controls.Button(storeitems["hat"].ComponentTexture, mmButtonFont);
+            Controls.Button monkey = new Controls.Button(Images["monkey"].ComponentTexture, MmButtonFont);
+            Controls.Button blackST = new Controls.Button(Images["blackST"].ComponentTexture, MmButtonFont);
+            Controls.Button silverST = new Controls.Button(Images["silverST"].ComponentTexture, MmButtonFont);
+            Controls.Button goldST = new Controls.Button(Images["goldST"].ComponentTexture, MmButtonFont);
+            Controls.Button mask = new Controls.Button(Images["mask"].ComponentTexture, MmButtonFont);
+            Controls.Button hat = new Controls.Button(Images["hat"].ComponentTexture, MmButtonFont);
             // Assign event handlers for the buttons (so they actually do something)
             backButton.Click += BackButton_Click;
 
@@ -136,7 +136,12 @@ namespace testing_v2.Screens
 
         private void Monkeyprice_Click(object sender, EventArgs e)
         {
-            
+            //CLICK HANDLING STEPS
+            //IF the item id isnt aleady in list / grayed
+            //append item id into player item list
+            //player class update coins based on item.price
+            //change item button color to gray
+            //Alert player that they purchased item
         }
 
         private void Hatprice_Click(object sender, EventArgs e)
@@ -151,26 +156,18 @@ namespace testing_v2.Screens
 
         private void GoldSTprice_Click(object sender, EventArgs e)
         {
-            
+            //locked for now
         }
 
         private void SilverSTprice_Click(object sender, EventArgs e)
         {
-            
+            //locked for now
         }
 
         private void BlackSTprice_Click(object sender, EventArgs e)
         {
             
         }
-
-
-        //CLICK HANDLING STEPS
-        //IF the item id isnt aleady in list / grayed
-        //append item id into player item list
-        //player class update coins based on item.price
-        //change item button color to gray
-        //Alert player that they purchased item
 
 
 
@@ -181,11 +178,11 @@ namespace testing_v2.Screens
         }
 
         // Constructor
-        public ShopPage(Texture2D mmButtonTexture, SpriteFont mmButtonFontt, Dictionary<string, ShopItem> storeitemss)
+        public ShopPage(Texture2D mmButtonTexture, SpriteFont mmButtonFont, Dictionary<string, ShopItem> images)
         {
             SelectedCorePage = CorePage.Shop;
-            storeitems = storeitemss;
-            mmButtonFont = mmButtonFontt;
+            Images = images;
+            MmButtonFont = mmButtonFont;
             // Divide the grid of the screen into rows and columns
             DesignScreenLayout();
 
