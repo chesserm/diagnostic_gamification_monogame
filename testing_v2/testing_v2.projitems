@@ -30,6 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screens\PlayScreens\SymptomListPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\ShopPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\StatsPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ShopItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)States.cs" />
   </ItemGroup>
   <ItemGroup>

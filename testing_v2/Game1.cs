@@ -22,40 +22,6 @@ namespace testing_v2
         int screenHeight = 1366;
         int screenWidth = 768;
 
-        // Old textures (one created for each button) that are no longer needed
-        #region SpecificTexturesNotNeeded
-        //Texture2D play_button;
-        //Texture2D shop_button;
-        //Texture2D customize_button;
-        //Texture2D stats_button;
-        //Texture2D back_button;
-
-        //Texture2D background_box;
-
-        //Texture2D chf_button;
-        //Texture2D copd_button;
-        //Texture2D pneumonia_button;
-
-        //Texture2D diagnose_button;
-        //Texture2D investigate_button;
-
-        //Texture2D general_exam_button;
-        //Texture2D examine_head_button;
-        //Texture2D examine_neck_button;
-        //Texture2D examine_abdomen_button;
-        //Texture2D examine_extremities_button;
-        //Texture2D examine_lungs_button;
-        //Texture2D examine_oxygen_button;
-        //Texture2D examine_skin_button;
-        //Texture2D order_blood_button;
-        //Texture2D order_imaging_button;
-
-        //static int menuButtonWidth = 200;
-        //static int menuButtonHeight = 100;
-        //static int backButtonWidth = 100;
-        //static int backButtonHeight = 50;
-        #endregion
-
         // Content used (buttons, sprites, fonts, etc)
         #region ContentVariables
         SpriteFont gameTextFont;
@@ -75,9 +41,6 @@ namespace testing_v2
 
 
         GameDriver gameDriver;
-
-        // Variable that detects touch
-        TouchCollection tc;
 
 
         public Game1()
@@ -152,7 +115,7 @@ namespace testing_v2
             //statsPage = new StatsPage(button, gameTextFont);
 
             // Initialize game driver, which manages the whole game
-            gameDriver = new GameDriver(button, gameTextFont, monkey, monkey);
+            gameDriver = new GameDriver(button, gameTextFont, monkey1, monkey1, images, sprite);
 
             
             /*
@@ -174,7 +137,7 @@ namespace testing_v2
             }
 
             // TODO: Add your update logic here
-            tc = TouchPanel.GetState();
+            //tc = TouchPanel.GetState();
 
             // Automatically determine and update correct page
 

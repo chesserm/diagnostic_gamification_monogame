@@ -20,12 +20,20 @@ namespace testing_v2
         StatsPage statsPage;
         PlayPage playPage;
 
+
+
         #endregion
 
 
+        #region Assets
+
+        //Dictionary<string, ShopItem> images;
+
+        #endregion
+
         // Properties
         #region Properties
-        
+
         // Button Texture
         Texture2D ButtonTexture { get; set; }
 
@@ -46,7 +54,7 @@ namespace testing_v2
 
         // Constructor
         #region Constructor
-        public GameDriver(Texture2D buttonTexture, SpriteFont font, Texture2D patientSprite, Texture2D userAvatarSprite)
+        public GameDriver(Texture2D buttonTexture, SpriteFont font, Texture2D patientSprite, Texture2D userAvatarSprite, Dictionary<string, ShopItem> imagesDictionary, Texture2D sprite)
         {
             ButtonTexture = buttonTexture;
             Font = font;
@@ -55,8 +63,8 @@ namespace testing_v2
 
             // Initialize all pages using assets provided
             mainMenuPage = new MainMenu(ButtonTexture, Font);
-            shopPage = new ShopPage(ButtonTexture, Font);
-            customizePage = new CustomizePage(ButtonTexture, Font);
+            shopPage = new ShopPage(ButtonTexture, Font, imagesDictionary);
+            customizePage = new CustomizePage(ButtonTexture, Font, imagesDictionary, sprite);
             statsPage = new StatsPage(ButtonTexture, Font);
             playPage = new PlayPage(PatientTexture, ButtonTexture, Font);
 
