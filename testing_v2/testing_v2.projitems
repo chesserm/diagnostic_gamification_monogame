@@ -14,8 +14,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Sprite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Textbox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
+<<<<<<< HEAD
     <Compile Include="$(MSBuildThisFileDirectory)GameDriver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PatientData.cs" />
+=======
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\PlayerManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\BlockStats.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\item.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Player.cs" />
+>>>>>>> playerclassxml
     <Compile Include="$(MSBuildThisFileDirectory)Row.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\CustomizePage.cs" />

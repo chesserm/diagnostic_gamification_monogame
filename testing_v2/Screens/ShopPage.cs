@@ -5,6 +5,7 @@ using game_state_enums;
 using testing_v2;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using testing_v2.Managers;
 
 namespace testing_v2.Screens
 {
@@ -13,7 +14,9 @@ namespace testing_v2.Screens
         #region MemberVariables
         // Screen object that abstracts 99% of the work from this object
         Screen _screen = new Screen();
-        
+
+        PlayerManager _playerManager;
+
         #endregion
 
 
@@ -177,12 +180,18 @@ namespace testing_v2.Screens
             SelectedCorePage = CoreState.Menu;
         }
 
+        private void buyItem(object sender, EventArgs e)
+        {
+            _playerManager.buyItem(1, 100);
+        }
+
         // Constructor
-        public ShopPage(Texture2D mmButtonTexture, SpriteFont mmButtonFont, Dictionary<string, ShopItem> images)
+        public ShopPage(Texture2D mmButtonTexture, SpriteFont mmButtonFont, Dictionary<string, ShopItem> images, PlayerManager playerManagerin)
         {
             SelectedCorePage = CoreState.Shop;
             Images = images;
             MmButtonFont = mmButtonFont;
+            _playerManager = playerManagerin;
 
             // Divide the grid of the screen into rows and columns
             DesignScreenLayout();

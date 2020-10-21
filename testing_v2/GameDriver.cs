@@ -54,7 +54,7 @@ namespace testing_v2
 
         // Constructor
         #region Constructor
-        public GameDriver(Texture2D buttonTexture, SpriteFont font, Texture2D patientSprite, Texture2D userAvatarSprite, Dictionary<string, ShopItem> imagesDictionary, Texture2D sprite)
+        public GameDriver(Texture2D buttonTexture, SpriteFont font, Texture2D patientSprite, Texture2D userAvatarSprite, Dictionary<string, ShopItem> imagesDictionary, Texture2D sprite, PlayerManager playerManager)
         {
             ButtonTexture = buttonTexture;
             Font = font;

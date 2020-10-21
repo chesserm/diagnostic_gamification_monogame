@@ -8,7 +8,8 @@ using System.Collections.Specialized;
 using System.Linq;
 using game_state_enums;
 using testing_v2.Screens;
-using System.Collections.Generic;
+using testing_v2.Managers;
+using Javax.Security.Auth;
 
 namespace testing_v2
 {
@@ -17,6 +18,7 @@ namespace testing_v2
         // Variables given to us (spritebatch is in charge of drawing ALL visuals)
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        public PlayerManager _playerManager;
 
         // The screen resolution we are designing for (scaling will adjust for variation)
         int screenHeight = 1366;
@@ -75,6 +77,9 @@ namespace testing_v2
             hat1 = Content.Load<Texture2D>("hat");
 
             sprite = Content.Load<Texture2D>("guy-noST");
+            _playerManager = PlayerManager.Load();
+
+            //background_box = Content.Load<Texture2D>("background_box");
 
             layover_blackST = Content.Load<Texture2D>("layover_blackST");
             layover_mask1 = Content.Load<Texture2D>("layover_mask");
@@ -109,7 +114,7 @@ namespace testing_v2
             // TODO: Add your initialization logic here
 
             // Initialize game driver, which manages the whole game
-            gameDriver = new GameDriver(button, gameTextFont, monkey1, monkey1, images, sprite);
+            gameDriver = new GameDriver(button, gameTextFont, monkey1, monkey1, images, sprite, _playerManager);
 
             
             /*
