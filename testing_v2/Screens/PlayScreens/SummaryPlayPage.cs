@@ -98,47 +98,54 @@ namespace testing_v2.Screens.PlayScreens
 
             // Divide screen height (24 rows of size defaultHeight pixels) into four rows
             _screen.AddRow(2 * defaultHeight); // row 0 title
-            _screen.AddRow(2 * defaultHeight); // row 1 Correct vs Incorrect
-            _screen.AddRow(2 * defaultHeight); // row 2 spacing
-            _screen.AddRow(2 * defaultHeight); // row 3 Reasoning title goes here
-            _screen.AddRow(2 * defaultHeight); // row 4 Correct incorrect headings go here
+            _screen.AddRow(1 * defaultHeight); // row 1 Correct vs Incorrect Titles
+            _screen.AddRow(1 * defaultHeight); // row 2 Correct vs Incorrect valuess
+            _screen.AddRow(2 * defaultHeight); // row 3 spacing
+            _screen.AddRow(2 * defaultHeight); // row 4 Reasoning title goes here
+            _screen.AddRow(1 * defaultHeight); // row 5 Correct incorrect headings go here
 
             // Five reasoning values
-            _screen.AddRow(2 * defaultHeight); // row 5 Correct incorrect headings go here
             _screen.AddRow(2 * defaultHeight); // row 6 Correct incorrect headings go here
             _screen.AddRow(2 * defaultHeight); // row 7 Correct incorrect headings go here
             _screen.AddRow(2 * defaultHeight); // row 8 Correct incorrect headings go here
             _screen.AddRow(2 * defaultHeight); // row 9 Correct incorrect headings go here
+            _screen.AddRow(2 * defaultHeight); // row 10 Correct incorrect headings go here
 
-            _screen.AddRow(1 * defaultHeight); // row 10 for coins and exp
-            _screen.AddRow(1 * defaultHeight); // row 11 for button
+            _screen.AddRow(1 * defaultHeight); // row 11 for coins and exp
+            _screen.AddRow(1 * defaultHeight); // row 12 for button
             
-            _screen.AddFinalRow();             // row 11
+            _screen.AddFinalRow();             // row 13
 
 
             // Divide screen width within rows into columns (there are 12 column units to divide)
 
             // Divide correct and incorrect row in half
             _screen.AddColumn(1, 2);
-            _screen.AddColumn(1, 3); // Correct diagnosis goes here
+            _screen.AddColumn(1, 3); // Correct diagnosis Title goes here
             _screen.AddColumn(1, 2);
-            _screen.AddColumn(1, 3); // Users's diagnosis goes here
-            _screen.AddColumn(1, 2); 
+            _screen.AddColumn(1, 3); // Users's diagnosis Title goes here
+            _screen.AddColumn(1, 2);
+
+            _screen.AddColumn(2, 2);
+            _screen.AddColumn(2, 3); // Correct diagnosis goes here
+            _screen.AddColumn(2, 2);
+            _screen.AddColumn(2, 3); // Users's diagnosis goes here
+            _screen.AddColumn(2, 2); 
 
             // Divide row for reasoning title
-            _screen.AddColumn(3, 1);
-            _screen.AddColumn(3, 4); // Reasoning title goes here
-            _screen.AddColumn(3, 7);
+            _screen.AddColumn(4, 1);
+            _screen.AddColumn(4, 4); // Reasoning title goes here
+            _screen.AddColumn(4, 7);
 
             // Divide row for correct vs incorrect title
-            _screen.AddColumn(4, 1);
-            _screen.AddColumn(4, 3); // Reasoning title goes here
-            _screen.AddColumn(4, 2);
-            _screen.AddColumn(4, 3);
-            _screen.AddColumn(4, 1);
+            _screen.AddColumn(5, 1);
+            _screen.AddColumn(5, 3); // Correct title goes here
+            _screen.AddColumn(5, 2);
+            _screen.AddColumn(5, 3); // Incorrect title goes here
+            _screen.AddColumn(5, 1);
 
             // Add slots for reasoning
-            for (int i = 5; i < 10; ++i)
+            for (int i = 6; i < 11; ++i)
             {
                 _screen.AddColumn(i, 2);
                 _screen.AddColumn(i, 3); // Correct reasoning goes here
@@ -148,16 +155,14 @@ namespace testing_v2.Screens.PlayScreens
             }
 
             // Divide up coin and exp row 
-            _screen.AddColumn(10, 2);
-            _screen.AddColumn(10, 3); // Correct reasoning goes here
-            _screen.AddColumn(10, 2);
-            _screen.AddColumn(10, 3); // Users's reasoning goes here
-            _screen.AddColumn(10, 2);
+            _screen.AddColumn(11, 6); // Coin Award goes here
+            _screen.AddColumn(11, 6); // Exp Award goes here
+
 
             // Divide up row for button
-            _screen.AddColumn(11, 4);
-            _screen.AddColumn(11, 4); // Button goes here
-            _screen.AddColumn(11, 4);
+            _screen.AddColumn(12, 4);
+            _screen.AddColumn(12, 4); // Button goes here
+            _screen.AddColumn(12, 4);
 
 
         }
@@ -169,6 +174,9 @@ namespace testing_v2.Screens.PlayScreens
 
             Controls.Textbox summaryTitle = new Controls.Textbox(font, "Summary of Diagnostic Process");
             Controls.Textbox reasoningTitle = new Controls.Textbox(font, "Reasoning Steps");
+            Controls.Textbox correctDiagnosisTitle = new Controls.Textbox(font, "Correct Dignosis");
+            Controls.Textbox userDiagnosisTitle = new Controls.Textbox(font, "User Diagnosis");
+
             Controls.Textbox correctTitle = new Controls.Textbox(font, "Correct");
             Controls.Textbox incorrectTitle = new Controls.Textbox(font, "Incorrect");
 
@@ -216,25 +224,28 @@ namespace testing_v2.Screens.PlayScreens
 
             // Titles
             _screen.Place(summaryTitle, 0, 0);
-            _screen.Place(reasoningTitle, 3, 1);
-            _screen.Place(correctTitle, 4, 1);
-            _screen.Place(incorrectTitle, 4, 3);
-            _screen.Place(userDiagnosisText, 1, 1);
-            _screen.Place(correctDiagnosisText, 1, 3);
+            _screen.Place(reasoningTitle, 4, 1);
+            _screen.Place(correctTitle, 5, 1);
+            _screen.Place(incorrectTitle, 5, 3);
+            _screen.Place(correctDiagnosisTitle, 1, 1);
+            _screen.Place(userDiagnosisTitle, 1, 3);
+            _screen.Place(userDiagnosisText, 2, 1);
+            _screen.Place(correctDiagnosisText, 2, 3);
+            
 
             // Button
-            _screen.Place(finishButton, 11, 1);
+            _screen.Place(finishButton, 12, 1);
 
             // Exp and coin values
-            _screen.Place(coinAwarded, 10, 1);
-            _screen.Place(expAwarded, 10, 3);
+            _screen.Place(coinAwarded, 11, 0);
+            _screen.Place(expAwarded, 11, 1);
 
             #region AddReasoningElements
             int sizeOfLists = userReasoningChoices.Count;
             for (int i = 0; i < sizeOfLists; ++i)
             {
                 // The rows where reasoning is placed are [5-9]
-                int rowValue = i + 5;
+                int rowValue = i + 6;
                 _screen.Place(correctReasoningChoices[i], rowValue, 1);
                 _screen.Place(userReasoningChoices[i], rowValue, 3);
             }
