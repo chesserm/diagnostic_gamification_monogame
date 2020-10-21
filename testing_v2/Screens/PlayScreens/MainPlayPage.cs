@@ -46,8 +46,8 @@ namespace testing_v2.Screens.PlayScreens
             // Divide screen width within rows into columns (there are 12 column units to divide)
             #region Columns
             // Add columns to row 0 for backbutton
+            _screen.AddColumn(0, 10); 
             _screen.AddColumn(0, 2); // back button goes here
-            _screen.AddColumn(0, 10);
 
             // Add columns to row 2 for sprite
             _screen.AddColumn(2, 4);
@@ -94,7 +94,7 @@ namespace testing_v2.Screens.PlayScreens
             // Place button objects (row and col indices gotten from DesignScreenLayout() function above)
             #region PlaceElements
 
-            _screen.Place(backButton, 0, 0);
+            _screen.Place(backButton, 0, 1);
             _screen.Place(patientSprite, 2, 1);
             _screen.Place(instructionText, 4, 0);
             _screen.Place(diagnoseButton, 5, 1);

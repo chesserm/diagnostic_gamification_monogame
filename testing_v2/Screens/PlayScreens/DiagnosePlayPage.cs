@@ -90,6 +90,7 @@ namespace testing_v2.Screens.PlayScreens
             chfButton.Click += ChfButton_Click;
             copdButton.Click += CopdButton_Click;
             pneumoniaButton.Click += PneumoniaButton_Click;
+            backButton.Click += BackButton_Click;
 
             #endregion
 
@@ -105,6 +106,11 @@ namespace testing_v2.Screens.PlayScreens
             #endregion
         }
 
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            PatientDiagnosis = DiagnosisState.Back;
+        }
+
         private void PneumoniaButton_Click(object sender, EventArgs e)
         {
             PatientDiagnosis = DiagnosisState.Pneumonia;
@@ -117,7 +123,7 @@ namespace testing_v2.Screens.PlayScreens
 
         private void ChfButton_Click(object sender, EventArgs e)
         {
-            PatientDiagnosis = DiagnosisState.Back;
+            PatientDiagnosis = DiagnosisState.CHF;
         }
 
         #endregion

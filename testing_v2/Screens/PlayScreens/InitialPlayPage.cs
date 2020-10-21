@@ -14,6 +14,8 @@ namespace testing_v2.Screens.PlayScreens
         #region MemberVariables
         Screen _screen = new Screen();
 
+        Texture2D _buttonTexture;
+        SpriteFont _font;
         #endregion
 
         #region Properties
@@ -228,11 +230,23 @@ namespace testing_v2.Screens.PlayScreens
             // Initialize flag that the PlayPage checks for
             IsUserFinishedWithPage = false;
 
+            _buttonTexture = texture;
+            _font = font;
+
+            // Divide the grid of the screen into rows and columns
+            //DesignScreenLayout();
+
+            // Create and place the objects needed for this page
+            //CreateAndPlaceElements(texture, font);
+        }
+
+        public void UpdateInitialPlayPage()
+        {
             // Divide the grid of the screen into rows and columns
             DesignScreenLayout();
 
             // Create and place the objects needed for this page
-            CreateAndPlaceElements(texture, font);
+            CreateAndPlaceElements(_buttonTexture, _font);
         }
 
 

@@ -26,6 +26,9 @@ namespace testing_v2.Screens.PlayScreens
         public Dictionary<SymptomState, String> UserReasoning  { get; set;}
         public Dictionary<SymptomState, String> CorrectReasoning { get; set; }
 
+        // Variable for tracking player diagnosis
+        public DiagnosisState PlayerDiagnosis { get; set; }
+
         #endregion
 
         #region HelperFunctions
@@ -33,10 +36,76 @@ namespace testing_v2.Screens.PlayScreens
         private void DesignScreenLayout()
         {
 
+            // 24 rows exist in the deafult grid, so get the default height
+            int defaultHeight = Screen.defaultRowHeight;
+
+            // Divide screen height (24 rows of size defaultHeight pixels) into four rows
+            _screen.AddRow(2 * defaultHeight); // row 0 title
+            _screen.AddRow(2 * defaultHeight); // row 1 Correct vs Incorrect
+            _screen.AddRow(2 * defaultHeight); // row 2 spacing
+            _screen.AddRow(2 * defaultHeight); // row 3 Reasoning title goes here
+            _screen.AddRow(2 * defaultHeight); // row 4 Correct incorrect headings go here
+
+
+            // Add for loop for space
+
+            _screen.AddRow(2 * defaultHeight); // row 5 for button
+            
+            _screen.AddFinalRow();             // row 6 + 1
+
+
+            // Divide screen width within rows into columns (there are 12 column units to divide)
+
+            // Divide correct and incorrect row in half
+            _screen.AddColumn(1, 2);
+            _screen.AddColumn(1, 3); // Correct diagnosis goes here
+            _screen.AddColumn(1, 2);
+            _screen.AddColumn(1, 3);
+            _screen.AddColumn(1, 2); // Users's diagnosis goes here
+
+            // Divide row for reasoning title
+            _screen.AddColumn(3, 1);
+            _screen.AddColumn(3, 4); // Reasoning title goes here
+            _screen.AddColumn(3, 7);
+
+            // Divide row for correct vs incorrect title
+            _screen.AddColumn(4, 1);
+            _screen.AddColumn(4, 3); // Reasoning title goes here
+            _screen.AddColumn(4, 2);
+            _screen.AddColumn(4, 3);
+            _screen.AddColumn(4, 1);
+
+            // Divide up row for button
+            _screen.AddColumn(5, 4);
+            _screen.AddColumn(5, 4); // Button goes here
+            _screen.AddColumn(5, 4);
+
+
         }
 
         private void CreateAndPlaceElements(Texture2D buttonTexture, SpriteFont font)
         {
+            Controls.Button finishButton = new Controls.Button(buttonTexture, font) { Text = "Finish" };
+
+            Controls.Textbox summaryTitle = new Controls.Textbox(font, "Summary of Diagnostic Process");
+            Controls.Textbox reasoningTitle = new Controls.Textbox(font, "Reasoning Steps");
+            Controls.Textbox correctTitle = new Controls.Textbox(font, "Correct");
+            Controls.Textbox incorrectTitle = new Controls.Textbox(font, "Incorrect");
+
+            // Add event handler for one button
+            finishButton.Click += FinishButton_Click;
+
+
+            #region PlaceElements
+
+            _screen.Place(summaryTitle, 0, 0);
+
+            #endregion
+        }
+
+        private void FinishButton_Click(object sender, EventArgs e)
+        {
+            IsUserFinishedWithPage = true;
         }
         #endregion
 
@@ -49,14 +118,12 @@ namespace testing_v2.Screens.PlayScreens
             _buttonTexture = buttonTexture;
             _font = font;
 
-            DesignScreenLayout();
-            CreateAndPlaceElements(buttonTexture, font);
-
         }
 
         // Redraw summary page
         public void UpdateSummaryPage()
         {
+            _screen = new Screen();
             DesignScreenLayout();
             CreateAndPlaceElements(_buttonTexture, _font);
         }

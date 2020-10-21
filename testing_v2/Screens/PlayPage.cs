@@ -165,74 +165,74 @@ namespace testing_v2.Screens
             {
                 case SymptomState.General:
                     {
-                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
-                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
-                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
-                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        reasoningChoices[ReasoningState.Correct] = "General Exam Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "General Exam Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "General Exam Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "General Exam Incorrect Reasoning 3";
                         break;
                     }
                 case SymptomState.Head:
                     {
-                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
-                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
-                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
-                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        reasoningChoices[ReasoningState.Correct] = "Head Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Head Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Head Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Head Incorrect Reasoning 3";
                         break;
                     }
                 case SymptomState.Neck:
                     {
-                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
-                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
-                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
-                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        reasoningChoices[ReasoningState.Correct] = "Neck Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Neck Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Neck Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Neck Incorrect Reasoning 3";
                         break;
                     }
                 case SymptomState.Lungs:
                     {
-                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
-                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
-                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
-                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        reasoningChoices[ReasoningState.Correct] = "Lungs Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Lungs Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Lungs Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Lungs Incorrect Reasoning 3";
                         break;
                     }
                 case SymptomState.Extremities:
                     {
-                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
-                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
-                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
-                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        reasoningChoices[ReasoningState.Correct] = "Extremities Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Extremities Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Extremities Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Extremities Incorrect Reasoning 3";
                         break;
                     }
                 case SymptomState.Skin:
                     {
-                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
-                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
-                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
-                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        reasoningChoices[ReasoningState.Correct] = "Skin Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Skin Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Skin Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Skin Incorrect Reasoning 3";
                         break;
                     }
                 case SymptomState.Abdomen:
                     {
-                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
-                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
-                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
-                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        reasoningChoices[ReasoningState.Correct] = "Abdomen Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Abdomen Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Abdomen Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Abdomen Incorrect Reasoning 3";
                         break;
                     }
                 case SymptomState.Oxygen:
                     {
-                        reasoningChoices[ReasoningState.Correct] = "Correct Reasoning";
-                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
-                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
-                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        reasoningChoices[ReasoningState.Correct] = "Oxygen Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Oxygen Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Oxygen Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Oxygen Incorrect Reasoning 3";
                         break;
                     }
                 case SymptomState.Bloodwork:
                     {
-                        reasoningChoices[ReasoningState.Correct] = "BloodworkCorrect Reasoning";
-                        reasoningChoices[ReasoningState.Incorrect1] = "Incorrect Reasoning 1";
-                        reasoningChoices[ReasoningState.Incorrect2] = "Incorrect Reasoning 2";
-                        reasoningChoices[ReasoningState.Incorrect3] = "Incorrect Reasoning 3";
+                        reasoningChoices[ReasoningState.Correct] = "Bloodwork Correct Reasoning";
+                        reasoningChoices[ReasoningState.Incorrect1] = "Bloodwork Incorrect Reasoning 1";
+                        reasoningChoices[ReasoningState.Incorrect2] = "Bloodwork Incorrect Reasoning 2";
+                        reasoningChoices[ReasoningState.Incorrect3] = "Bloodwork Incorrect Reasoning 3";
                         break;
                     }
                 case SymptomState.Imaging:
@@ -268,6 +268,7 @@ namespace testing_v2.Screens
         {
             summaryPlayPage.UserReasoning = userReasoning;
             summaryPlayPage.CorrectReasoning = correctReasoning;
+            summaryPlayPage.PlayerDiagnosis = _playerDiagnosis;
             summaryPlayPage.UpdateSummaryPage();
 
         }
@@ -303,6 +304,9 @@ namespace testing_v2.Screens
 
             // Get data before passing it into info page (and set data in initialPlayPage)
             getData();
+
+            // Required to ensure screen is properly updated
+            initialPlayPage.UpdateInitialPlayPage();
 
 
             symptomInfoPlayPage = new SymptomInfoPlayPage(patientData, SymptomState.Nothing, buttonTexture, font);
@@ -575,14 +579,14 @@ namespace testing_v2.Screens
                                     // Update diagnosis variable
                                     _playerDiagnosis = diagnosePlayPage.PatientDiagnosis;
 
+                                    // Update diagnosePlayPage's game state (reset for next visit)
+                                    diagnosePlayPage.PatientDiagnosis = DiagnosisState.Undiagnosed;
+
                                     // Make sure summary page is up to date with reasoning values
                                     SendSummaryPageReasoning();
 
                                     // Change state to go to summary
                                     CurrentPlayState = PlayState.Summary;
-
-                                    // Update diagnosePlayPage's game state
-                                    diagnosePlayPage.PatientDiagnosis = DiagnosisState.Undiagnosed;
                                     break;
                                 }
                         }
