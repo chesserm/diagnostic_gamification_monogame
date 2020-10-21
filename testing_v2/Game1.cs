@@ -37,6 +37,7 @@ namespace testing_v2
         Texture2D mask1;
         Texture2D hat1;
         Texture2D sprite;
+        Texture2D patient;
 
         Texture2D layover_blackST;
         Texture2D layover_mask1;
@@ -114,8 +115,10 @@ namespace testing_v2
 
             // TODO: Add your initialization logic here
 
+            patient = Content.Load<Texture2D>("patient");
+
             // Initialize game driver, which manages the whole game
-            gameDriver = new GameDriver(button, gameTextFont, monkey1, monkey1, images, sprite, _playerManager);
+            gameDriver = new GameDriver(button, gameTextFont, patient, monkey1, images, sprite, _playerManager);
 
             
             /*

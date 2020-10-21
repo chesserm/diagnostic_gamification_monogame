@@ -257,9 +257,13 @@ namespace testing_v2.Screens
         public void UpdateUserReasoning(SymptomState selectedSymptom, ReasoningState userChoice)
         {
             // Update the dictionaries tracking the reasoning for user and correct choices
-            userReasoning[selectedSymptom] = reasoningChoices[userChoice];
-            correctReasoning[selectedSymptom] = reasoningChoices[ReasoningState.Correct];
-
+            // Only use first reasoning choice
+            if (!userReasoning.ContainsKey(selectedSymptom))
+            {
+                userReasoning[selectedSymptom] = reasoningChoices[userChoice];
+                correctReasoning[selectedSymptom] = reasoningChoices[ReasoningState.Correct];
+            }
+            
             return;
         }
 
@@ -269,6 +273,7 @@ namespace testing_v2.Screens
             summaryPlayPage.UserReasoning = userReasoning;
             summaryPlayPage.CorrectReasoning = correctReasoning;
             summaryPlayPage.PlayerDiagnosis = _playerDiagnosis;
+            summaryPlayPage.CorrectDiagnosis = patientData.Diagnosis;
             summaryPlayPage.UpdateSummaryPage();
 
         }
@@ -318,6 +323,9 @@ namespace testing_v2.Screens
             // Set state variables for the PlayPage object
             CurrentPlayState = PlayState.Initial;
             IsUserDoneWithPlay = false;
+            userReasoning = new Dictionary<SymptomState, string>();
+            correctReasoning = new Dictionary<SymptomState, string>();
+            _playerDiagnosis = DiagnosisState.Undiagnosed;
 
             // Reset state variables for all pages
             initialPlayPage.IsUserFinishedWithPage = false;
@@ -536,11 +544,12 @@ namespace testing_v2.Screens
                         // Check if the user is finished reviewing summary page
                         if (reasoningPlayPage.IsUserFinishedWithPage)
                         {
-                            // Reset reasoning page's state tracker
-                            reasoningPlayPage.IsUserFinishedWithPage = false;
-
                             // Update the dictionaries that track user reasoning choices
                             UpdateUserReasoning(lastSelectedSymptom, reasoningPlayPage.SelectedReasoning);
+
+                            // Reset reasoning page's state tracker
+                            reasoningPlayPage.IsUserFinishedWithPage = false;
+                            reasoningPlayPage.SelectedReasoning = ReasoningState.Undecided;
 
                             // User is finished with reasoning page (selected a reasoning), return to main page of play
                             CurrentPlayState = PlayState.Main;
@@ -565,11 +574,13 @@ namespace testing_v2.Screens
                                 }
                             case DiagnosisState.Back:
                                 {
+                                    // Update diagnosePlayPage's game state
+                                    diagnosePlayPage.PatientDiagnosis = DiagnosisState.Undiagnosed;
+
                                     // Player mistakenly chose diagnose and wants to return to main play page
                                     CurrentPlayState = PlayState.Main;
 
-                                    // Update diagnosePlayPage's game state
-                                    diagnosePlayPage.PatientDiagnosis = DiagnosisState.Undiagnosed;
+                                    
                                     break;
                                 }
                             default:
