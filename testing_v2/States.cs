@@ -62,4 +62,13 @@ namespace game_state_enums
         Undecided
     }
 
+    public enum ItemType
+    {
+        Hat,
+        Labcoat,
+        Stethescope,
+        Mask,
+        Shoes,
+        Pants
+    }
 }

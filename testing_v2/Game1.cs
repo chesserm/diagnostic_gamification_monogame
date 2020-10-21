@@ -8,6 +8,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using game_state_enums;
 using testing_v2.Screens;
+using System.Collections.Generic;
 
 namespace testing_v2
 {
@@ -58,214 +59,27 @@ namespace testing_v2
         // Content used (buttons, sprites, fonts, etc)
         #region ContentVariables
         SpriteFont gameTextFont;
+        
         Texture2D button;
-        Texture2D monkey;
+        Texture2D monkey1;
+        Texture2D blackST1;
+        Texture2D silverST1;
+        Texture2D goldST1;
+        Texture2D mask1;
+        Texture2D hat1;
+        Texture2D sprite;
+
+        Texture2D layover_blackST;
+        Texture2D layover_mask1;
         #endregion
 
-        // Screens/Pages for our game
-        #region GamePages
-        //MainMenu mainMenuPage;
-        //ShopPage shopPage;
-        //CustomizePage customizePage;
-        //StatsPage statsPage;
-        //PlayPage playPage;
-
-        #endregion
 
         GameDriver gameDriver;
 
         // Variable that detects touch
         TouchCollection tc;
 
-        //#region DeterminingCurrentState
 
-        //// Determine which page's draw function to call
-        //public void DeterminePageToDraw(GameTime gameTime, SpriteBatch spriteBatch)
-        //{
-        //    switch(mainMenuPage.SelectedCorePage)
-        //    {
-        //        case CoreState.Menu:
-        //            {
-        //                mainMenuPage.Draw(gameTime, spriteBatch);
-        //                break;
-        //            }
-        //        case CoreState.Shop:
-        //            {
-        //                // Update state in the shop page if it was toggled from returning to main page
-        //                if (shopPage.SelectedCorePage == CoreState.Menu)
-        //                {
-        //                    shopPage.SelectedCorePage = CoreState.Shop;
-        //                    mainMenuPage.SelectedCorePage = CoreState.Menu;
-        //                }
-        //                else
-        //                {
-        //                    // Draw Shop Page
-        //                    shopPage.Draw(gameTime, spriteBatch);
-        //                }
-
-                        
-                        
-        //                break;
-        //            }
-        //        case CoreState.Customize:
-        //            {
-        //                // Update state in the customize page if it was toggled from returning to main page
-        //                if (customizePage.SelectedCorePage == CoreState.Menu)
-        //                {
-        //                    customizePage.SelectedCorePage = CoreState.Customize;
-        //                    mainMenuPage.SelectedCorePage = CoreState.Menu;
-        //                }
-        //                else
-        //                {
-        //                    // Draw Customize Page
-        //                    customizePage.Draw(gameTime, spriteBatch);
-        //                }
-
-                        
-        //                break;
-        //            }
-        //        case CoreState.Stats:
-        //            {
-        //                // Update state in the stats page if it was toggled from returning to main page
-        //                if (statsPage.SelectedCorePage == CoreState.Menu)
-        //                {
-        //                    statsPage.SelectedCorePage = CoreState.Stats;
-        //                    mainMenuPage.SelectedCorePage = CoreState.Menu;
-        //                }
-        //                else
-        //                {
-        //                    // Draw Stats Page
-        //                    statsPage.Draw(gameTime, spriteBatch);
-        //                }
-
-                        
-        //                break;
-        //            }
-        //        case CoreState.Play:
-        //            {
-                        
-        //                break;
-        //            }
-        //    }
-        //}
-
-        //// Determine which page to update, and update it
-        //public void DeterminePageToUpdate(GameTime gameTime)
-        //{
-        //    switch (mainMenuPage.SelectedCorePage)
-        //    {
-        //        case CoreState.Menu:
-        //            {
-        //                mainMenuPage.Update(gameTime);
-        //                break;
-        //            }
-        //        case CoreState.Shop:
-        //            {
-        //                // Update state in the shop page if it was toggled from returning to main page
-        //                if (shopPage.SelectedCorePage == CoreState.Menu)
-        //                {
-        //                    shopPage.SelectedCorePage = CoreState.Shop;
-        //                    mainMenuPage.SelectedCorePage = CoreState.Menu;
-
-        //                    /*
-        //                     * Here you would check shopPage.ItemsPurchased and add each item to the player class's list of ids
-        //                     * of purchased items and you would also check the shopPage.TotalCoinsSpent and subtract this value from the player's
-        //                     * balance of coins.
-        //                     * 
-        //                     * Then you'd reset the shopPage.ItemsPurchased to an empty list and shopPage.TotalCoinsSpent to 0 for the next time
-        //                     * the player goes into the shop
-        //                     * 
-        //                     * These variables have to be created. I just made them up for conceptual notes.
-        //                     * 
-        //                     * An alternative, and possibly better way to do this, is to instead set a property in the shopPage (e.g. playercoins) to be
-        //                     * equal to the player's coins before entering the page. This lets you check to make sure they don't spend more than they are
-        //                     * allowed to in the shop and makes the update easier when you return (you just set the player's coins equal to the variable when
-        //                     * you return instead of adding). you would still need to reset this to 0 in the shop page after returning.
-        //                     * 
-        //                     */
-
-        //                }
-        //                else
-        //                {
-        //                    // Update Shop Page
-        //                    shopPage.Update(gameTime);
-        //                }
-
-                        
-
-        //                break;
-        //            }
-        //        case CoreState.Customize:
-        //            {
-        //                // Update state in the customize page if it was toggled from returning to main page
-        //                if (customizePage.SelectedCorePage == CoreState.Menu)
-        //                {
-        //                    customizePage.SelectedCorePage = CoreState.Customize;
-        //                    mainMenuPage.SelectedCorePage = CoreState.Menu;
-        //                }
-        //                else
-        //                {
-        //                    // Update Customize Page
-        //                    customizePage.Update(gameTime);
-        //                }
-
-                        
-        //                break;
-        //            }
-        //        case CoreState.Stats:
-        //            {
-        //                // Update state in the stats page if it was toggled from returning to main page
-        //                if (statsPage.SelectedCorePage == CoreState.Menu)
-        //                {
-        //                    statsPage.SelectedCorePage = CoreState.Stats;
-        //                    mainMenuPage.SelectedCorePage = CoreState.Menu;
-
-        //                    /*
-        //                     * Here you would check statsPage.NumCorrect properties (there would need to be one for each cause)
-        //                     * and set each variable in the corresponding player class to the new values
-        //                     * 
-        //                     * Then you'd just have to make sure the variables in the statsPage class get re-assigned to before 
-        //                     * re-entering the stats page
-        //                     * 
-        //                     * 
-        //                     * These variables have to be created. I just made them up for conceptual notes.
-        //                     * 
-        //                     */
-        //                }
-        //                else
-        //                {
-        //                    // Update Stats Page
-        //                    statsPage.Update(gameTime);
-        //                }
-
-                        
-        //                break;
-        //            }
-        //        case CoreState.Play:
-        //            {
-        //                // Check to see if user is done with play loop
-        //                if (playPage.IsUserDoneWithPlay)
-        //                {
-        //                    // Update global state variable
-        //                    mainMenuPage.SelectedCorePage = CoreState.Menu;
-        //                }
-        //                else
-        //                {
-        //                    playPage.Update(gameTime);
-        //                }
-
-        //                // Reset state variable for plaly
-        //                // If user
-        //                playPage.IsUserDoneWithPlay = false;
-        //                break;
-        //            }
-        //    }
-        //}
-
-        //#endregion
-
-
-        // This is the constructor for the game class and is where we can set some parameters
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -287,43 +101,51 @@ namespace testing_v2
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+
+            Dictionary<string, ShopItem> images = new Dictionary<string, ShopItem>();
             // TODO: use this.Content to load your game content here
-            monkey = Content.Load<Texture2D>("monkey");
+            monkey1 = Content.Load<Texture2D>("monkey");
+            blackST1 = Content.Load<Texture2D>("shopBlackST");
+            silverST1 = Content.Load<Texture2D>("shopsilverST");
+            goldST1 = Content.Load<Texture2D>("shopgoldST");
+            mask1 = Content.Load<Texture2D>("mask");
+            hat1 = Content.Load<Texture2D>("hat");
 
-            #region NoLongerNeeded
-            //background_box = Content.Load<Texture2D>("background_box");
+            sprite = Content.Load<Texture2D>("guy-noST");
 
-            //play_button = Content.Load<Texture2D>("play_button");
-            //shop_button = Content.Load<Texture2D>("shop_button");
-            //customize_button = Content.Load<Texture2D>("customize_button");
-            //back_button = Content.Load<Texture2D>("back_button");
-            //stats_button = Content.Load<Texture2D>("stats_button");
+            layover_blackST = Content.Load<Texture2D>("layover_blackST");
+            layover_mask1 = Content.Load<Texture2D>("layover_mask");
 
-            //diagnose_button = Content.Load<Texture2D>("diagnose_button");
-            //investigate_button = Content.Load<Texture2D>("investigate_button");
+            ShopItem monkey = new ShopItem(monkey1, ItemType.Labcoat, 5, 100);
+            ShopItem blackST = new ShopItem(blackST1, ItemType.Stethescope, 0, 100);
+            ShopItem silverST = new ShopItem(silverST1, ItemType.Stethescope, 1, 200);
+            ShopItem goldST = new ShopItem(goldST1, ItemType.Stethescope, 2, 300);
+            ShopItem mask = new ShopItem(mask1, ItemType.Mask, 3, 200);
+            ShopItem hat = new ShopItem(hat1, ItemType.Hat, 4, 150);
 
-            //chf_button = Content.Load<Texture2D>("CHF");
-            //copd_button = Content.Load<Texture2D>("COPD");
-            //pneumonia_button = Content.Load<Texture2D>("pneumonia");
+            ShopItem layover_BST = new ShopItem(layover_blackST, ItemType.Stethescope, 100, 0);
+            ShopItem layover_mask = new ShopItem(layover_mask1, ItemType.Mask, 100, 0);
 
-            //general_exam_button = Content.Load<Texture2D>("general_exam_button");
-            //examine_abdomen_button = Content.Load<Texture2D>("examine_abdomen");
-            //examine_extremities_button = Content.Load<Texture2D>("extreme_extremities");
-            //examine_head_button = Content.Load<Texture2D>("examine_head");
-            //examine_lungs_button = Content.Load<Texture2D>("examine_lungs");
-            //examine_neck_button = Content.Load<Texture2D>("examine_neck");
-            //examine_oxygen_button = Content.Load<Texture2D>("examine_oxygen");
-            //examine_skin_button = Content.Load<Texture2D>("examine_skin");
+            images["monkey"] = monkey;
+            images["blackST"] = blackST;
+            images["silverST"] = silverST;
+            images["goldST"] = goldST;
+            images["mask"] = mask;
+            images["hat"] = hat;
 
-            //order_blood_button = Content.Load<Texture2D>("order_blood_work");
-            //order_imaging_button = Content.Load<Texture2D>("ordering_imaging");
-            #endregion
+            images["layoverBST"] = layover_BST;
+            images["layovermask"] = layover_mask;
+
+            //sprite
+            //Dictionary<string, ShopItem> owneditems = new Dictionary<string, ShopItem>();
+
 
             button = Content.Load<Texture2D>("button");
 
             gameTextFont = Content.Load<SpriteFont>("gameTextFont");
 
             // TODO: Add your initialization logic here
+
             //mainMenuPage = new MainMenu(button, gameTextFont);
             //shopPage = new ShopPage(button, gameTextFont);
             //customizePage = new CustomizePage(button, gameTextFont);
@@ -331,6 +153,15 @@ namespace testing_v2
 
             // Initialize game driver, which manages the whole game
             gameDriver = new GameDriver(button, gameTextFont, monkey, monkey);
+
+            
+            /*
+            * Update GameDriver to have images argument and sprite argument from customizepage and shop page
+            */
+            //shopPage = new ShopPage(button, gameTextFont, images);
+            //TODO change customize page third arguement to player purchased items list
+            //customizePage = new CustomizePage(button, gameTextFont, images, sprite);
+            
         }
 
 
