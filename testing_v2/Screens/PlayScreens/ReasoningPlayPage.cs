@@ -182,13 +182,14 @@ namespace testing_v2.Screens.PlayScreens
 
             _buttonTexture = buttonTexture;
             _font = font;
-            
 
+            //ReasoningChoices = new Dictionary<ReasoningState, string>();
         }
 
         // This function can be called to re-draw the page
         public void UpdateReasoningPage()
         {
+            _screen = new Screen();
             DesignScreenLayout();
             CreateAndPlaceElements(_buttonTexture, _font);
         }

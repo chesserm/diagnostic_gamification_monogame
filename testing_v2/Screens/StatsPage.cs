@@ -14,6 +14,9 @@ namespace testing_v2.Screens
         // Screen object that abstracts 99% of the work from this object
         Screen _screen = new Screen();
         PlayerManager _playerManager;
+
+        Texture2D _buttonTexture;
+        SpriteFont _font;
         #endregion
 
         // Enum that lets us detect what screen the user has selected
@@ -62,6 +65,9 @@ namespace testing_v2.Screens
             Controls.Button addincorrectpneumonia = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "incorrectpneumonia" };
             Controls.Button addincorrectchf = new Controls.Button(mmButtonTexture, mmButtonFont) { Text = "incorrectcopd" };
 
+            Controls.Textbox displayCoins = new Controls.Textbox(mmButtonFont, $"my accuracy is: {_playerManager.Player.NumCoins}");
+
+            _screen.Place(displayCoins, 0, 2);
 
             // Assign event handlers for the buttons (so they actually do something)
             backButton.Click += BackButton_Click;
@@ -84,14 +90,18 @@ namespace testing_v2.Screens
 
         }
 
+        
+
         private void BackButton_Click(object sender, EventArgs e)
         {
             SelectedCorePage = CoreState.Menu;
+
         }
 
         private void addcorrectcopd_Click(object sender, EventArgs e)
         {
             _playerManager.caseComplete(true, 'c');
+            UpdatePage();
         }
         private void addincorrectcopd_Click(object sender, EventArgs e)
         {
@@ -120,12 +130,22 @@ namespace testing_v2.Screens
             SelectedCorePage = CoreState.Stats;
             _playerManager = playerManagerin;
 
+            _buttonTexture = mmButtonTexture;
+            _font = mmButtonFont;
+
             // Divide the grid of the screen into rows and columns
             DesignScreenLayout();
 
             // Create and place the objects needed for this page
             CreateAndPlaceElements(mmButtonTexture, mmButtonFont);
 
+        }
+
+        public void UpdatePage()
+        {
+            _screen = new Screen();
+            DesignScreenLayout();
+            CreateAndPlaceElements(_buttonTexture, _font);
         }
 
         // Draw for Game
