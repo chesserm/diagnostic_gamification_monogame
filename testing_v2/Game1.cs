@@ -104,15 +104,9 @@ namespace testing_v2
 
 
             button = Content.Load<Texture2D>("button");
-
             gameTextFont = Content.Load<SpriteFont>("gameTextFont");
 
             // TODO: Add your initialization logic here
-
-            //mainMenuPage = new MainMenu(button, gameTextFont);
-            //shopPage = new ShopPage(button, gameTextFont);
-            //customizePage = new CustomizePage(button, gameTextFont);
-            //statsPage = new StatsPage(button, gameTextFont);
 
             // Initialize game driver, which manages the whole game
             gameDriver = new GameDriver(button, gameTextFont, monkey1, monkey1, images, sprite);
@@ -137,16 +131,10 @@ namespace testing_v2
             }
 
             // TODO: Add your update logic here
-            //tc = TouchPanel.GetState();
-
+            
             // Automatically determine and update correct page
 
             gameDriver.Update(gameTime);
-
-            //mainMenuPage.Update(gameTime);
-
-            // Check which button is being pressed
-            
 
             base.Update(gameTime);
         }
@@ -159,224 +147,12 @@ namespace testing_v2
 
             // TODO: Add your drawing code here inside of the Begin() and End() function calls
             _spriteBatch.Begin();
-            //_spriteBatch.Draw(monkey, new Vector2(0, 0), Color.White);
-            #region oldcode
-            // Main menu
-            // Check which button is being pressed
-            //switch (currentScreen)
-            //{
-            //    case Screen.Menu:
-            //        {
-
-            //            _spriteBatch.Draw(shop_button, new Vector2(200, 500), Color.White);
-            //            _spriteBatch.Draw(customize_button, new Vector2(600, 500), Color.White);
-            //            _spriteBatch.Draw(stats_button, new Vector2(200, 800), Color.White);
-            //            _spriteBatch.Draw(play_button, new Vector2(600, 800), Color.White);
-
-            //            break;
-            //        }
-            //    case Screen.Shop:
-            //        {
-            //            _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
-            //            _spriteBatch.DrawString(gameTextFont, "Shop Page", new Vector2(400, 500), Color.Black);
-            //            break;
-            //        }
-            //    case Screen.Customize:
-            //        {
-            //            _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
-            //            _spriteBatch.DrawString(gameTextFont, "Customize Page", new Vector2(400, 500), Color.Black);
-            //            break;
-            //        }
-            //    case Screen.Stats:
-            //        {
-            //            _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
-            //            _spriteBatch.DrawString(gameTextFont, "Stats Page", new Vector2(400, 500), Color.Black);
-            //            break;
-            //        }
-            //    case Screen.Play:
-            //        {
-            //            // Figure out which step of the diagnostic process the user is in 
-            //            switch (diagnosticStep)
-            //            {
-            //                case PlayScreen.Initial:
-            //                    {
-            //                        _spriteBatch.Draw(background_box, new Vector2(100, 100), Color.White);
-            //                        _spriteBatch.DrawString(gameTextFont, "Initial Presentation Information", new Vector2(275, 150), Color.Black);
-
-            //                        _spriteBatch.DrawString(gameTextFont, "Age: 74", new Vector2(150, 300), Color.Black);
-            //                        _spriteBatch.DrawString(gameTextFont, "Gender: Male", new Vector2(150, 350), Color.Black);
-
-            //                        _spriteBatch.DrawString(gameTextFont, "Description of Symptoms:", new Vector2(150, 450), Color.Black);
-            //                        _spriteBatch.DrawString(gameTextFont, "Chest Heaviness", new Vector2(200, 500), Color.Black);
-
-            //                        _spriteBatch.DrawString(gameTextFont, "Severity of Symptoms: Severe", new Vector2(150, 600), Color.Black);
-
-            //                        _spriteBatch.DrawString(gameTextFont, "Onset of Symptoms: 3 days", new Vector2(150, 650), Color.Black);
-
-            //                        _spriteBatch.DrawString(gameTextFont, "Duration of Symptoms: Constant", new Vector2(150, 700), Color.Black);
-
-            //                        _spriteBatch.DrawString(gameTextFont, "Provocating Factors:", new Vector2(150, 800), Color.Black);
-            //                        _spriteBatch.DrawString(gameTextFont, "Exertion", new Vector2(200, 850), Color.Black);
-
-            //                        _spriteBatch.DrawString(gameTextFont, "Relieving Factors:", new Vector2(150, 900), Color.Black);
-            //                        _spriteBatch.DrawString(gameTextFont, "None", new Vector2(200, 950), Color.Black);
-
-
-            //                        _spriteBatch.DrawString(gameTextFont, "Past Medical History: ", new Vector2(150, 1050), Color.Black);
-            //                        _spriteBatch.DrawString(gameTextFont, "Heart Failure", new Vector2(200, 1100), Color.Black);
-            //                        _spriteBatch.DrawString(gameTextFont, "Cornary Atery Disease", new Vector2(200, 1150), Color.Black);
-            //                        _spriteBatch.DrawString(gameTextFont, "COPD", new Vector2(200, 1200), Color.Black);
-            //                        _spriteBatch.DrawString(gameTextFont, "Current Tobacco Use", new Vector2(200, 1250), Color.Black);
-
-
-            //                        _spriteBatch.Draw(play_button, new Vector2(300, 1400), Color.White);
-
-
-
-            //                        break;
-            //                    }
-            //                case PlayScreen.Main:
-            //                    {
-            //                        //_spriteBatch.DrawString(gameTextFont, "Main Play Page", new Vector2(400, 500), Color.Black);
-
-            //                        _spriteBatch.Draw(monkey, new Vector2(250, 350), Color.White);
-
-            //                        _spriteBatch.Draw(diagnose_button, new Vector2(200, 1200), Color.White);
-            //                        _spriteBatch.Draw(investigate_button, new Vector2(600, 1200), Color.White);
-
-
-            //                        break;
-            //                    }
-            //                case PlayScreen.SymptomList:
-            //                    {
-            //                        // Check which symptom is being investigated
-            //                        switch (currentSymptom)
-            //                        {
-            //                            case Symptom.Nothing:
-            //                                {
-            //                                    _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
-
-            //                                    _spriteBatch.Draw(background_box, new Vector2(100, 100), Color.White);
-            //                                    _spriteBatch.DrawString(gameTextFont, "Select a Symptom to Investigate", new Vector2(275, 150), Color.Black);
-
-            //                                    _spriteBatch.Draw(general_exam_button, new Vector2(200, 400), Color.White);
-            //                                    _spriteBatch.Draw(examine_head_button, new Vector2(200, 550), Color.White);
-            //                                    _spriteBatch.Draw(examine_neck_button, new Vector2(200, 700), Color.White);
-            //                                    _spriteBatch.Draw(examine_lungs_button, new Vector2(200, 850), Color.White);
-            //                                    _spriteBatch.Draw(examine_extremities_button, new Vector2(200, 1000), Color.White);
-            //                                    _spriteBatch.Draw(examine_abdomen_button, new Vector2(200, 1150), Color.White);
-            //                                    _spriteBatch.Draw(order_blood_button, new Vector2(200, 1300), Color.White);
-            //                                    _spriteBatch.Draw(order_imaging_button, new Vector2(200, 1450), Color.White);
-            //                                    break;
-            //                                }
-            //                            case Symptom.General:
-            //                                {
-            //                                    _spriteBatch.Draw(background_box, new Vector2(100, 100), Color.White);
-            //                                    _spriteBatch.DrawString(gameTextFont, "Results of General Exam", new Vector2(275, 150), Color.Black);
-
-            //                                    _spriteBatch.DrawString(gameTextFont, "Vitals:", new Vector2(150, 350), Color.Black);
-            //                                    _spriteBatch.DrawString(gameTextFont, "Temperature: 38.4", new Vector2(200, 400), Color.Black);
-            //                                    _spriteBatch.DrawString(gameTextFont, "Heart Rate: 121", new Vector2(200, 450), Color.Black);
-            //                                    _spriteBatch.DrawString(gameTextFont, "Respiratory Rate: 121", new Vector2(200, 500), Color.Black);
-            //                                    _spriteBatch.DrawString(gameTextFont, "Blood Pressure: 104/53", new Vector2(200, 550), Color.Black);
-
-            //                                    _spriteBatch.DrawString(gameTextFont, "General Observations:", new Vector2(150, 700), Color.Black);
-            //                                    _spriteBatch.DrawString(gameTextFont, "Awake", new Vector2(200, 750), Color.Black);
-            //                                    _spriteBatch.DrawString(gameTextFont, "Alert", new Vector2(200, 800), Color.Black);
-            //                                    _spriteBatch.DrawString(gameTextFont, "Oriented x2", new Vector2(200, 850), Color.Black);
-
-            //                                    _spriteBatch.Draw(back_button, new Vector2(750, 125), Color.White);
-
-            //                                    break;
-            //                                }
-            //                            case Symptom.Head:
-            //                                {
-            //                                    break;
-            //                                }
-            //                            case Symptom.Neck:
-            //                                {
-            //                                    break;
-            //                                }
-            //                            case Symptom.Lungs:
-            //                                {
-            //                                    break;
-            //                                }
-            //                            case Symptom.Extremities:
-            //                                {
-            //                                    break;
-            //                                }
-            //                            case Symptom.Abdomen:
-            //                                {
-            //                                    break;
-            //                                }
-            //                            case Symptom.Oxygen:
-            //                                {
-            //                                    break;
-            //                                }
-            //                            case Symptom.Imaging:
-            //                                {
-            //                                    break;
-            //                                }
-            //                            default:
-            //                                {
-            //                                    break;
-            //                                }
-            //                        }
-
-
-
-            //                        break;
-            //                    }
-            //                case PlayScreen.SymptomInfo:
-            //                    {
-            //                        _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
-            //                        _spriteBatch.DrawString(gameTextFont, "Symtom Info Play Page", new Vector2(400, 500), Color.Black);
-            //                        break;
-            //                    }
-            //                case PlayScreen.Reasoning:
-            //                    {
-            //                        _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
-            //                        _spriteBatch.DrawString(gameTextFont, "Reasoning Play Page", new Vector2(400, 500), Color.Black);
-            //                        break;
-            //                    }
-            //                case PlayScreen.Diagnose:
-            //                    {
-            //                        _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
-            //                        _spriteBatch.DrawString(gameTextFont, "Diagnose Play Page", new Vector2(400, 500), Color.Black);
-            //                        break;
-            //                    }
-            //                case PlayScreen.Summary:
-            //                    {
-            //                        _spriteBatch.Draw(back_button, new Vector2(0, 0), Color.White);
-            //                        _spriteBatch.DrawString(gameTextFont, "Summary Play Page", new Vector2(400, 500), Color.Black);
-            //                        break;
-            //                    }
-            //                default:
-            //                    {
-            //                        break;
-            //                    }
-            //            }
-
-            //            break;
-            //        }
-            //    default:
-            //        break;
-            //}
-            #endregion
-
+            
+           
             //Automatically determine which page to draw
 
             gameDriver.Draw(gameTime, _spriteBatch);
-            //DeterminePageToDraw(gameTime, _spriteBatch);
-
-            //mainMenuPage.Draw(gameTime, _spriteBatch);
-
-
-
-
-            //_spriteBatch.DrawString(gameTextFont, "Hello World!", new Vector2(100, 100), Color.Black);
-
-
+            
             _spriteBatch.End();
 
             base.Draw(gameTime);
