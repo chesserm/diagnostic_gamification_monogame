@@ -174,9 +174,10 @@ namespace testing_v2
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             // Draw each element in the _elements list of Components
-            foreach (var comp in _elements)
+            int num_elements = _elements.Count;
+            for (int i = 0; i < num_elements; ++i)
             {
-                comp.Draw(gameTime, spriteBatch);
+                _elements[i].Draw(gameTime, spriteBatch);
             }
         }
 
@@ -184,9 +185,10 @@ namespace testing_v2
         public void Update(GameTime gameTime)
         {
             // Draw each element in the _elements list of Components
-            foreach (var comp in _elements)
+            int num_elements = _elements.Count;
+            for (int i = 0; i < num_elements; ++i)
             {
-                comp.Update(gameTime);
+                _elements[i].Update(gameTime);
             }
         }
 
