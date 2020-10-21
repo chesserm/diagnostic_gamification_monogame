@@ -35,8 +35,8 @@ namespace testing_v2.Screens
         SymptomState lastSelectedSymptom = SymptomState.Nothing;
 
         // Maps for tracking reasoning
-        Dictionary<SymptomState, String> userReasoning;
-        Dictionary<SymptomState, String> correctReasoning;
+        Dictionary<SymptomState, String> userReasoning = new Dictionary<SymptomState, String>();
+        Dictionary<SymptomState, String> correctReasoning = new Dictionary<SymptomState, String>();
         Dictionary<ReasoningState, String> reasoningChoices;
 
         // User's Diagnosis
@@ -289,6 +289,9 @@ namespace testing_v2.Screens
             _patientTexture = patientTexture;
             _buttonTexture = buttonTexture;
             _font = font;
+
+            // Initialize variables
+
 
             // Initialize child page objects
             initialPlayPage = new InitialPlayPage(buttonTexture, font);

@@ -5,6 +5,8 @@ using testing_v2.Screens;
 using game_state_enums;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using testing_v2.Managers;
+
 
 namespace testing_v2
 {
